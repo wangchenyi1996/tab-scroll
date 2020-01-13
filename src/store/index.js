@@ -22,9 +22,8 @@ export default new Vuex.Store({
       storage: window.localStorage,
       reducer(val) {
         return {
-          // 只储存state中的count
           token: val.token,
-          user:{
+          user: {
             count:val.user.count,
             userinfo:val.user.userinfo
           }
