@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <button @click="toast">显示taost弹出框</button>
-    <p>模拟吸顶效果</p>
+   <div style="display:flex;">
+      <button @click="toast">显示taost弹出框---模拟吸顶效果</button>
+      <p @click="downs">去下载图片</p>
+   </div>
     <Tab :tabList="tabList" @Tabchang="tabchange" :current="current" />
     <div class="tiyu">
       <div class="title">体育</div>
@@ -118,6 +120,11 @@ export default {
       } else {
         this.current = 4;
       }
+    },
+    downs(){
+      this.$router.push({
+        path:'/down'
+      })
     }
   }
 };
