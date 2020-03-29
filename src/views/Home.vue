@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-   <div style="display:flex;">
+   <!-- <div style="display:flex;">
       <button @click="toast">显示taost弹出框---模拟吸顶效果</button>
       <p @click="downs">去下载图片</p>
-   </div>
+   </div> -->
     <Tab :tabList="tabList" @Tabchang="tabchange" :current="current" />
     <div class="tiyu">
       <div class="title">体育</div>
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     toast() {
-      this.$toast("我是最帅的",10000);
+      this.$toast("我是最帅的",1500);
     },
     tabchange(index) {
       this.current = index;
