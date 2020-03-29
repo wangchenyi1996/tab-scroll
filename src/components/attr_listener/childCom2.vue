@@ -19,6 +19,7 @@ export default {
   },
   created() {
     console.log(this.$attrs); // { "boo": "Html", "coo": "CSS", "doo": "Vue", "title": "前端工匠" }
+     console.log('listeners',this.$listeners); 
   }
 };
 </script>
