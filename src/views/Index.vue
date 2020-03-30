@@ -10,24 +10,32 @@
       class="abc"
       @change1="change1"
     ></child-com1>
+
+    <p style="margin:30px auto;color:red;">测试.sync</p>
+    <syncCom :shows.sync='shows' />
+
+    <button @click="changeValue">父组件切换</button>
   </div>
 </template>
 <script>
 const childCom1 = () => import("@/components/attr_listener/childCom1.vue");
+const syncCom = () => import("@/components/sync.vue");
 export default {
-  components: { childCom1 },
+  components: { childCom1,syncCom },
   data() {
     return {
       foo: "Javascript",
       boo: "Html",
       coo: "CSS",
-      doo: "Vue"
+      doo: "Vue",
+      shows:true
     };
   },
-  mounted(){
-    this.change1()
-  },
+ 
   methods: {
+    changeValue(){
+      this.shows = !this.shows
+    },
     handle() {
       console.log('tag', 'handle')
     },
