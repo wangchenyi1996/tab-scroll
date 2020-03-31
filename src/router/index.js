@@ -23,6 +23,11 @@ const routes = [
     path: '/index',
     name: 'Index',
     component: () => import(/* webpackChunkName: "about" */ '../views/Index.vue')
+  },
+  {
+    path: '/slot',
+    name: 'Slot',
+    component: () => import(/* webpackChunkName: "about" */ '../views/SlotPage.vue')
   }
 ]
 
