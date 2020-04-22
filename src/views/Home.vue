@@ -11,7 +11,6 @@
         <img :src="item.roomImg" />
         <p>{{item.roomWhere}}</p>
       </div>
-      
     </div>
     <div class="yule">
       <div class="title">娱乐</div>
@@ -73,14 +72,25 @@ export default {
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
-    this.domH.push(0);
-    this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
-    this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
-    this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
-    this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
-    console.log("tag", this.domH);
+    // this.domH.push(0);
+    // this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
+    // this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
+    // this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
+    // this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
+    // console.log("tag", this.domH);
+
+    this.listLoad()
+    
   },
   methods: {
+    listLoad(){
+      this.domH.push(0);
+      this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
+      this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
+      this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
+      this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
+      console.log("tag", this.domH);
+    },
     toast() {
       this.$toast("我是最帅的",1500);
     },
@@ -108,7 +118,7 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
-      console.log(scrollTop);
+      // console.log(scrollTop);
       if (scrollTop < this.domH[1]) {
         this.current = 0;
       } else if (scrollTop < this.domH[2]) {
@@ -133,6 +143,9 @@ export default {
 <style lang="scss">
 .home {
   width: 98%;
+  img{
+    height: 90px;
+  }
   .tiyu {
     .title {
       font-size: 20px;
