@@ -8,35 +8,35 @@
     <div class="tiyu">
       <div class="title">体育</div>
       <div class="litem" v-for="(item,index) in tiyu" :key="index">
-        <img :src="item.roomImg" />
+        <img :src="item.roomImg" @load="loadImg"/>
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="yule">
       <div class="title">娱乐</div>
       <div class="litem" v-for="(item,index) in yule" :key="index">
-        <img :src="item.roomImg" />
+        <img :src="item.roomImg"  @load="loadImg"/>
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="caij">
       <div class="title">财经</div>
       <div class="litem" v-for="(item,index) in caij" :key="index">
-        <img :src="item.roomImg" />
+        <img :src="item.roomImg"  @load="loadImg"/>
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="lishi">
       <div class="title">历史</div>
       <div class="litem" v-for="(item,index) in lishi" :key="index">
-        <img :src="item.roomImg" />
+        <img :src="item.roomImg"  @load="loadImg"/>
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="keji">
       <div class="title">科技</div>
       <div class="litem" v-for="(item,index) in keji" :key="index">
-        <img :src="item.roomImg" />
+        <img :src="item.roomImg"  @load="loadImg"/>
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
@@ -78,6 +78,11 @@ export default {
     // this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
     // this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
     // console.log("tag", this.domH);
+    
+    /* 图片加载高度可能获取不准确 ，所以获取的高度数组会有问题
+     * 第一种方法，可以设置图片高度
+     * 第一种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
+     */
 
     this.listLoad()
     
@@ -89,7 +94,12 @@ export default {
       this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
-      console.log("tag", this.domH);
+      console.log("高度数组：", this.domH);
+    },
+    loadImg(){
+      this.domH=[]
+      this.listLoad()
+      console.log('图片加载完成了')
     },
     toast() {
       this.$toast("我是最帅的",1500);
@@ -144,7 +154,7 @@ export default {
 .home {
   width: 98%;
   img{
-    height: 90px;
+    // height: 90px;
   }
   .tiyu {
     .title {
