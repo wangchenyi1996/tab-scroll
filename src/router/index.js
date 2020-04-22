@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
   },
   {
     path: '/about',
@@ -17,17 +17,47 @@ const routes = [
   {
     path: '/down',
     name: 'down',
-    component: () => import(/* webpackChunkName: "about" */ '../views/DownImg.vue')
+    component: () => import(/* webpackChunkName: "down" */ '../views/DownImg.vue')
   },
   {
     path: '/index',
     name: 'Index',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Index.vue')
+    component: () => import(/* webpackChunkName: "Index" */ '../views/Index.vue')
   },
   {
     path: '/slot',
     name: 'Slot',
-    component: () => import(/* webpackChunkName: "about" */ '../views/SlotPage.vue')
+    component: () => import(/* webpackChunkName: "Slot" */ '../views/SlotPage.vue')
+  },
+  // 路由解耦模式
+  // 1、布尔模式
+  {
+    path: '/route1/:id/:name',
+    name: 'Route1',
+    component: () => import(/* webpackChunkName: "route" */ '../views/Route1.vue'),
+    props:true
+  },
+  // 2、对象模式
+  {
+    path: '/route2/:id',
+    name: 'Route2',
+    component: () => import(/* webpackChunkName: "route" */ '../views/Route2.vue'),
+    props:{
+      name:'wq'
+    }
+  },
+   // 3、函数模式
+   {
+    path: '/route3/:id',
+    name: 'Route3',
+    component: () => import(/* webpackChunkName: "route" */ '../views/Route3.vue'),
+    props:(route)=>(
+      // console.log('tag', route),
+      {
+        name: "wq",
+        id: route.params.id
+      }
+    )
   }
 ]
 

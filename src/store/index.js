@@ -21,6 +21,7 @@ export default new Vuex.Store({
     createPersistedState({
       storage: window.localStorage,
       reducer(val) {
+        console.log('val:', val)
         return {
           token: val.token,
           user: {
