@@ -88,7 +88,7 @@ export default {
     //  第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
     // this.listLoad()
 
-    // 第3种方法， this.$nextTick
+    // 第3种方法， this.$nextTick+定时器延迟，如果网速很慢，此方法也无效。
     this.$nextTick(()=>{
       setTimeout(()=>{
         this.listLoad()
