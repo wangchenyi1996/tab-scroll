@@ -80,11 +80,20 @@ export default {
     // console.log("tag", this.domH);
     
     /* 图片加载高度可能获取不准确 ，所以获取的高度数组会有问题
-     * 第一种方法，可以设置图片高度
-     * 第一种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
+     * 第1种方法，可以设置图片高度
+     * 第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
+     * 
      */
 
-    this.listLoad()
+    //  第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
+    // this.listLoad()
+
+    // 第3种方法， this.$nextTick
+    this.$nextTick(()=>{
+      setTimeout(()=>{
+        this.listLoad()
+      },1000)
+    })
     
   },
   methods: {
@@ -97,9 +106,9 @@ export default {
       console.log("高度数组：", this.domH);
     },
     loadImg(){
-      this.domH=[]
-      this.listLoad()
-      console.log('图片加载完成了')
+      // this.domH=[]
+      // this.listLoad()
+      // console.log('图片加载完成了')
     },
     toast() {
       this.$toast("我是最帅的",1500);
