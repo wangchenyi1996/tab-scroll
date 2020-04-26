@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* @media screen and (max-width: 300px) {
+            .media-cont {
+                background-color:red;
+                height: 100px;
+                width: 100px;
+                margin: 50px;
+            }
+        }
+        @media screen and (min-width: 300px) and (max-width: 800px){
+            .media-cont {
+                background-color:orange;
+                height: 100px;
+                width: 100px;
+                margin: 50px;
+            }
+        }
+        @media screen and (min-width: 800px){
+            .media-cont {
+                background-color:skyblue;
+                height: 100px;
+                width: 100px;
+                margin: 50px;
+            }
+        } */
+        @media only screen and (-webkit-min-device-pixel-ratio: 1) {
+            .media-cont {
+                font-size: 30px;
+                background-color:rgb(109, 50, 205);
+                height: 200px;
+                width: 200px;
+                margin: 100px;
+            }
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+            .media-cont {
+                font-size: 30px;
+                background-color:yellowgreen;
+                height: 200px;
+                width: 200px;
+                margin: 100px;
+            }
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+            .media-cont {
+                font-size: 30px;
+                background-color:palevioletred;
+                height: 200px;
+                width: 200px;
+                margin: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="media-cont">
+        媒体查询测试
+    </div>
+</body>
+</html>

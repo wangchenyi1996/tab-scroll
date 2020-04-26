@@ -4,15 +4,13 @@ const Toast = {};
 
 // 注册Toast
 Toast.install = function (Vue,options={}) {
-    console.log('options', options)
+    // console.log('options', options)
     // 生成一个Vue的子类
     // 同时这个子类也就是组件
     const ToastConstructor = Vue.extend(ToastComponent)
     // 生成一个该子类的实例
     const instance = new ToastConstructor();
-
-    console.log('tag', instance)
-
+    // console.log('tag', instance)
     // 将这个实例挂载在我创建的div上
     // 并将此div加入全局挂载点内部
     instance.$mount(document.createElement('div'))
