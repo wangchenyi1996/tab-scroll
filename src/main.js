@@ -5,7 +5,10 @@ import router from './router'
 import store from './store'
 
 import Toast from './components/Toast/Toast'
-Vue.use(Toast)
+Vue.use(Toast,{
+  timing:1500,
+  type:'success'
+})
 
 Vue.config.productionTip = false
 

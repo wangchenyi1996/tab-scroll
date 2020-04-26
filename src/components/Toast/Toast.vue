@@ -1,6 +1,8 @@
 <template>
     <transition name="fade">
-        <div class="toast" v-show="show">
+        <div class="toast" 
+        v-show="show" 
+        :class="type=='success' ? 'success' : type=='error' ? 'error' : ''">
             {{message}}
         </div>
     </transition>
@@ -11,7 +13,8 @@ export default {
   data() {
     return {
       show: false,
-      message: ""
+      message: "",
+      type:''
     };
   }
 };
@@ -30,7 +33,15 @@ export default {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 5vw;
-  z-index: 999;
+  z-index: 9999;
+}
+.success{
+  background-color:green;
+  color: white;
+}
+.error{
+  background-color:orangered;
+  color: white;
 }
 .fade-enter-active,
 .fade-leave-active {

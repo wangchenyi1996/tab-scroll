@@ -1,9 +1,12 @@
 <template>
   <div class="home">
-   <!-- <div style="display:flex;">
-      <button @click="toast">显示taost弹出框---模拟吸顶效果</button>
+   <div style="display:flex;flex-direction:column;">
+     <p>模拟吸顶效果</p>
+     <hr />
+      <button @click="toast">成功taost弹出框</button>
+      <button @click="toast2">失败taost弹出框</button>
       <p @click="downs">去下载图片</p>
-   </div> -->
+   </div>
     <Tab :tabList="tabList" @Tabchang="tabchange" :current="current" />
     <div class="tiyu">
       <div class="title">体育</div>
@@ -86,14 +89,14 @@ export default {
      */
 
     //  第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
-    // this.listLoad()
+    this.listLoad()
 
     // 第3种方法， this.$nextTick+定时器延迟，如果网速很慢，此方法也无效。
-    this.$nextTick(()=>{
-      setTimeout(()=>{
-        this.listLoad()
-      },1000)
-    })
+    // this.$nextTick(()=>{
+    //   setTimeout(()=>{
+    //     this.listLoad()
+    //   },1000)
+    // })
     
   },
   methods: {
@@ -106,12 +109,15 @@ export default {
       console.log("高度数组：", this.domH);
     },
     loadImg(){
-      // this.domH=[]
-      // this.listLoad()
-      // console.log('图片加载完成了')
+      this.domH=[]
+      this.listLoad()
+      console.log('图片加载完成了')
     },
     toast() {
-      this.$toast("我是最帅的",1500);
+      this.$toast("我成功了",1500);
+    },
+    toast2() {
+      this.$toast("我失败了",1500,'error');
     },
     tabchange(index) {
       this.current = index;
