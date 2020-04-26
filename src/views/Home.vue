@@ -106,12 +106,12 @@ export default {
       this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
-      console.log("高度数组：", this.domH);
+      // console.log("高度数组：", this.domH);
     },
     loadImg(){
       this.domH=[]
       this.listLoad()
-      console.log('图片加载完成了')
+      // console.log('图片加载完成了')
     },
     toast() {
       this.$toast("我成功了",1500);

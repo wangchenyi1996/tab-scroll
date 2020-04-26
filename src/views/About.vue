@@ -16,6 +16,15 @@
     <p>action</p>
     <p>测试数据：{{comTest}}</p>
     <button @click="test">action</button>
+
+    <hr />
+    <p>provide / inject 使用</p>
+    <br />
+    <br />
+    <p>{{userInfo}}</p>
+    <button @click="handleReload" style="margin-top:50px;">点击刷新</button>
+
+
   </div>
 </template>
 
@@ -23,7 +32,19 @@
 import { mapState,mapGetters,mapActions } from "vuex";
 
 export default {
-  name: "home",
+  name: "about",
+   //字符串数组方式
+  // inject:["reload",'userInfo'],  
+
+  //对象方式
+  inject:{
+    reload:{
+      defalut:'reload'
+    },
+    userInfo:{
+      defalut:'userInfo'
+    }
+  },
 
   computed: {
     ...mapState({
@@ -38,6 +59,7 @@ export default {
     })
   },
   mounted() {
+    console.log('执行刷新操作')
     console.log("count值:", this.comCount);
     console.log("用户信息：", this.comUserInfo);
   },
@@ -68,6 +90,11 @@ export default {
 
         //法2
         this.testData(['123','456','789'])
+    },
+
+    //刷新页面
+    handleReload(){
+      this.reload()
     }
 
   }
