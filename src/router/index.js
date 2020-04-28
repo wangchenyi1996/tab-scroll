@@ -35,30 +35,68 @@ const routes = [
     path: '/route1/:id/:name',
     name: 'Route1',
     component: () => import(/* webpackChunkName: "route" */ '../views/Route1.vue'),
-    props:true
+    props: true
   },
   // 2、对象模式
   {
     path: '/route2/:id',
     name: 'Route2',
     component: () => import(/* webpackChunkName: "route" */ '../views/Route2.vue'),
-    props:{
-      name:'wq'
+    props: {
+      name: 'wq'
     }
   },
-   // 3、函数模式
-   {
+  // 3、函数模式
+  {
     path: '/route3/:id',
     name: 'Route3',
     component: () => import(/* webpackChunkName: "route" */ '../views/Route3.vue'),
-    props:(route)=>(
+    props: (route) => (
       // console.log('tag', route),
       {
         name: "wq",
         id: route.params.id
       }
     )
+  },
+  // echarts 图表使用
+  //折线图
+  {
+    path: '/pic1',
+    name: 'pic1',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic1.vue')
+  },
+  //柱状图
+  {
+    path: '/pic2',
+    name: 'pic2',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic2.vue')
+  },
+   //饼图
+   {
+    path: '/pic3',
+    name: 'pic3',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic3.vue')
+  },
+  //雷达图
+  {
+    path: '/pic4',
+    name: 'pic4',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic4.vue')
+  },
+   //地图
+   {
+    path: '/map',
+    name: 'map',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Map.vue')
+  },
+   //K线图
+   {
+    path: '/k-line',
+    name: 'k-line',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic5.vue')
   }
+
 ]
 
 const router = new VueRouter({
