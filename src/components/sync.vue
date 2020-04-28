@@ -1,10 +1,10 @@
 <template class="border">
   <div>
-    <div v-show="shows" style="margin:30px;border:1px solid red;width
+    <div v-show="shows" style="margin:10px;border:1px solid red;width
     100px;height:100px;">
         测试sync的显示和隐藏
     </div>
-    <button @click="changeShow" style="margin-bottom:40px;">子组件切换</button>
+    <button @click="changeShow" style="margin-bottom:1px;">子组件切换</button>
   </div>
 </template>
 <script>

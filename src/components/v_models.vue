@@ -1,9 +1,9 @@
 <template class="border">
     <div>
-        value:{{value}}
+        子组件:value-{{value}}
         <!-- <input @input="handleInput" v-model="tempValue"/> -->
-        <input v-model="tempValue"/>
-        <button @click="handleInput">按钮</button>
+        <input v-model="tempValue" placeholder="请输入..." @input="handleInput"/>
+        <button @click="handleInput">设置值</button>
     </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
     },
     data() {
         return {
-            tempValue: '默认值'
+            tempValue: ''
         }
     },
     methods: {

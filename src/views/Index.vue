@@ -1,6 +1,5 @@
 <template>
   <div @click="handle">
-    <h2>浪里行舟</h2>
     <child-com1
       :foo="foo"
       :boo="boo"
@@ -11,15 +10,25 @@
       @change1="change1"
     ></child-com1>
 
-    <p style="margin:30px auto;color:red;">测试.sync</p>
+    <p style="margin:10px auto;color:red;">测试.sync</p>
     <syncCom :shows.sync='shows' />
 
-    <button @click="changeValue" style="margin-bottom:50px;">父组件切换</button>
+    <p style="color:red;font-size:20px;margin:10px;">shows:{{shows}}</p>
 
+    <button @click="changeValue" style="margin-bottom:10px;">父组件切换</button>
+
+    <p style="color:red;font-size:20px;margin:20px;">自定义组件中：v-model使用</p><hr />
+    <p>注意事项：自定义组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件</p>
+    <p style="color:red;font-size:20px;margin:20px;"> 父组件： title:{{title}}</p>
     <vmodelCom v-model="title" />
 
-    <p style="color:green;font-size:20px;">测试is属性</p>
-    <component  :is="showOne"></component> 
+
+    <p style="color:green;font-size:20px;">测试is属性--使用keep-alive可以保持页面缓存</p>
+
+    <keep-alive>
+      <component  :is="showOne"></component> 
+    </keep-alive>
+
     <button @click="changIS">切换is属性</button> 
 
   </div>
@@ -40,7 +49,7 @@ export default {
       coo: "CSS",
       doo: "Vue",
       shows:true,
-      title:'1111111',
+      title:'我是张三',
       showOne:'tisCom11'
     };
   },
@@ -67,7 +76,7 @@ export default {
 </script>
 <style>
   .abc{
-    color:red;
-    font-size:20px;
+    color:skyblue;
+    font-size:14px;
   }
 </style>
