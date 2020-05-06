@@ -72,8 +72,8 @@ const routes = [
     name: 'pic2',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic2.vue')
   },
-   //饼图
-   {
+  //饼图
+  {
     path: '/pic3',
     name: 'pic3',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic3.vue')
@@ -84,17 +84,29 @@ const routes = [
     name: 'pic4',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic4.vue')
   },
-   //地图
-   {
+  //地图
+  {
     path: '/map',
     name: 'map',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Map.vue')
   },
-   //K线图
-   {
+  //K线图
+  {
     path: '/k-line',
     name: 'k-line',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/ECharts/Pic5.vue')
+  },
+  // 高德地图
+  {
+    path: '/gd-map',
+    name: 'gd-map',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/Map.vue')
+  },
+  //css 媒体查询使用
+   {
+    path: '/media',
+    name: 'media',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/Medias.vue')
   }
 
 ]
