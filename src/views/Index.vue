@@ -11,11 +11,18 @@
     ></child-com1>
 
     <p style="margin:10px auto;color:red;">测试.sync</p>
-    <syncCom :shows.sync='shows' />
-
+    <!-- 单个属性 .sync-->
+    <syncCom :shows.sync='shows' :isMuti="false"/>
     <p style="color:red;font-size:20px;margin:10px;">shows:{{shows}}</p>
-
     <button @click="changeValue" style="margin-bottom:10px;">父组件切换</button>
+
+     <!-- 多个属性 .sync
+     <child  v-bind.sync = “{name:'张三',age:18}”></child>  
+      (不能写成  :.sync="{name:'张三',age:18}"，否则会报错的)
+      这样会把 "{name:'张三',age:18}" 对象中的每一个 property (如 name) 都作为一个独立的 prop 传进去，然后各自添加用于更新的 v-on 监听器。
+    -->
+    <syncCom v-bind.sync='objData' :isMuti="true"/>
+     <button @click="muti" style="margin-bottom:10px;">测试多个.sync属性</button>
 
     <p style="color:red;font-size:20px;margin:20px;">自定义组件中：v-model使用</p><hr />
     <p>注意事项：自定义组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件</p>
@@ -50,11 +57,24 @@ export default {
       doo: "Vue",
       shows:true,
       title:'我是张三',
-      showOne:'tisCom11'
+      showOne:'tisCom11',
+      objData:{
+        name:'张三',
+        age:18
+      }
     };
   },
  
   methods: {
+    //多个 .sync属性
+    muti(){
+      this.objData = {
+        name:'李四',
+        age:28
+      }
+    },
+
+    //单个 .sync属性
     changeValue(){
       this.shows = !this.shows
     },
