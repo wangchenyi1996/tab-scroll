@@ -107,6 +107,12 @@ const routes = [
     path: '/media',
     name: 'media',
     component: () => import(/* webpackChunkName: "echarts" */ '../views/Medias.vue')
+  },
+  //自定义事件
+  {
+    path: '/evt',
+    name: 'events',
+    component: () => import(/* webpackChunkName: "echarts" */ '../views/Events.vue')
   }
 
 ]
