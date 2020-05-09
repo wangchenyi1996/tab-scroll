@@ -8,6 +8,9 @@ export default {
   props: {
     coo: String,
     title: String
+  },
+  created(){
+    console.log('listeners3',this.$listeners); 
   }
 };
 </script>

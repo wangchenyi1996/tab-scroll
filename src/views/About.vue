@@ -21,7 +21,7 @@
     <p>provide / inject 使用</p>
     <br />
     <br />
-    <p>{{userInfo}}</p>
+    <p>{{users}}</p>
     <button @click="handleReload" style="margin-top:50px;">点击刷新</button>
 
 
@@ -59,7 +59,7 @@ export default {
       from:'reload',
       default: () => {}
     },
-    userInfo:{
+    users:{
       from:'userInfo1',
       defalut:() => {}
     }

@@ -1,5 +1,5 @@
 <template>
-  <div @click="handle">
+  <div >
     <child-com1
       :foo="foo"
       :boo="boo"
@@ -8,6 +8,7 @@
       title="前端工匠"
       class="abc"
       @change1="change1"
+      v-on="$listeners"
     ></child-com1>
 
     <p style="margin:10px auto;color:red;">测试.sync</p>
@@ -82,7 +83,7 @@ export default {
       console.log('tag', 'handle')
     },
     change1(){
-      console.log('tag', '父组件中非原生事件')
+      console.log('父页面', '父组件中非原生事件1')
     },
     changIS(){
       if(this.showOne=='tisCom11'){
