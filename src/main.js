@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 Vue.config.productionTip = false
 
 // 引入 v-charts图标插件
@@ -26,7 +27,6 @@ VueAMap.initAMapApiLoader({
     plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.Geolocation'],
     v: '1.4.4'
 })
-
 
 new Vue({
     router,
