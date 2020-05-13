@@ -1,6 +1,13 @@
 <template>
   <div id="app">
     <router-view v-if="isShow"/>
+    
+    <div class="container">
+        <router-view name="header"></router-view>
+        <router-view name="left"></router-view>
+        <router-view name="mian"></router-view>
+    </div>
+
   </div>
 </template>
 <script>

@@ -12,7 +12,7 @@
     export default {
         props:['name','id'],
         mounted(){
-            console.log('route', this.$route)
+          console.log('route', this.$route)
         }
     }
 </script>

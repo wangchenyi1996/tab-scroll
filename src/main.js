@@ -10,9 +10,9 @@ Vue.use(VCharts)
 
 //引入自定义插件
 import Toast from './components/Toast/Toast'
-Vue.use(Toast,{
-  timing:1500,
-  type:'success'
+Vue.use(Toast, {
+    timing: 1500,
+    type: 'success'
 })
 
 //引入地图
@@ -27,8 +27,9 @@ VueAMap.initAMapApiLoader({
     v: '1.4.4'
 })
 
+
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

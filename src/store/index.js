@@ -1,6 +1,6 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import Vuex from 'vuex'
-Vue.use(Vuex)
+// Vue.use(Vuex)
 import user from './user'
 import createPersistedState from 'vuex-persistedstate'
 // console.log('tag', user)
