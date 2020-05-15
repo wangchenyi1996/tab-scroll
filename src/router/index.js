@@ -152,15 +152,60 @@ const routes = [{
             left: Bar,
             mian: Foo
         }
-    }
-
+    },
+    // 解释 v-for 为什么 要加上 key
+    {
+        path: '/keys',
+        name: 'keys',
+        component: () =>
+            import ( /* webpackChunkName: "echarts" */ '../views/Keys.vue')
+    },
+    {
+        path: '/page1',
+        name: 'page1',
+        component: () =>
+            import ('../views/RefreshPages/Page1.vue'),
+        meta: {
+            keepAlive: true // true :缓存  false :不缓存
+        }
+    },
+    {
+        path: '/page2',
+        name: 'page2',
+        component: () =>
+            import ('../views/RefreshPages/Page2.vue'),
+        meta: {
+            keepAlive: true, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
+    {
+        path: '/page3',
+        name: 'page3',
+        component: () =>
+            import ('../views/RefreshPages/Page3.vue'),
+        meta: {
+            keepAlive: true, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
 
 ]
 
 const router = new VueRouter({
     mode: 'hash',
     base: process.env.BASE_URL,
-    routes
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return {
+                x: 0,
+                y: 0
+            }
+        }
+    }
 })
 
 export default router
