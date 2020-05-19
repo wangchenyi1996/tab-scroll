@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,43 +30,75 @@
                 margin: 50px;
             }
         } */
+        
         @media only screen and (-webkit-min-device-pixel-ratio: 1) {
             .media-cont {
                 font-size: 30px;
-                background-color:rgb(109, 50, 205);
+                background-color: rgb(109, 50, 205);
                 height: 200px;
                 width: 200px;
                 margin: 100px;
             }
         }
+        
         @media only screen and (-webkit-min-device-pixel-ratio: 2) {
             .media-cont {
                 font-size: 30px;
-                background-color:yellowgreen;
+                background-color: yellowgreen;
                 height: 200px;
                 width: 200px;
                 margin: 100px;
             }
         }
+        
         @media only screen and (-webkit-min-device-pixel-ratio: 3) {
             .media-cont {
                 font-size: 30px;
-                background-color:palevioletred;
+                background-color: palevioletred;
                 height: 200px;
                 width: 200px;
                 margin: 100px;
             }
         }
-
-        div.box{
+        
+        div.box {
             width: 400px;
             background-color: papayawhip;
         }
-        .p{
+        
+        .p {
             width: 300px;
+        }
+        
+        .wrap {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: 10px solid #3377aa;
+            border-radius: 20px;
+        }
+        
+        .wrap::before,
+        .wrap::after {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 40px 20px;
+            border-style: solid;
+            border-color: #3377aa transparent transparent;
+            bottom: -80px;
+            left: 50%;
+            margin-left: -20px;
+        }
+        
+        .wrap::after {
+            border-color: #fff transparent transparent;
+            bottom: -60px;
         }
     </style>
 </head>
+
 <body>
     <div class="media-cont">
         媒体查询测试
@@ -74,17 +107,21 @@
 
     <div class="box">
         <p class="p">
-            我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的
-            我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的
-            我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的
+            我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的 我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的 我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的我是最帅的
         </p>
     </div>
+
+
+    <div class="wrap"></div>
+
+
     <script>
         // 定时器 加参数
-        function test(a,b){
-            console.log(a,b)
+        function test(a, b) {
+            console.log(a, b)
         }
-        setTimeout(test,200,'我是张三','今年10岁')
+        setTimeout(test, 200, '我是张三', '今年10岁')
     </script>
 </body>
+
 </html>
