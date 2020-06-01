@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: 王强
+ * @Date: 2020-05-13 12:05:47
+ * @LastEditors: 王强
+ * @LastEditTime: 2020-05-20 15:56:40
+--> 
 <template>
     <div>
         
@@ -15,7 +23,7 @@ export default {
         lastName:"qiang",
         firstName:"wang"
       },
-      test:[1,2,3,4]
+      test:[1,2,3,4,5,6]
     }
   },
 };

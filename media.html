@@ -70,12 +70,27 @@
             width: 300px;
         }
         
-        .wrap {
+        .wrap,
+        .wrap2 {
             position: relative;
             width: 300px;
             height: 200px;
             border: 10px solid #3377aa;
             border-radius: 20px;
+            margin: 50px;
+        }
+        
+        .wrap2::before {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 40px 20px;
+            border-style: solid;
+            border-color: #3377aa transparent transparent;
+            bottom: -80px;
+            left: 50%;
+            margin-left: -20px;
         }
         
         .wrap::before,
@@ -113,6 +128,31 @@
 
 
     <div class="wrap"></div>
+    <!-- .wrap {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        border: 10px solid #3377aa;
+        border-radius: 20px;
+    }
+    
+    .wrap::before,
+    .wrap::after {
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 0;
+        border-width: 40px 20px;
+        border-style: solid;
+        border-color: #3377aa transparent transparent;
+        bottom: -80px;
+        left: 50%;
+        margin-left: -20px;
+    } -->
+
+    <div class="wrap2">
+
+    </div>
 
 
     <script>

@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: 王强
+ * @Date: 2020-05-13 12:05:47
+ * @LastEditors: 王强
+ * @LastEditTime: 2020-05-20 15:58:39
+--> 
 <template>
     <div>
        <!-- 方法1 -->
@@ -22,13 +30,26 @@
         <!-- 作用域插槽 -->
         <!-- slotProps 可以随意命名 -->
         <!-- slotProps 接取的是子组件标签slot上属性数据的集合所有v-bind:user="user" -->
-        <p style="margin:20px 0;">作用域插槽</p>
+       
         <slotCom2>
             <template v-slot:todo="slotProps" >
                 <!-- {{slotProps.user1.firstName}} -->
                 <!-- {{slotProps.user1.lastName}} -->
+                 <p style="margin:20px 0;">作用域插槽</p>
                 <ul>
                     <li v-for="item in slotProps.test1" :key="item" style="color:red;font-size:20px;margin-bottom:20px;">
+                        {{item}}
+                    </li>
+                </ul>
+            </template> 
+
+        </slotCom2>
+
+         <slotCom2>
+             <template #todo="{test1}" >
+                <p>解构插槽</p>
+                <ul>
+                    <li v-for="item in test1" :key="item" style="color:red;font-size:20px;margin-bottom:20px;">
                         {{item}}
                     </li>
                 </ul>
