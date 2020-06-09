@@ -189,6 +189,27 @@ const routes = [{
             isBack: false, //用于判断上一个页面是哪个
         }
     },
+    //  模仿 商品列表的倒计时功能
+    {
+        path: '/list',
+        name: 'list',
+        component: () =>
+            import ('../views/times/list.vue'),
+        meta: {
+            keepAlive: true, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
+    {
+        path: '/detail/:id',
+        name: 'detail',
+        component: () =>
+            import ('../views/times/detail.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
 
 ]
 
