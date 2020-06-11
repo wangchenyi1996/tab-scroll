@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flex-grow、flex-shrink、flex-basis 属性使用</title>
+  <style type="text/css" media="screen">
+    * {
+      /* padding: 0; */
+      /* margin: 0; */
+    }
+    
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    
+    .test {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      border: none;
+      box-sizing: border-box;
+    }
+    
+    .scrollbar {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    
+    p {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .test-1::-webkit-scrollbar {
+      /*滚动条整体样式*/
+      width: 8px;
+      /*高宽分别对应横竖滚动条的尺寸*/
+      height: 1px;
+    }
+    
+    .test-1::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius: 8px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: #cecbcb;
+    }
+    
+    .test-1::-webkit-scrollbar-track {
+      /*滚动条里面轨道*/
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      background: #efefef;
+    }
+    /* 带有渐变效果 */
+    
+    .test-5::-webkit-scrollbar {
+      /*滚动条整体样式*/
+      width: 10px;
+      /*高宽分别对应横竖滚动条的尺寸*/
+      height: 1px;
+    }
+    
+    .test-5::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius: 10px;
+      background-color: #F90;
+      background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+    }
+    
+    .test-5::-webkit-scrollbar-track {
+      /*滚动条里面轨道*/
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      /*border-radius: 10px;*/
+      background: #EDEDED;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <div class="test test-1">
+    <div class="scrollbar">
+      <p style="font-size: 30px;">自定义滚动条</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+      <p>123</p>
+    </div>
+  </div> -->
+
+  <div class="test test-5">
+    <div class="scrollbar">
+        <p style="font-size: 30px;">渐变效果--自定义滚动条</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+        <p>123</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

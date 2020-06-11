@@ -89,7 +89,7 @@ export default {
      */
 
     //  第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
-    this.listLoad()
+    // this.listLoad()
 
     // 第3种方法， this.$nextTick+定时器延迟，如果网速很慢，此方法也无效。
     // this.$nextTick(()=>{
@@ -106,7 +106,7 @@ export default {
       this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
-      // console.log("高度数组：", this.domH);
+      console.log("高度数组：", this.domH);
     },
     loadImg(){
       this.domH=[]
@@ -139,11 +139,7 @@ export default {
       }
     },
     handleScroll() {
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
-      // console.log(scrollTop);
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       if (scrollTop < this.domH[1]) {
         this.current = 0;
       } else if (scrollTop < this.domH[2]) {
@@ -155,6 +151,8 @@ export default {
       } else {
         this.current = 4;
       }
+
+
     },
     downs(){
       this.$router.push({

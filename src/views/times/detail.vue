@@ -21,6 +21,16 @@ export default {
       ],
     };
   },
+  watch: {
+    $route: {
+      handler(val, oldVal){
+        console.log(val,oldVal);
+      },
+      // 深度观察监听
+      deep: true,
+      immediate:true
+    }
+  },
   created() {
     let id = parseInt(this.$route.params.id)
     this.creatime = this.timeArr[id-1].creatime
