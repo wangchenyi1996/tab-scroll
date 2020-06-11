@@ -210,6 +210,27 @@ const routes = [{
             isBack: false, //用于判断上一个页面是哪个
         }
     },
+    // 虚拟列表
+    {
+        path: '/vlist',
+        name: 'vlist',
+        component: () =>
+            import ('../views/virtulScroll/VirtualList.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
+    {
+        path: '/vlist2',
+        name: 'vlist2',
+        component: () =>
+            import ('../views/virtulScroll/VirtualList2.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
 
 ]
 
