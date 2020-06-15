@@ -231,6 +231,28 @@ const routes = [{
             isBack: false, //用于判断上一个页面是哪个
         }
     },
+    // 下拉刷新
+    {
+        path: '/refresh',
+        name: 'refresh',
+        component: () =>
+            import ('../views/Refresh.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
+    // socket
+    {
+        path: '/chat',
+        name: 'chat',
+        component: () =>
+            import ('../views/chat/Chat.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
 
 ]
 

@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+//引入动画库、全局scss样式
+import './common/style.scss'
+
 // 引入 v-charts图标插件
 import VCharts from 'v-charts'
 Vue.use(VCharts)
@@ -27,6 +30,12 @@ VueAMap.initAMapApiLoader({
     plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.Geolocation'],
     v: '1.4.4'
 })
+
+// socket
+import io from '@/assets/socket/socket.io.js'
+
+Vue.prototype.socket = io('http://localhost:9527')
+
 
 new Vue({
     router,

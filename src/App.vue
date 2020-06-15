@@ -1,11 +1,3 @@
-<!--
- * @Description: 
- * @Version: 1.0
- * @Autor: 王强
- * @Date: 2020-05-13 12:05:47
- * @LastEditors: 王强
- * @LastEditTime: 2020-05-15 10:15:34
- -->
 <template>
   <div id="app">
     <!-- <router-view v-if="isShow"/>
@@ -72,8 +64,10 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  width: 100%;
+  background-color: #f1f1f1;
+  min-height: 100%;
 }
 * {
   margin: 0;

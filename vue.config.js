@@ -1,6 +1,6 @@
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
-let publicPath = process.env.NODE_ENV === 'production' ? '/test' : '/'
+let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
 module.exports = {
     publicPath,
     outputDir: 'dist',
@@ -20,25 +20,16 @@ module.exports = {
         //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 
 
-        // const imagesRule = config.module.rule('images')
-        // imagesRule
-        //     .use('image-webpack-loader')
-        //     .loader('image-webpack-loader')
-        //     .options({
-        //         bypassOnDebug: true
-        //     })
-        //     .end()
-
-        //  config.module
+        // config.module
         //     .rule("images")
         //     .use("image-webpack-loader")
         //     .loader("image-webpack-loader")
         //     .options({
-        //       mozjpeg: { progressive: true, quality: 65 },
-        //       optipng: { enabled: false },
-        //       pngquant: { quality: [0.65, 0.9], speed: 4 },
-        //       gifsicle: { interlaced: false },
-        //     //   webp: { quality: 75 }
+        //         mozjpeg: { progressive: true, quality: 65 },
+        //         optipng: { enabled: false },
+        //         pngquant: { quality: [0.65, 0.9], speed: 4 },
+        //         gifsicle: { interlaced: false },
+        //         webp: { quality: 75 }
         //     });
 
     },
