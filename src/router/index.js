@@ -244,7 +244,17 @@ const routes = [{
     },
     // socket
     {
-        path: '/chat',
+        path: '/joinchat',
+        name: 'joinchat',
+        component: () =>
+            import ('../views/chat/JoinChat.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
+    {
+        path: '/chat/:username/:img',
         name: 'chat',
         component: () =>
             import ('../views/chat/Chat.vue'),
@@ -252,7 +262,7 @@ const routes = [{
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
         }
-    },
+    }
 
 ]
 

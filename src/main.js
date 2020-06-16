@@ -6,6 +6,7 @@ import store from './store'
 Vue.config.productionTip = false
 
 //引入动画库、全局scss样式
+// import './common/reset.scss'
 import './common/style.scss'
 
 // 引入 v-charts图标插件
@@ -34,7 +35,8 @@ VueAMap.initAMapApiLoader({
 // socket
 import io from '@/assets/socket/socket.io.js'
 
-Vue.prototype.socket = io('http://localhost:9527')
+// Vue.prototype.socket = io('http://localhost:9527')
+Vue.prototype.socket = io('http://192.168.1.156:9527')
 
 
 new Vue({

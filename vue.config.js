@@ -2,7 +2,7 @@
 const resolve = dir => require('path').join(__dirname, dir)
 let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
 module.exports = {
-    publicPath,
+    publicPath:'./',
     outputDir: 'dist',
     productionSourceMap: false,
 

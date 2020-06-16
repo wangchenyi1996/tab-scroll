@@ -4,13 +4,19 @@
  * @Autor: 王强
  * @Date: 2020-06-15 09:08:01
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-15 16:26:35
+ * @LastEditTime: 2020-06-16 11:43:50
 --> 
 <template>
-  <div style="width:100%;height:100%;" ref="chatMain">
-    <p class="p1">聊天-socket</p>
+  <div style="width:100%;height:100%;">
+    <div class="p1 u-f u-f-sbc">
+      <div class="u-f u-f ac">
+         <img src="../../assets/imgs/faces/1.9.png" alt="">
+         <span>同事群</span>
+      </div>
+      <p>群成员({{peopleCount}})</p>
+    </div>
 
-    <div class="chat-list" style="padding-top: 50px;padding-bottom:70px;">
+    <div classs="chat-list" style="padding-top: 50px;padding-bottom:70px;box-sizing:border-box;height:100%;"  ref="chatMain">
       <div class="chat-item" v-for="item in msgList" :key="item.id">
         <p v-if="item.isJoin" class="times">{{ item.name }}</p>
         <div v-else>
@@ -19,6 +25,7 @@
           <div class="left" v-if="item.isOwn">
             <div class="c-item u-f">
               <img :src="item.img" alt="face" />
+              <!-- <img :src="require('@/assets/imgs/images/'+item.img+'.png')" style="height:40px;width:40px;border-radius:20px;" alt=""/> -->
               <div class="contents u-f-c u-f-jsb">
                 <span class="names">{{ item.name }}</span>
                 <div class="txt">{{ item.content }}</div>
@@ -29,6 +36,7 @@
           <div class="right" v-else>
             <div class="c-item u-f-r2">
               <img :src="item.img" alt="face" />
+               <!-- <img :src="require('@/assets/imgs/images/'+item.img+'.png')" style="height:40px;width:40px;border-radius:20px;" alt=""/> -->
               <div class="contents u-f-c u-f-jsb">
                 <span class="names">{{ item.name }}</span>
                 <div class="txt">{{ item.content }}</div>
@@ -120,11 +128,20 @@ export default {
           img: require("../../assets/imgs/faces/1.8.png"),
           isJoin: false
         }
-      ]
+      ],
+      peopleCount:0
     };
   },
+  watch: {
+    msgList(value){
+      this.back()
+    }
+  },
   created() {
-    // console.log('socket信息：',this.socket)
+    let parms = this.$route.params
+    this.name = parms.username
+    this.img = parms.img
+     // console.log('socket信息：',this.socket)
     this.handleTimeFormat();
     this.join(this.name, this.img, this.content);
     this.welcome();
@@ -137,9 +154,17 @@ export default {
   methods: {
     back() {
       this.$nextTick(() => {
+        // this.top = this.$refs.chatMain.clientHeight;
+        // window.scroll({ top: this.top + 120, left: 0, behavior: "smooth" });
+
+        // let tops = this.$refs.chatMain
+        // tops.scrollTop =  tops.scrollHeight
+        // console.log('高度',tops.scrollHeight)
+
         this.top = this.$refs.chatMain.clientHeight;
-        console.log(this.top);
-        window.scroll({ top: this.top + 100, left: 0, behavior: "smooth" });
+        window.scrollTo(0,this.top)
+        // document.body.scrollTop(0,this.top) 
+
       });
     },
     // 处理时间
@@ -153,6 +178,7 @@ export default {
     //加入群
     join(name, img, content) {
       this.socket.emit("join", name, img, content);
+      this.back()
     },
     //广播-欢迎加入群
     welcome() {
@@ -165,6 +191,7 @@ export default {
           isJoin: true
         };
         this.msgList.push(wel);
+        this.peopleCount = users.length
       });
     },
     //退出群提醒
@@ -177,7 +204,10 @@ export default {
           isJoin: true
         };
         this.msgList.push(wel);
-        // console.log('退出群聊的用户信息：',users)
+        console.log('退出群聊的用户信息：',users)
+        this.peopleCount+=-1
+        // this.peopleCount = users.length
+        this.back()
       });
     },
     // 发送消息
@@ -185,14 +215,11 @@ export default {
       if (this.inputValue.length) {
         let data = {
           id: parseInt(this.msgList.length + 1) * 2,
-          name: "张三" + parseInt(this.msgList.length + 1) * 2,
+          name: this.name,
           content: this.inputValue,
           isOwn: this.inputValue.length % 2 === 0 ? true : false,
           times: new Date().getTime(),
-          img:
-            this.inputValue.length % 2
-              ? require("../../assets/imgs/faces/1.6.png")
-              : require("../../assets/imgs/faces/1.8.png"),
+          img: require('@/assets/imgs/images/'+this.img+'.png'),
           isJoin: false
         };
         console.log(data.img);
@@ -213,6 +240,7 @@ export default {
         this.msgList.push(data);
         this.handleTimeFormat();
       });
+      this.back()
     }
   }
 };
@@ -256,14 +284,18 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 40px;
-  line-height: 40px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  background-color: rgba(221, 96, 23, 0.8);
+  height: 45px;
+  line-height: 45px;
+  border-bottom: 1px solid #ccc;
+  padding: 2px 10px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.8);
   z-index: 99;
+  img{
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+  }
 }
 .scroll-wrapper {
   height: calc(100% - 60px);
@@ -287,6 +319,7 @@ export default {
         height: 50px;
         width: 50px;
         margin-right: 15px;
+        border-radius: 25px;
       }
       .contents {
         max-width: 70%;
@@ -329,6 +362,7 @@ export default {
         width: 50px;
         margin-right: 20px;
         margin-left: 10px;
+        border-radius: 25px;
       }
       .contents {
         max-width: 70%;
