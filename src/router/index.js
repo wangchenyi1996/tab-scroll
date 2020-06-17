@@ -262,7 +262,18 @@ const routes = [{
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
         }
-    }
+    },
+    // mock 使用
+    {
+        path: '/mock',
+        name: 'mock',
+        component: () =>
+            import ('../views/mock/Test01.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+        }
+    },
 
 ]
 

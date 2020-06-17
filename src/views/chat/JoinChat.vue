@@ -4,7 +4,7 @@
  * @Autor: 王强
  * @Date: 2020-06-16 10:35:33
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-16 11:32:53
+ * @LastEditTime: 2020-06-16 11:50:48
 --> 
 <template>
   <div class="content">
@@ -25,7 +25,7 @@
     <div class="modify" :style="{bottom:bootom+'px'}">
       <div class="modfiy-mian">
         <div v-for="(e,index) in img" :key="index" class="us-img" @click="selected(index)">
-          <img :src="require('@/assets/imgs/images/'+e.i+'.png')" style="height:40px;width:40px;border-radius:4px;"/>
+          <img :src="require('@/assets/imgs/images/'+e.i+'.png')" style="height:40px;width:40px;border-radius:20px;"/>
           <div class="dd">
             <div class="ddd" :style="{opacity:e.x}"></div>
           </div>

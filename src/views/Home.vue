@@ -1,45 +1,45 @@
 <template>
   <div class="home">
-   <div style="display:flex;flex-direction:column;">
-     <p>模拟吸顶效果</p>
-     <hr />
+    <div style="display:flex;flex-direction:column;">
+      <p>模拟吸顶效果</p>
+      <hr />
       <button @click="toast">成功taost弹出框</button>
       <button @click="toast2">失败taost弹出框</button>
       <p @click="downs">去下载图片</p>
-   </div>
+    </div>
     <Tab :tabList="tabList" @Tabchang="tabchange" :current="current" />
     <div class="tiyu">
       <div class="title">体育</div>
       <div class="litem" v-for="(item,index) in tiyu" :key="index">
-        <img :src="item.roomImg" @load="loadImg"/>
+        <img :src="item.roomImg" @load="loadImg" />
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="yule">
       <div class="title">娱乐</div>
       <div class="litem" v-for="(item,index) in yule" :key="index">
-        <img :src="item.roomImg"  @load="loadImg"/>
+        <img :src="item.roomImg" @load="loadImg" />
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="caij">
       <div class="title">财经</div>
       <div class="litem" v-for="(item,index) in caij" :key="index">
-        <img :src="item.roomImg"  @load="loadImg"/>
+        <img :src="item.roomImg" @load="loadImg" />
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="lishi">
       <div class="title">历史</div>
       <div class="litem" v-for="(item,index) in lishi" :key="index">
-        <img :src="item.roomImg"  @load="loadImg"/>
+        <img :src="item.roomImg" @load="loadImg" />
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
     <div class="keji">
       <div class="title">科技</div>
       <div class="litem" v-for="(item,index) in keji" :key="index">
-        <img :src="item.roomImg"  @load="loadImg"/>
+        <img :src="item.roomImg" @load="loadImg" />
         <p>{{item.roomWhere}}</p>
       </div>
     </div>
@@ -49,6 +49,8 @@
 <script>
 import Tab from "@/components/tab.vue";
 import datas from "@/assets/data.js";
+
+import axios from "axios";
 
 export default {
   name: "home",
@@ -70,10 +72,16 @@ export default {
       lishi: datas.tiyu,
       keji: datas.tiyu,
       domH: [],
-       show: false
+      show: false
     };
   },
   mounted() {
+    // mock 数据
+    // axios.get('http://localhost:8080/test').then((res)=>{
+    axios.get("/test").then(res => {
+      console.log(res.data);
+    });
+
     window.addEventListener("scroll", this.handleScroll);
     // this.domH.push(0);
     // this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
@@ -81,11 +89,11 @@ export default {
     // this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
     // this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
     // console.log("tag", this.domH);
-    
+
     /* 图片加载高度可能获取不准确 ，所以获取的高度数组会有问题
      * 第1种方法，可以设置图片高度
      * 第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
-     * 
+     *
      */
 
     //  第2种方法，给图片设置onload加载事件，当图片每次加载完成，都需要重新设置数组高度
@@ -97,27 +105,28 @@ export default {
     //     this.listLoad()
     //   },1000)
     // })
-    
   },
   methods: {
-    listLoad(){
+    listLoad() {
       this.domH.push(0);
       this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
       this.domH.push(document.getElementsByClassName("caij")[0].offsetTop - 50);
-      this.domH.push(document.getElementsByClassName("lishi")[0].offsetTop - 50);
+      this.domH.push(
+        document.getElementsByClassName("lishi")[0].offsetTop - 50
+      );
       this.domH.push(document.getElementsByClassName("keji")[0].offsetTop - 50);
       // console.log("高度数组：", this.domH);
     },
-    loadImg(){
-      this.domH=[]
-      this.listLoad()
+    loadImg() {
+      this.domH = [];
+      this.listLoad();
       // console.log('图片加载完成了')
     },
     toast() {
-      this.$toast("我成功了",1500);
+      this.$toast("我成功了", 1500);
     },
     toast2() {
-      this.$toast("我失败了",1500,'error');
+      this.$toast("我失败了", 1500, "error");
     },
     tabchange(index) {
       this.current = index;
@@ -139,7 +148,10 @@ export default {
       }
     },
     handleScroll() {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
       if (scrollTop < this.domH[1]) {
         this.current = 0;
       } else if (scrollTop < this.domH[2]) {
@@ -151,13 +163,11 @@ export default {
       } else {
         this.current = 4;
       }
-
-
     },
-    downs(){
+    downs() {
       this.$router.push({
-        path:'/down'
-      })
+        path: "/down"
+      });
     }
   }
 };
@@ -166,7 +176,7 @@ export default {
 <style lang="scss">
 .home {
   width: 98%;
-  img{
+  img {
     // height: 90px;
   }
   .tiyu {
