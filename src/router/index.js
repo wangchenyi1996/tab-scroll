@@ -17,35 +17,49 @@ const Foo = { template: '<div>header</div>' }
 const Bar = { template: '<div>left</div>' }
 const Baz = { template: '<div>mian</div>' }
 
-const routes = [{
+const routes = [
+    {
         path: '/',
+        redirect: '/home'
+    },
+    {
+        path: '/home',
         name: 'home',
         component: () =>
-            import ( /* webpackChunkName: "home" */ '../views/Home.vue')
+            import( /* webpackChunkName: "home" */ '../views/Home.vue'),
+        meta: {
+            showTabbar: true // true :缓存  false :不缓存
+        }
     },
     {
         path: '/about',
         name: 'about',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/About.vue')
+            import( /* webpackChunkName: "about" */ '../views/About.vue'),
+            meta: {
+                showTabbar: true // true :缓存  false :不缓存
+            }
     },
     {
         path: '/down',
         name: 'down',
         component: () =>
-            import ( /* webpackChunkName: "down" */ '../views/DownImg.vue')
+            import( /* webpackChunkName: "down" */ '../views/DownImg.vue')
     },
     {
         path: '/index',
         name: 'Index',
         component: () =>
-            import ( /* webpackChunkName: "Index" */ '../views/Index.vue')
+            import( /* webpackChunkName: "Index" */ '../views/Index.vue'),
+            meta: {
+                showTabbar: true // true :缓存  false :不缓存
+            }
     },
     {
         path: '/slot',
         name: 'Slot',
         component: () =>
-            import ( /* webpackChunkName: "Slot" */ '../views/SlotPage.vue')
+            import( /* webpackChunkName: "Slot" */ '../views/SlotPage.vue')
     },
     // 路由解耦模式
     // 1、布尔模式
@@ -53,7 +67,7 @@ const routes = [{
         path: '/route1/:id/:name',
         name: 'Route1',
         component: () =>
-            import ( /* webpackChunkName: "route" */ '../views/Route1.vue'),
+            import( /* webpackChunkName: "route" */ '../views/Route1.vue'),
         props: true
     },
     // 2、对象模式
@@ -61,7 +75,7 @@ const routes = [{
         path: '/route2/:id',
         name: 'Route2',
         component: () =>
-            import ( /* webpackChunkName: "route" */ '../views/Route2.vue'),
+            import( /* webpackChunkName: "route" */ '../views/Route2.vue'),
         props: {
             name: 'wq'
         }
@@ -71,7 +85,7 @@ const routes = [{
         path: '/route3/:id',
         name: 'Route3',
         component: () =>
-            import ( /* webpackChunkName: "route" */ '../views/Route3.vue'),
+            import( /* webpackChunkName: "route" */ '../views/Route3.vue'),
         props: (route) => (
             // console.log('tag', route),
             {
@@ -86,63 +100,63 @@ const routes = [{
         path: '/pic1',
         name: 'pic1',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic1.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic1.vue')
     },
     //柱状图
     {
         path: '/pic2',
         name: 'pic2',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic2.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic2.vue')
     },
     //饼图
     {
         path: '/pic3',
         name: 'pic3',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic3.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic3.vue')
     },
     //雷达图
     {
         path: '/pic4',
         name: 'pic4',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic4.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic4.vue')
     },
     //地图
     {
         path: '/map',
         name: 'map',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Map.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Map.vue')
     },
     //K线图
     {
         path: '/k-line',
         name: 'k-line',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic5.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/ECharts/Pic5.vue')
     },
     // 高德地图
     {
         path: '/gd-map',
         name: 'gd-map',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/Map.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/Map.vue')
     },
     //css 媒体查询使用
     {
         path: '/media',
         name: 'media',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/Medias.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/Medias.vue')
     },
     //自定义事件
     {
         path: '/evt',
         name: 'events',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/Events.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/Events.vue')
     },
     // 命名视图
     {
@@ -158,13 +172,13 @@ const routes = [{
         path: '/keys',
         name: 'keys',
         component: () =>
-            import ( /* webpackChunkName: "echarts" */ '../views/Keys.vue')
+            import( /* webpackChunkName: "echarts" */ '../views/Keys.vue')
     },
     {
         path: '/page1',
         name: 'page1',
         component: () =>
-            import ('../views/RefreshPages/Page1.vue'),
+            import('../views/RefreshPages/Page1.vue'),
         meta: {
             keepAlive: true // true :缓存  false :不缓存
         }
@@ -173,7 +187,7 @@ const routes = [{
         path: '/page2',
         name: 'page2',
         component: () =>
-            import ('../views/RefreshPages/Page2.vue'),
+            import('../views/RefreshPages/Page2.vue'),
         meta: {
             keepAlive: true, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -183,7 +197,7 @@ const routes = [{
         path: '/page3',
         name: 'page3',
         component: () =>
-            import ('../views/RefreshPages/Page3.vue'),
+            import('../views/RefreshPages/Page3.vue'),
         meta: {
             keepAlive: true, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -194,7 +208,7 @@ const routes = [{
         path: '/list',
         name: 'list',
         component: () =>
-            import ('../views/times/list.vue'),
+            import('../views/times/list.vue'),
         meta: {
             keepAlive: true, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -204,7 +218,7 @@ const routes = [{
         path: '/detail/:id',
         name: 'detail',
         component: () =>
-            import ('../views/times/detail.vue'),
+            import('../views/times/detail.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -215,7 +229,7 @@ const routes = [{
         path: '/vlist',
         name: 'vlist',
         component: () =>
-            import ('../views/virtulScroll/VirtualList.vue'),
+            import('../views/virtulScroll/VirtualList.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -225,7 +239,7 @@ const routes = [{
         path: '/vlist2',
         name: 'vlist2',
         component: () =>
-            import ('../views/virtulScroll/VirtualList2.vue'),
+            import('../views/virtulScroll/VirtualList2.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -236,7 +250,7 @@ const routes = [{
         path: '/refresh',
         name: 'refresh',
         component: () =>
-            import ('../views/Refresh.vue'),
+            import('../views/Refresh.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -247,17 +261,18 @@ const routes = [{
         path: '/joinchat',
         name: 'joinchat',
         component: () =>
-            import ('../views/chat/JoinChat.vue'),
+            import('../views/chat/JoinChat.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
+            showTabbar: true
         }
     },
     {
         path: '/chat/:username/:img',
         name: 'chat',
         component: () =>
-            import ('../views/chat/Chat.vue'),
+            import('../views/chat/Chat.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
@@ -268,12 +283,24 @@ const routes = [{
         path: '/mock',
         name: 'mock',
         component: () =>
-            import ('../views/mock/Test01.vue'),
+            import('../views/mock/Test01.vue'),
         meta: {
             keepAlive: false, // true :缓存  false :不缓存
             isBack: false, //用于判断上一个页面是哪个
         }
     },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () =>
+            import('../views/DotScrollToBottom.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+            showTabbar: true
+        }
+    },
+
 
 ]
 

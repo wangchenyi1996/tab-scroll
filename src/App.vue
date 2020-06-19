@@ -15,14 +15,21 @@
     <router-view v-if="!$route.meta.keepAlive">
       <!-- 这里是不被缓存的视图组件，比如 page3 -->
     </router-view>
+
+    <!-- 底部tabbar -->
+    <TabBar v-if="$route.meta && $route.meta.showTabbar"/>
   </div>
 </template>
-<script>
+<script> 
+import TabBar from '@/components/TabBar.vue'
 export default {
   data() {
     return {
       isShow: true
     };
+  },
+  components: {
+    TabBar,
   },
   /*
         provide：是一个对象，或者是一个返回对象的函数。里面呢就包含要给子孙后代的东西，也就是属性和属性值。
@@ -68,6 +75,7 @@ export default {
   width: 100%;
   background-color: #f1f1f1;
   min-height: 100%;
+   padding-bottom: 70px;
 }
 * {
   margin: 0;

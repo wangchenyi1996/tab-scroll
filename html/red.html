@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>模拟红包抽取（原创）-jq22.com</title>
+<script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+body {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+.redbag {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+.redbag {
+	width:300px;
+	height:400px;
+	border:1px solid #ccc;
+	background:#fd2451;
+}
+.topbg {
+	width:100%;
+	height:100px;
+	background:#fe4f5c;
+	border-radius:0 0 15px 15px;
+}
+.outbg {
+	margin-top:-30px;
+	width:90px;
+	height:90px;
+	background:#fd2451;
+	border-radius:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.kai {
+	width:60px;
+	height:60px;
+	background:#FFEB3B;
+	border-radius:100%;
+	box-shadow:0 0 10px 2px gold;
+	font-size:40px;
+	font-weight:600;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border:2px solid red;
+	animation:scale .25s 100ms linear infinite;
+}
+.kai:hover {
+	color:red;
+}
+@keyframes scale {
+	from {
+	transform:scale(0.9);
+}
+to {
+	transform:scale(1.1);
+	background:rgba(255,255,0,.5);
+}
+}.txt {
+	font-size:32px;
+	margin-top:50px;
+	color:#FFEB3B;
+	letter-spacing:7px;
+}
+</style>
+</head>
+<body>
+<div>
+    <p>请输入红包金额：<input type="number" id="total" value="100" onchange="total=this.value"></p>
+    <p>请输入红包个数：<input type="number" id="num" value="4" onchange="num=this.value"></p>
+    <p>剩余金额：<span id="sy_total"></span></p>
+    <p>剩余个数：<span id="sy_num"></span></p>
+    <p><button onclick="init()">再来一个</button></p>
+
+</div>
+<h1>惊！您有一个红包未领取</h1>
+<div class="redbag">
+    <div class="topbg"></div>
+    <div class="outbg">
+        <div class="kai" onclick="openbag()">檫</div>
+    </div>
+    <div class="txt">恭喜发财</div>
+</div>
+<div id="list"></div>
+
+<script>
+var t = document.getElementById('total'); // 红包总金额 对象
+var n = document.getElementById('num'); // 红包个数 对象
+var sy_t = document.getElementById('sy_total'); // 剩余红包总金额 对象
+var sy_n = document.getElementById('sy_num'); // 剩余红包个数 对象
+var log = document.getElementById('list'); // 记录 对象
+
+var i = 0; // 抢到的第几个红包
+var money = 0; // 抢到的金额
+var total = t.value; // 红包总金额
+var num = n.value; // 红包个数
+
+function openbag() {
+    if (num > 0) {
+        if (num == 1) { // 最后一个包
+            money = ~~(total * 100) / 100;;
+            total = 0; // 全部
+            sy_t.innerText = total; // 剩余金额
+            sy_n.innerText = --num; // 剩余红包数					
+            log.innerHTML += "<p>恭喜！第" + (++i) + "个红包￥" + money + "</p>"; // 记录
+            clean(); // 清除遗留数据
+            return;
+        }
+        // 随机到0赋值为0.01
+        money = (~~(Math.random() * total * 100) || 100) / 100;
+        total -= money;
+        // 剩余金额
+        sy_t.innerText = ~~(total * 100) / 100;
+        sy_n.innerText = --num; // 剩余红包数					
+        log.innerHTML += "<p>恭喜！抢到第" + (++i) + "个红包￥" + money + "</p>"; // 记录	
+    } else {
+        alert("您手慢啦，红包没有啦！");
+    }
+}
+
+function init() {
+    t.value = 100;
+    n.value = 4;
+    total = t.value;
+    num = n.value;
+    sy_t.innerText = total; // 剩余金额
+    sy_n.innerText = num; // 剩余红包数
+    log.innerHTML = "";
+    clean();
+}
+
+function clean() {
+    i = 0; // 抢到的第几个红包
+    money = 0; // 抢到的金额
+}
+init();
+</script>
+
+</body>
+</html>

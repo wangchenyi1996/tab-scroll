@@ -4,7 +4,7 @@
  * @Autor: 王强
  * @Date: 2020-06-17 11:11:38
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-17 11:32:35
+ * @LastEditTime: 2020-06-17 14:02:15
 --> 
 <template>
   <div class="mock">
@@ -35,9 +35,14 @@ export default {
   methods: {
     getCitylist() {
       axios
-        .get("/cityList")
+        .get("/cityList",{
+          data:{
+            a:1,
+            b:2
+          }
+        })
         .then(res => {
-          console.log("城市列表", res.data.data);
+          console.log("城市列表", res);
           this.list = res.data.data;
         })
         .catch(err => {
