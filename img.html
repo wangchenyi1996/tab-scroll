@@ -4,7 +4,7 @@
  * @Autor: 王强
  * @Date: 2020-06-19 10:51:40
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-19 11:14:00
+ * @LastEditTime: 2020-06-19 16:06:13
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,9 @@
       width: 300px;
       height: 300px;
     }
-    
+    /* 使用另一种方式来解决图片自适应的问题－－图片自适应问题，图片宽度设置100%，
+    页面加载时会存在高度塌陷的问题，可以使用padding－top来设置百分比值来实现自适应 
+    padding-top = (图片的高度/图片的宽度)*100； */
     .imgs {
       width: 100%;
       height: 0;
