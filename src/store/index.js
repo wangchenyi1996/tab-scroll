@@ -9,6 +9,13 @@ export default new Vuex.Store({
   state: {
     token:'15785625225573450056'
   },
+  getters:{
+    getToken(state,getters){
+      // console.log('state:',state)
+      // console.table('getters:',getters['user/getTestData'])
+      return state.token
+    }
+  },
   mutations:{
     updateToken(state,token){
       state.token=token
@@ -21,7 +28,7 @@ export default new Vuex.Store({
     createPersistedState({
       storage: window.localStorage,
       reducer(val) {
-        console.log('val:', val)
+        // console.log('所有state:', val)
         return {
           token: val.token,
           user: {

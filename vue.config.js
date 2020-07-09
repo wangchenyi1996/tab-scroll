@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: 王强
+ * @Date: 2020-05-13 12:05:47
+ * @LastEditors: 王强
+ * @LastEditTime: 2020-06-24 16:11:30
+ */ 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
@@ -9,7 +17,7 @@ module.exports = {
     lintOnSave: false, //关闭 eslint
     devServer: {
         port: 8080, // 端口号
-        host: "localhost",
+        // host: "localhost",
         https: false, // https:{type:Boolean}
         open: true, //配置自动启动浏览器
         proxy: {

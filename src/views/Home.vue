@@ -79,7 +79,7 @@ export default {
     // mock 数据
     // axios.get('http://localhost:8080/test').then((res)=>{
     axios.get("/test").then(res => {
-      console.log(res.data);
+      // console.log(res.data);
     });
 
     window.addEventListener("scroll", this.handleScroll);

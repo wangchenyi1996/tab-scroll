@@ -7,10 +7,16 @@ export default{
         },
         count:0,
         //测试的
-        testData:['aaa','bbbbb','cccc']
+        testData:['aaa','bbbbb','cccc'],
+        // 表示页面历史记录
+        historyList:[]
     },
     getters:{
-        getCountValue(state){
+        getCountValue(state,getters,rootState, rootGetters){
+            // console.log('state:',state) // 本模块的state
+            // console.log('getters:',getters) // 本模块的getters
+            // console.log('rootState:',rootState) // 本模块的state和跟 state
+            // console.log('rootGetters:',rootGetters) // 本模块的getters和跟 getters
             return state.count
         },
         getUserInfo(state){
@@ -21,7 +27,7 @@ export default{
     actions:{
         //模拟异步获取数据
         testAction ({ state,commit},data) {
-            console.log(state,data)
+            // console.log(state,data)
             commit('upActionData',data)
         }
     },
@@ -33,8 +39,14 @@ export default{
             state.userinfo = userinfo
         },
         upActionData(state,data){
-            console.log('data', data)
+            // console.log('data', data)
             state.testData = data
+        },
+        // 添加历史记录
+        addHistory(state,data){
+           state.historyList.push(data)
+            // console.log(state.historyList)
         }
+
     }
 };

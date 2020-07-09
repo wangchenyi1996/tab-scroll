@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>Turn.js 实现翻书效果</title>
+    <link rel="stylesheet" type="text/css" href="css/basic.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/modernizr.2.5.3.min.js"></script>
+</head>
+<body>
+<!-- 加载框 -->
+<div class="shade">
+    <div class="sk-fading-circle">
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+    </div>
+    <div class="number"></div>
+</div>
+<!-- 书的外边框 -->
+<div class="flipbook-viewport" style="display:none;">
+    <div class="previousPage"></div>
+    <div class="nextPage"></div>
+    <div class="return"></div>
+    <img class="btnImg" src="./image/btn.gif" style="display: none"/>
+    <div class="container">
+        <div class="flipbook">
+        </div>
+        <!-- 页码 -->
+        <div class="pagenumber">
+        </div>
+    </div>
+</div> 
+<script type="text/javascript">
+    // 加载图片
+    // 背景图片加载方式，注意路径
+    var loading_img_url = [
+        "./image/0001.jpg",
+        "./image/0002.jpg",
+        "./image/0003.jpg",
+        "./image/0004.jpg",
+        "./image/0005.jpg",
+        "./image/0006.jpg",
+        "./image/0007.jpg",
+        "./image/0008.jpg",
+        "./image/0009.jpg",
+        "./image/0010.jpg",
+        "./image/0011.jpg",
+        "./image/0012.jpg",
+        "./image/0013.jpg",
+        "./image/0014.jpg",
+        "./image/0015.jpg",
+        "./image/0016.jpg",
+        "./image/0017.jpg",
+        "./image/0018.jpg",
+        "./image/0019.jpg",
+        "./image/0020.jpg",
+        "./image/0021.jpg",
+        "./image/0022.jpg",
+        "./image/0023.jpg",
+        "./image/0024.jpg",
+        "./image/0025.jpg",
+        "./image/0026.jpg",
+        "./image/0027.jpg",
+        "./image/0028.jpg",
+        "./image/0029.jpg",
+        "./image/0030.jpg",
+        "./image/0031.jpg",
+        "./image/0032.jpg",
+        "./image/0033.jpg",
+        "./image/0034.jpg",
+        "./image/0035.jpg",
+        "./image/0036.jpg",
+        "./image/0037.jpg",
+        "./image/0038.jpg",
+        "./image/0039.jpg",
+        "./image/0040.jpg",
+        "./image/0041.jpg",
+        "./image/0041.jpg",
+    ];
+</script>
+<script type="text/javascript" src="js/main.js"></script>
+<script>
+    //自定义弹出层
+    (function ($) {
+        //ios confirm box
+        jQuery.fn.confirm = function (title, option, okCall, cancelCall) {
+            var defaults = {
+                title: null, //what text
+                cancelText: '取消', //the cancel btn text
+                okText: '确定' //the ok btn text
+            };
+
+            if (undefined === option) {
+                option = {};
+            }
+            if ('function' != typeof okCall) {
+                okCall = $.noop;
+            }
+            if ('function' != typeof cancelCall) {
+                cancelCall = $.noop;
+            }
+
+            var o = $.extend(defaults, option, {title: title, okCall: okCall, cancelCall: cancelCall});
+
+            var $dom = $(this);
+
+            var dom = $('<div class="g-plugin-confirm">');
+            var dom1 = $('<div>').appendTo(dom);
+            var dom_content = $('<div>').html(o.title).appendTo(dom1);
+            var dom_btn = $('<div>').appendTo(dom1);
+            var btn_cancel = $('<a href="#"></a>').html(o.cancelText).appendTo(dom_btn);
+            var btn_ok = $('<a href="#"></a>').html(o.okText).appendTo(dom_btn);
+            btn_cancel.on('click', function (e) {
+                o.cancelCall();
+                dom.remove();
+                e.preventDefault();
+            });
+            btn_ok.on('click', function (e) {
+                o.okCall();
+                dom.remove();
+                e.preventDefault();
+            });
+
+            dom.appendTo($('body'));
+            return $dom;
+        };
+    })(jQuery);
+
+    if ($(window).width() > 1024 && $(window).height() > 700) {
+        //上一页
+        $(".previousPage").bind("click", function () {
+            var pageCount = $(".flipbook").turn("pages");//总页数
+            var currentPage = $(".flipbook").turn("page");//当前页
+            if (currentPage > 2) {
+                $(".flipbook").turn('page', currentPage - 2);
+            } else if(currentPage == 2) {
+                $(".flipbook").turn('page', currentPage - 1);
+            }
+        });
+        // 下一页
+        $(".nextPage").bind("click", function () {
+            var pageCount = $(".flipbook").turn("pages");//总页数
+            var currentPage = $(".flipbook").turn("page");//当前页
+            if (currentPage < pageCount-1) {
+                $(".flipbook").turn('page', currentPage + 2);
+            } else if(currentPage == pageCount-1) {
+                $(".flipbook").turn('page', currentPage + 1);
+            }
+        });
+    } else {
+        //上一页
+        $(".previousPage").bind("click", function () {
+            var pageCount = $(".flipbook").turn("pages");//总页数
+            var currentPage = $(".flipbook").turn("page");//当前页
+            if (currentPage >= 2) {
+                $(".flipbook").turn('page', currentPage - 1);
+            } else {
+            }
+        });
+        // 下一页
+        $(".nextPage").bind("click", function () {
+            var pageCount = $(".flipbook").turn("pages");//总页数
+            var currentPage = $(".flipbook").turn("page");//当前页
+            if (currentPage <= pageCount) {
+                $(".flipbook").turn('page', currentPage + 1);
+            } else {
+            }
+        });
+    }
+
+    
+    //返回到目录页
+    $(".return").bind("click", function () {
+        $(document).confirm('您确定要返回首页吗?', {}, function () {
+            $(".flipbook").turn('page', 1); //跳转页数
+        }, function () {
+        });
+    });
+</script>
+</body>
+</html>

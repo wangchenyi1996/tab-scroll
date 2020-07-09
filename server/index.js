@@ -4,18 +4,22 @@
  * @Autor: 王强
  * @Date: 2020-06-15 09:06:54
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-17 10:04:57
- */
+ * @LastEditTime: 2020-07-02 09:08:27
+ */ 
 let express = require('express');
 let app = express();
 let cors = require("cors");
 let server = require('http').createServer(app);
 let io = require('socket.io')(server);
 
+
 app.use(cors)
 app.use('/', express.static(__dirname + '/public'));
 
-server.listen(9527);
+app.listen(9527, () => {
+    console.log('*** server started ***');
+});
+// server.listen(9527);
 
 // 定义用户数据
 const socketList = {};

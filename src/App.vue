@@ -10,18 +10,48 @@
 
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive && isShow" />
-        <!-- 这里是会被缓存的视图组件，比如 page1,page2 -->
+      <!-- 这里是会被缓存的视图组件，比如 page1,page2 -->
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive">
       <!-- 这里是不被缓存的视图组件，比如 page3 -->
     </router-view>
 
     <!-- 底部tabbar -->
-    <TabBar v-if="$route.meta && $route.meta.showTabbar"/>
+    <div>
+      <a href="weixin://">打开微信</a>
+    </div>
+    <div>
+      <a href="alipays://">打开支付宝</a>
+    </div>
+    <div>
+      <a href="alipays://platformapi/startapp?saId=10000007">打开支付宝的扫一扫功能</a>
+    </div>
+    <div>
+      <a href="alipays://platformapi/startapp?appId=60000002">打开支付宝的蚂蚁森林</a>
+    </div>
+    <!-- 拨号 -->
+    <a href="tel:10086">打电话给: 10086</a>
+
+    <!-- 发送短信 -->
+    <a href="sms:10086">发短信给: 10086</a>
+
+    <!-- 发送邮件 -->
+    <a href="mailto:839626987@qq.com">发邮件给：839626987@qq.com</a>
+
+    <!-- 选择照片或者拍摄照片 -->
+    <input type="file" accept="image/*" />
+
+    <!-- 选择视频或者拍摄视频 -->
+    <input type="file" accept="video/*" />
+
+    <!-- 多选 -->
+    <input type="file" multiple />
+
+    <TabBar v-if="$route.meta && $route.meta.showTabbar" />
   </div>
 </template>
-<script> 
-import TabBar from '@/components/TabBar.vue'
+<script>
+import TabBar from "@/components/TabBar.vue";
 export default {
   data() {
     return {
@@ -29,7 +59,7 @@ export default {
     };
   },
   components: {
-    TabBar,
+    TabBar
   },
   /*
         provide：是一个对象，或者是一个返回对象的函数。里面呢就包含要给子孙后代的东西，也就是属性和属性值。
@@ -75,7 +105,7 @@ export default {
   width: 100%;
   background-color: #f1f1f1;
   min-height: 100%;
-   padding-bottom: 70px;
+  padding-bottom: 70px;
 }
 * {
   margin: 0;

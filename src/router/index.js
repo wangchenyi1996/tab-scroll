@@ -1,6 +1,9 @@
 // import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// 引入 store
+import store from '../store'
+
 // Vue.use(VueRouter)
 
 // 命名视图 
@@ -36,9 +39,9 @@ const routes = [
         name: 'about',
         component: () =>
             import( /* webpackChunkName: "about" */ '../views/About.vue'),
-            meta: {
-                showTabbar: true // true :缓存  false :不缓存
-            }
+        meta: {
+            showTabbar: true // true :缓存  false :不缓存
+        }
     },
     {
         path: '/down',
@@ -51,9 +54,9 @@ const routes = [
         name: 'Index',
         component: () =>
             import( /* webpackChunkName: "Index" */ '../views/Index.vue'),
-            meta: {
-                showTabbar: true // true :缓存  false :不缓存
-            }
+        meta: {
+            showTabbar: true // true :缓存  false :不缓存
+        }
     },
     {
         path: '/slot',
@@ -309,15 +312,52 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes,
     scrollBehavior(to, from, savedPosition) {
+        // console.log(savedPosition)
+        // if (savedPosition) {
+        //     return savedPosition
+        // } else {
+        //     return {
+        //         x: 0,
+        //         y: 0
+        //     }
+        // }
         if (savedPosition) {
+            // savedPosition is only available for popstate navigations.
             return savedPosition
         } else {
-            return {
-                x: 0,
-                y: 0
+            const position = {}
+            // new navigation.
+            // scroll to anchor by returning the selector
+            if (to.hash) {
+                position.selector = to.hash
             }
+            // 如果meta中有scrollTop
+            if (to.matched.some(m => m.meta.scrollToTop)) {
+                // cords will be used if no selector is provided,
+                // or if the selector didn't match any element.
+                position.x = 0
+                position.y = 0
+            }
+            // if the returned position is falsy or an empty object,
+            // will retain current scroll position.
+            return position
         }
     }
+})
+
+
+router.beforeEach((to, from, next) => {
+    // to: Route: 即将要进入的目标 路由对象
+    // from: Route: 当前导航正要离开的路由
+    // next: Function: 一定要调用该方法来 resolve 这个钩子。
+    // to.path 可以表示历史记录
+    // this.$store.commit("user/addCount", 10);
+    let historyList = store.state.user.historyList
+    console.log(historyList)
+    if (!historyList.includes(to.path)) {
+        store.commit('user/addHistory', to.path)
+    }
+    next()
 })
 
 export default router

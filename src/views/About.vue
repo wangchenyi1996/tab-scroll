@@ -62,6 +62,9 @@ export default {
     users:{
       from:'userInfo1',
       defalut:() => {}
+    },
+    foo:{
+      from:'foo'
     }
   },
 
@@ -74,13 +77,15 @@ export default {
     ...mapGetters({
         comCount: 'user/getCountValue',
         comUserInfo: 'user/getUserInfo',
-        comTest:'user/getTestData'
+        comTest: 'user/getTestData',
+        getToken: 'getToken'
     })
   },
   mounted() {
     console.log('执行刷新操作')
     console.log("count值:", this.comCount);
     console.log("用户信息：", this.comUserInfo);
+    console.log("Token信息：", this.getToken);
   },
   methods: {
     ...mapActions({
@@ -113,6 +118,8 @@ export default {
 
     //刷新页面
     handleReload(){
+      // 可以响应式的 修改 provide 传递的数据 必须是对象类型才可修改， 对象可以引用
+      // this.users.name = '王五'
       this.reload()
     }
 
