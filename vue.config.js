@@ -4,8 +4,8 @@
  * @Autor: 王强
  * @Date: 2020-05-13 12:05:47
  * @LastEditors: 王强
- * @LastEditTime: 2020-06-24 16:11:30
- */ 
+ * @LastEditTime: 2020-07-17 16:42:42
+ */
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
@@ -43,42 +43,42 @@ module.exports = {
         before(app) {
             app.get('/test', function (req, res) {
                 res.json({
-                    name:'张三',age: 18
+                    name: '张三', age: 18
                 });
             });
         },
     },
-        chainWebpack: config => {
-            // 重新设置 alias
-            config.resolve.alias
-                .set('@', resolve('src'))
-                .set('@view', resolve('src/views'))
+    chainWebpack: config => {
+        // 重新设置 alias
+        config.resolve.alias
+            .set('@', resolve('src'))
+            .set('@view', resolve('src/views'))
 
-            // 查看打包文件体积大小
-            // config
-            //     .plugin('webpack-bundle-analyzer')
-            //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+        // 查看打包文件体积大小
+        // config
+        //     .plugin('webpack-bundle-analyzer')
+        //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 
-
-            // config.module
-            //     .rule("images")
-            //     .use("image-webpack-loader")
-            //     .loader("image-webpack-loader")
-            //     .options({
-            //         mozjpeg: { progressive: true, quality: 65 },
-            //         optipng: { enabled: false },
-            //         pngquant: { quality: [0.65, 0.9], speed: 4 },
-            //         gifsicle: { interlaced: false },
-            //         webp: { quality: 75 }
-            //     });
-
-        },
-        configureWebpack: {
-            externals: {
-                'vue': 'Vue',
-                'vuex': 'Vuex',
-                'vue-router': 'VueRouter',
-                'axios': 'axios'
-            }
+        // ============压缩图片 start============
+        // config.module
+        //     .rule("images")
+        //     .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+        //     .use("image-webpack-loader")
+        //     .loader("image-webpack-loader")
+        //     .options({
+        //         mozjpeg: { progressive: true, quality: 65 },
+        //         optipng: { enabled: false },
+        //         pngquant: { quality: [0.65, 0.90], speed: 4 },
+        //         gifsicle: { interlaced: false }
+        //     });
+        // ============压缩图片 end============
+    },
+    configureWebpack: {
+        externals: {
+            'vue': 'Vue',
+            'vuex': 'Vuex',
+            'vue-router': 'VueRouter',
+            'axios': 'axios'
         }
     }
+}

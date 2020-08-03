@@ -21,7 +21,6 @@ Toast.install = function (Vue,options={}) {
     // Vue.prototype.$toast = (msg, duration = 1500) => {
     //     instance.message = msg;
     //     instance.show = true;
-
     //     setTimeout(() => {
     //         instance.show = false;
     //     }, duration);

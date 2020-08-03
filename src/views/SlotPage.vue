@@ -51,12 +51,25 @@
     </div>
 </template>
 <script>
-const slotCom1 = () => import("@/components/slots/slotCom1.vue");
-const slotCom2 = () => import("@/components/slots/slotCom2.vue");
+// 方法一 工程化
+const path = require('path')
+const files = require.context('@/components/slots', false, /\.vue$/)
+// console.log(files.keys(),'集合')
+const userComponents = {}
+files.keys().forEach(key => { 
+    const name = path.basename(key, '.vue') 
+    userComponents[name] = files(key).default || files(key)
+})
+// console.log(userComponents,'集合')
+
+// 方法二
+// const slotCom1 = () => import("@/components/slots/slotCom1.vue");
+// const slotCom2 = () => import("@/components/slots/slotCom2.vue");
 export default {
-    components: {
-        slotCom1,slotCom2
-    },
+    // components: {
+    //     slotCom1,slotCom2
+    // },
+    components: userComponents
 };
 </script>
 <style>
