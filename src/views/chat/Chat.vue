@@ -158,7 +158,7 @@ export default {
         // window.scroll({ top: this.top + 120, left: 0, behavior: "smooth" });
 
         // let tops = this.$refs.chatMain
-        // tops.scrollTop =  tops.scrollHeight
+        // tops.scrollTop =  tops.scrollHeight - tops.clientHeight;
         // console.log('高度',tops.scrollHeight)
 
         this.top = this.$refs.chatMain.clientHeight;

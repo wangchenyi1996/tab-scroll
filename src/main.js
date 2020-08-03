@@ -38,7 +38,7 @@ VueAMap.initAMapApiLoader({
 // socket
 import io from '@/assets/socket/socket.io.js'
 
-Vue.prototype.socket = io('http://localhost:9527')
+// Vue.prototype.socket = io('http://localhost:9527')
 // Vue.prototype.socket = io('http://192.168.1.156:9527')
 
 
