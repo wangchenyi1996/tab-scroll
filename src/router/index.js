@@ -303,7 +303,18 @@ const routes = [
             showTabbar: true
         }
     },
-
+    // 测试 created mounted watch computed执行顺序问题
+    {
+        path: '/vuesort',
+        name: 'vuesort',
+        component: () =>
+            import('../views/vuesort.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+            showTabbar: false
+        }
+    },
 
 ]
 

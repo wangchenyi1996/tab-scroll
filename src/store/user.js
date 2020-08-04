@@ -15,8 +15,8 @@ export default{
         getCountValue(state,getters,rootState, rootGetters){
             // console.log('state:',state) // 本模块的state
             // console.log('getters:',getters) // 本模块的getters
-            // console.log('rootState:',rootState) // 本模块的state和跟 state
-            // console.log('rootGetters:',rootGetters) // 本模块的getters和跟 getters
+            // console.log('rootState:',rootState) // 本模块的state和根 state
+            // console.log('rootGetters:',rootGetters) // 本模块的getters和根 getters
             return state.count
         },
         getUserInfo(state){
