@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div class="style-1">
+    <div class="style-1">
       <div>
         <div style="font-size: 32px;color: #fff;text-align: center;padding-top: 120rpx;">
           <p v-for="item in 1" :key="item">骚代码写在这里</p>
@@ -14,13 +14,12 @@
       <div style="font-size: 32px;color: #fff;text-align: center;padding-top: 30px;">骚代码写在这里</div>
     </div>
 
-    <div style="height: 100px;"></div>-->
+    <div style="height: 100px;"></div>
 
     <div class="container">
       <div class="avator"></div>
       <p>bulr shadow</p>
     </div>
-    <!-- 倒计时 -->
     <p>倒计时：{{ msg }}</p>
   </div>
 </template>

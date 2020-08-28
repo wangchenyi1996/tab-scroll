@@ -17,7 +17,7 @@
     </router-view>
 
     <!-- 底部tabbar -->
-    <div>
+    <!-- <div>
       <a href="weixin://">打开微信</a>
     </div>
     <div>
@@ -28,24 +28,24 @@
     </div>
     <div>
       <a href="alipays://platformapi/startapp?appId=60000002">打开支付宝的蚂蚁森林</a>
-    </div>
+    </div> -->
     <!-- 拨号 -->
-    <a href="tel:10086">打电话给: 10086</a>
+    <!-- <a href="tel:10086">打电话给: 10086</a> -->
 
     <!-- 发送短信 -->
-    <a href="sms:10086">发短信给: 10086</a>
+    <!-- <a href="sms:10086">发短信给: 10086</a> -->
 
     <!-- 发送邮件 -->
-    <a href="mailto:839626987@qq.com">发邮件给：839626987@qq.com</a>
+    <!-- <a href="mailto:839626987@qq.com">发邮件给：839626987@qq.com</a> -->
 
     <!-- 选择照片或者拍摄照片 -->
-    <input type="file" accept="image/*" />
+    <!-- <input type="file" accept="image/*" /> -->
 
     <!-- 选择视频或者拍摄视频 -->
-    <input type="file" accept="video/*" />
+    <!-- <input type="file" accept="video/*" /> -->
 
     <!-- 多选 -->
-    <input type="file" multiple />
+    <!-- <input type="file" multiple /> -->
 
     <TabBar v-if="$route.meta && $route.meta.showTabbar" />
   </div>
