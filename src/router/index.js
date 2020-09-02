@@ -315,7 +315,18 @@ const routes = [
             showTabbar: false
         }
     },
-
+    // 瀑布流
+    {
+        path: '/waterful',
+        name: 'waterful',
+        component: () =>
+            import('../views/Waterful.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+            showTabbar: false
+        }
+    },
 ]
 
 const router = new VueRouter({

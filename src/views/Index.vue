@@ -9,7 +9,9 @@
       class="abc"
       @change1="change1"
       v-on="$listeners"
+     
     ></child-com1>
+     <!-- @hook:mounted="handleMounted"  -->
 
     <p style="margin:10px auto;color:red;">测试.sync</p>
     <!-- 单个属性 .sync-->
@@ -65,8 +67,19 @@ export default {
       }
     };
   },
+  created() {
+    // 监听子组件的mounted
+    this.$on('hook:mounted',()=>{
+      console.log('监听子组件的mounted')
+    }) 
+  },
  
   methods: {
+    // 监听子组件的mounted
+    handleMounted(){
+      console.log('我是父组件的mounted')
+    },
+
     //多个 .sync属性
     muti(){
       this.objData = {

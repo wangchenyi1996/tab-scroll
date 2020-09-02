@@ -36,6 +36,9 @@ export default {
     //也可以像下面这样使用
     this.$emit('change1')
   }, 
+  mounted() {
+    console.log('我是子组件mounted')
+  },
   methods: {
     change2(){
       console.log('tag2', '父组件中非原生事件2')
