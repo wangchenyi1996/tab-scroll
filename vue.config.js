@@ -13,12 +13,24 @@ module.exports = {
     publicPath: './',
     outputDir: 'dist',
     productionSourceMap: false,
-
     lintOnSave: false, //关闭 eslint
+
+    pwa: {
+        name: 'My App',
+        themeColor: '#4DBA87',
+        msTileColor: '#000000',
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'black',
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+          swSrc: 'src/sw.js',
+        }
+    },
+
     devServer: {
         port: 8080, // 端口号
         // host: "localhost",
-        https: false, // https:{type:Boolean}
+        // https: false, // https:{type:Boolean}
         open: true, //配置自动启动浏览器
         proxy: {
             "/api": {

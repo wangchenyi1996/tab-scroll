@@ -13,7 +13,7 @@
     "echarts": "^4.7.0",
     "image-webpack-loader": "^6.0.0",
     "mockjs": "^1.1.0",
-    "register-service-worker": "^1.6.2",
+    "register-service-worker": "^1.7.1",
     "v-charts": "^1.19.0",
     "vue": "^2.6.11",
     "vue-amap": "^0.5.10",
