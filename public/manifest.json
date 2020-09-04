@@ -1,13 +1,14 @@
 {
     "name": "Vue-PWA webapp",
     "short_name": "Vue-PWA",
-    "icons": [{
-            "src": "/img/icons/android-chrome-192x192.png",
+    "icons": [
+        {
+            "src": "./img/icons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/img/icons/android-chrome-512x512.png",
+            "src": "./img/icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

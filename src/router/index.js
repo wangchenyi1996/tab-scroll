@@ -327,6 +327,17 @@ const routes = [
             showTabbar: false
         }
     },
+    {
+        path: '/scroll',
+        name: 'scroll',
+        component: () =>
+            import('../views/Scroll.vue'),
+        meta: {
+            keepAlive: false, // true :缓存  false :不缓存
+            isBack: false, //用于判断上一个页面是哪个
+            showTabbar: false
+        }
+    },
 ]
 
 const router = new VueRouter({
