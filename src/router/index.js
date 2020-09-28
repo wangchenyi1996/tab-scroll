@@ -338,6 +338,12 @@ const routes = [
             showTabbar: false
         }
     },
+    {
+        path: '/animation',
+        name: 'animation',
+        component: () =>
+            import('../views/AnimationList.vue')
+    },
 ]
 
 const router = new VueRouter({

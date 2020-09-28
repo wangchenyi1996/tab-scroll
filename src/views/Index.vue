@@ -9,7 +9,7 @@
       class="abc"
       @change1="change1"
       v-on="$listeners"
-     
+      @hook:mounted="handleMounted"
     ></child-com1>
      <!-- @hook:mounted="handleMounted"  -->
 

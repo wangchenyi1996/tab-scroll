@@ -103,9 +103,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: #fff;
   min-height: 100%;
-  padding-bottom: 70px;
+  // padding-bottom: 70px;
 }
 * {
   margin: 0;
