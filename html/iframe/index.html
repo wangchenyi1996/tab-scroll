@@ -1,0 +1,40 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-13 11:31:32
+ * @LastEditTime: 2020-10-13 14:48:25
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \reactc:\Users\wq\Desktop\vue\tab-scroll\html\iframe\index.html
+-->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+  <form id="form">
+    <input type="text" placeholder="Enter message" name="message">
+    <input type="submit" value="Click to send">
+  </form>
+
+  <iframe src="iframe.html" id="iframe" style="display:block;height:60px" name="example"></iframe>
+
+  <script>
+    form.onsubmit = function() {
+      // iframe.contentWindow.postMessage(this.message.value, '*');
+      var str = document.getElementsByName('message')[0].value
+      let win = window.frames.example;
+      win.postMessage(str, "*");
+      return false;
+    };
+    window.onbeforeunload = function() {
+      return "There are unsaved changes. Leave now?";
+    };
+  </script>
+
+</body>
+
+</html>

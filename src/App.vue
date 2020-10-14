@@ -46,6 +46,8 @@
 
     <!-- 多选 -->
     <!-- <input type="file" multiple /> -->
+    <!-- 拨号 -->
+
 
     <TabBar v-if="$route.meta && $route.meta.showTabbar" />
   </div>

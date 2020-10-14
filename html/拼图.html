@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-12 09:42:33
+ * @LastEditTime: 2020-10-12 10:57:21
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \reactc:\Users\wq\Desktop\vue\tab-scroll\html\拼图.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拼图</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    .area {
+      width: 603px;
+      height: 603px;
+      border: 1px solid red;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+    .div1 {
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+      border-left: 0px;
+      position: relative;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="imgs">
+    <img id="img1" src="./imgs/1.jpg" alt="">
+    <img id="img2" src="./imgs/2.jpg" alt="">
+    <img id="img3" src="./imgs/3.jpg" alt="">
+    <img id="img4" src="./imgs/4.jpg" alt="">
+    <img id="img5" src="./imgs/5.jpg" alt="">
+    <img id="img6" src="./imgs/6.jpg" alt="">
+    <img id="img7" src="./imgs/7.jpg" alt="">
+    <img id="img8" src="./imgs/8.jpg" alt="">
+    <img id="img9" src="./imgs/9.jpg" alt="">
+  </div>
+
+  <div style="display: flex;">
+    <div id="area" class="area">
+      <div class="div1" id="div1"></div>
+      <div class="div1" id="div2"></div>
+      <div class="div1" id="div3"></div>
+      <div class="div1" id="div4"></div>
+      <div class="div1" id="div5"></div>
+      <div class="div1" id="div6"></div>
+      <div class="div1" id="div7"></div>
+      <div class="div1" id="div8"></div>
+      <div class="div1" id="div9"></div>
+    </div>
+
+    <img src="./imgs/ns.jpg" style="width: 50%;margin-left: 100px;">
+  </div>
+  <script>
+    var num = 0;
+    document.ondragstart = function(e) {
+      console.log(e)
+      // 存储拖拽的元素
+      e.dataTransfer.setData("text/html", e.target.id);
+    }
+    document.ondragover = function(e) {
+      // 阻止浏览器的默认行为
+      e.preventDefault();
+    }
+    document.ondrop = function(e) {
+      //采用dataTransfer存储拖拽元素只能在drop中获取
+      //下面的判断目的是为了只允许拖拽的图片放在指定的框的位置和原先存放图片的位置，其它地方的位置不允许放置
+      if (e.target.className == "div1" || e.target.id == "all") {
+        var id = e.dataTransfer.getData("text/html");
+        e.target.appendChild(document.getElementById(id));
+      }
+
+    }
+  </script>
+</body>
+
+</html>

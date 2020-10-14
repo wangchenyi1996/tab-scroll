@@ -38,11 +38,16 @@
     radial-gradient(10px circle at 5px 10px, transparent 5px, blue 5px);
     background-size: 5px 15px;
   }
-
+  .disabled {
+    pointer-events: none;
+    cursor: default;
+    /* opacity: 0.6; */
+    -webkit-font-smoothing: antialiased;
+}
 
   </style>
 </head>
 <body>
-  <div class="base-coupons">示例</div>
+  <div class="base-coupons disabled">示例</div>
 </body>
 </html>

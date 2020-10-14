@@ -389,3 +389,87 @@ export function fnFormatTimeHeader(time) {
         return `${year}-${month + 1}-${day} ${hour}:${minute < 10 ? '0' + minute : minute}`
     }
 }
+
+/**
+ * @description: URL地址转成对象格式  https://www.baidu.com?name=郝晨光&age=24&sex=男  =>   {name: "郝晨光", age: "24", sex: "男"}
+ * @param {string}  https://www.baidu.com?name=郝晨光&age=24&sex=男
+ * @return {object}  {name: "郝晨光", age: "24", sex: "男"}
+ */
+export function getURLParams(url) {
+    let paramsStr = url.split('?')[1];
+    let paramsArr = paramsStr.split('&');
+    let result = {};
+    for(let i = 0; i < paramsArr.length; i++) {
+        let params = paramsArr[i].split('=');
+        result[params[0]] = params[1];
+    }
+    return result;
+}
+
+/**
+ * @description: 简单的冒泡排序
+ * @param {Array} [1,33,55,7,8,9,100]
+ * @return {Array} [1,7,8,9,33,55,100]
+ */
+export function sort(arr) {
+    for(let i = 0; i < arr.length; i++) {
+        for(let j = i + 1; j < arr.length; j++) {
+            if(arr[i] > arr[j]) {
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+/**
+ * @description: 输出字符串中出现次数最多的字符及其出现次数
+ * @param {string} str = 'asdfghjasdfghjassdasasdasdaa'
+ * @return {object} { word: "a", count: 8 }
+ */
+export function getMaxWord(str) {
+    // 1. 先定义一个临时对象
+    let obj = {};
+    // 2. 定义返回结果
+    let result = {
+        word: '',
+        count: 0
+    };
+    // 3. 判断对象中是否有这个key 有的话就+1，反之没有赋值为1
+    for(let i = 0; i < str.length; i++) {
+        if(obj[str[i]]) {
+            obj[str[i]]++;
+        }else {
+            obj[str[i]] = 1;
+        }
+    }
+    // 4. 遍历 临时对象
+    for(let i in obj) {
+        if(result.count < obj[i]) {
+            result.word = i;
+            result.count = obj[i];
+        }
+    }
+    return result;
+}
+
+/**
+ * @description: 判断是否是回文  =>  ABCDEFGFEDCBA
+ * @param {String} 
+ * @return {String} 
+ */
+export function palindrome(str) {
+    return str === str.split('').reverse().join('');
+}
+
+/**
+ * @description: 找出数组最大的差值，最大值减最小值的差
+ * @param {array} [1,2,3,4,5,6,7,8,9]
+ * @return {number}  8
+ */
+export function maxDifference(arr) {
+    let min = Math.min.apply(null, arr);
+    let max = Math.max.apply(null, arr);
+    return max - min;
+}

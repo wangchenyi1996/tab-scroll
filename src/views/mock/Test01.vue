@@ -36,7 +36,7 @@ export default {
     getCitylist() {
       axios
         .get("/cityList",{
-          data:{
+          params:{
             a:1,
             b:2
           }
