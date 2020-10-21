@@ -98,6 +98,10 @@
   padding: 0 20px 0 24px;
 }
 
+.list-wrapper {
+  position: relative;
+}
+
 .list-wrapper::before {
   position: absolute;
   right: 0;
@@ -128,9 +132,7 @@
   background: linear-gradient( to top, #fafafa, hsla(0, 0%, 98%, 0.5) 84%, hsla(0, 0%, 98%, 0.13));
 }
 
-.list-wrapper {
-  position: relative;
-}
+
 
 ul {
   color: #595959;
