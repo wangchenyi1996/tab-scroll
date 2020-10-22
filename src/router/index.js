@@ -338,11 +338,19 @@ const routes = [
             showTabbar: false
         }
     },
+    // vue列表动画
     {
         path: '/animation',
         name: 'animation',
         component: () =>
             import('../views/AnimationList.vue')
+    },
+    // html5 API
+    {
+        path: '/html5',
+        name: 'HTML5',
+        component: () =>
+            import('../views/Html5Api.vue')
     },
 ]
 

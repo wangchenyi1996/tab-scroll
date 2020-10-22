@@ -9,6 +9,12 @@
     <audio controls="controls">您的浏览器不支持播放音频文件</audio>
     <input @click="start()" type="button" value="开始" />
     <input @click="stop()" type="button" value="结束" />
+
+    <h3>pointer-enent  上传文件</h3>
+    <div class="ups">
+      <input type="file" @change="upFile" accept=".jpg,.png">
+      <span>上传图片</span>
+    </div>
   </div>
 </template>
 
@@ -88,12 +94,32 @@ export default {
     stop() {
       recorder.stop();
     },
+    upFile(e){
+      console.log(e.target.files[0])
+    }
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 p {
   margin: 10px auto;
+}
+.ups{
+  position: relative;
+  input[type='file']{
+    color: #fff;
+  }
+  span{
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    background-color: skyblue;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+  }
 }
 </style>
