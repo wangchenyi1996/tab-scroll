@@ -16,6 +16,7 @@
       <li @click="$router.push('/list')">模仿 商品列表的倒计时功能</li>
       <li @click="$router.push('/refresh')">自定义下拉刷新功能</li>
       <li @click="$router.push('/waterful')">瀑布流示例</li>
+      <li @click="$router.push('/book')">实现小说左右滑动翻页功能</li>
       <li @click="txtDirective" v-test="{a:1,b:2}">{{txt}}</li>
     </ul>
     <div class="bruce flex-ct-x">
@@ -95,8 +96,8 @@ export default {
   padding-top: 20px;
   list-style-type: none;
   li {
-    height: 40px;
-    line-height: 40px;
+    height: 30px;
+    line-height: 30px;
   }
 }
 .scroll-indicator {

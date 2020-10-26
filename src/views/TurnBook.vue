@@ -79,7 +79,13 @@ export default {
 
       this.handleDirection(this.startX, this.startY, this.endX, this.endY);
     },
-    // 处理左右方向
+
+    /* 处理左右方向
+     * touchmove的最后坐标减去touchstart的起始坐标，
+       X的结果如果正数，则说明手指是从左往右划动；X的结果如果负数，
+       则说明手指是从右往左划动；Y的结果如果正数，则说明手指是从上往下划动；
+       Y的结果如果负数，则说明手指是从下往上划动。
+     */
     handleDirection(startX, startY, endX, endY) {
       const that = this;
       let distanceX = endX - startX;
