@@ -95,7 +95,11 @@ export default {
       } else if (Math.abs(distanceX) > Math.abs(distanceY) && distanceX < 0) {
         console.log("往左滑动");
         this.bookPage = this.bookPage + 1;
-      }
+      } else if (Math.abs(distanceY) > Math.abs(distanceX) && distanceY > 0) {
+        alert('往下滑动')
+      } else if (Math.abs(distanceY) > Math.abs(distanceX) && distanceY < 0) {
+        alert('往上滑动')
+      } 
       this.getBook();
     },
   },
