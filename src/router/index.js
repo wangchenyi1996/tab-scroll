@@ -352,6 +352,13 @@ const routes = [
         component: () =>
             import('../views/Html5Api.vue')
     },
+    // 图书翻页效果
+    {
+        path: '/book',
+        name: 'TurnBook',
+        component: () =>
+            import('../views/TurnBook.vue')
+    },
 ]
 
 const router = new VueRouter({

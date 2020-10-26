@@ -1,11 +1,3 @@
-/*
- * @Description: 
- * @Version: 1.0
- * @Autor: 王强
- * @Date: 2020-05-13 12:05:47
- * @LastEditors: 王强
- * @LastEditTime: 2020-07-17 16:42:42
- */
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
@@ -49,6 +41,14 @@ module.exports = {
                 secure: false,
                 pathRewrite: {
                     "^/api2": "/"
+                }
+            },
+            "/book": {
+                target: "http://39.96.77.250",
+                changeOrigin: true,
+                secure: false,
+                pathRewrite: {
+                    "^/book": ""
                 }
             },
         },
