@@ -20,7 +20,6 @@ export default {
       bookPage: 0,
       content: "",
       name: "",
-      timer: null,
       startX: 0,
       startY: 0,
       endX: 0,

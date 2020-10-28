@@ -391,6 +391,66 @@ export function fnFormatTimeHeader(time) {
 }
 
 /**
+ * 时间戳显示为多少分钟前，多少天前的JS处理
+ * @param { number } timestamp 
+ */
+
+export function dateDiff(timestamp) {
+    // 补全为13位
+    var arrTimestamp = (timestamp + '').split('');
+    for (var start = 0; start < 13; start++) {
+        if (!arrTimestamp[start]) {
+            arrTimestamp[start] = '0';
+        }
+    }
+    timestamp = arrTimestamp.join('') * 1;
+    var minute = 1000 * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    // var halfamonth = day * 15;
+    var month = day * 30;
+    var now = new Date().getTime();
+    var diffValue = now - timestamp;
+    // 如果本地时间反而小于变量时间
+    if (diffValue < 0) {
+        return '不久前';
+    }
+    // 计算差异时间的量级
+    var monthC = diffValue / month;
+    var weekC = diffValue / (7 * day);
+    var dayC = diffValue / day;
+    var hourC = diffValue / hour;
+    var minC = diffValue / minute;
+    // 数值补0方法
+    var zero = function (value) {
+        if (value < 10) {
+            return '0' + value;
+        }
+        return value;
+    };
+    // 使用
+    if (monthC > 12) {
+        // 超过1年，直接显示年月日
+        return (function () {
+            var date = new Date(timestamp);
+            return date.getFullYear() + '年' + zero(date.getMonth() + 1) + '月' + zero(date.getDate()) + '日';
+        })();
+    } else if (monthC >= 1) {
+        return parseInt(monthC) + "月前";
+    } else if (weekC >= 1) {
+        return parseInt(weekC) + "周前";
+    } else if (dayC >= 1) {
+        return parseInt(dayC) + "天前";
+    } else if (hourC >= 1) {
+        return parseInt(hourC) + "小时前";
+    } else if (minC >= 1) {
+        return parseInt(minC) + "分钟前";
+    }
+    return '刚刚';
+};
+
+
+/**
  * @description: URL地址转成对象格式  https://www.baidu.com?name=郝晨光&age=24&sex=男  =>   {name: "郝晨光", age: "24", sex: "男"}
  * @param {string}  https://www.baidu.com?name=郝晨光&age=24&sex=男
  * @return {object}  {name: "郝晨光", age: "24", sex: "男"}
@@ -399,7 +459,7 @@ export function getURLParams(url) {
     let paramsStr = url.split('?')[1];
     let paramsArr = paramsStr.split('&');
     let result = {};
-    for(let i = 0; i < paramsArr.length; i++) {
+    for (let i = 0; i < paramsArr.length; i++) {
         let params = paramsArr[i].split('=');
         result[params[0]] = params[1];
     }
@@ -412,9 +472,9 @@ export function getURLParams(url) {
  * @return {Array} [1,7,8,9,33,55,100]
  */
 export function sort(arr) {
-    for(let i = 0; i < arr.length; i++) {
-        for(let j = i + 1; j < arr.length; j++) {
-            if(arr[i] > arr[j]) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] > arr[j]) {
                 let temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
@@ -437,16 +497,16 @@ export function getMaxWord(str) {
         count: 0
     };
     // 3. 判断对象中是否有这个key 有的话就+1，反之没有赋值为1
-    for(let i = 0; i < str.length; i++) {
-        if(obj[str[i]]) {
+    for (let i = 0; i < str.length; i++) {
+        if (obj[str[i]]) {
             obj[str[i]]++;
-        }else {
+        } else {
             obj[str[i]] = 1;
         }
     }
     // 4. 遍历 临时对象
-    for(let i in obj) {
-        if(result.count < obj[i]) {
+    for (let i in obj) {
+        if (result.count < obj[i]) {
             result.word = i;
             result.count = obj[i];
         }

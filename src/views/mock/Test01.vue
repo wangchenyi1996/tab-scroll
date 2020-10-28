@@ -7,13 +7,21 @@
  * @LastEditTime: 2020-06-17 14:02:15
 --> 
 <template>
-  <div class="mock">
-    <h3 style="margin-top: 20px" ><center>mock使用--实现纯前端分页效果</center></h3>
+  <div
+    class="mock"
+    ref="maintain"
+    @touchstart="touchstart"
+    @touchmove="touchmove"
+    @touchend="touchend"
+  >
+    <h3 style="margin-top: 20px">
+      <center>mock使用--实现纯前端分页效果</center>
+    </h3>
 
     <div v-for="(item, index) in currentPageData" :key="index">
       <p>国家：{{ item.cn }}---区号：{{ item.code }}</p>
     </div>
-    <center style="font-weight:bolder">
+    <center style="font-weight: bolder">
       <a @click="prevPage()">上一页</a>
       <span>第{{ currentPage }}页/共{{ totalPage }}页</span>
       <a @click="nextPage()">下一页</a>
@@ -41,14 +49,41 @@ export default {
       currentPage: 1, //当前页数 ，默认为1
       pageSize: 15, // 每页显示数量
       currentPageData: [], //当前页显示内容
+      // 路由切换
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0,
     };
   },
-  mounted() {
+  created() {
     // this.getCitylist();
     // this.getCategroyList()
     this.getCcountryAreaCodeList();
   },
   methods: {
+    // 左滑、右滑切换路由实现
+    touchstart(e) {
+      console.log("开始", e.touches[0].clientX);
+      this.startX = e.touches[0].clientX;
+    },
+    touchmove(e) {
+      // console.log("滑动", e.touches[0].clientX);
+    },
+    touchend(e) {
+      console.log("结束", e.changedTouches[0].clientX);
+      this.endX = e.changedTouches[0].clientX;
+      let X = this.endX - this.startX;
+      if (X < -50) {
+        //左滑
+        this.$router.push("/home");
+      }
+      if (X > 50) {
+        //右滑
+        this.$router.push("/about");
+      }
+    },
+
     getCitylist() {
       axios
         .get("/cityList", {
@@ -76,7 +111,7 @@ export default {
           console.log(err);
         });
     },
-    
+
     // 前端分页相关
     getCcountryAreaCodeList() {
       axios
@@ -126,10 +161,11 @@ export default {
 
 <style lang="scss" scoped>
 .mock {
+  transition: all 0.8s;
   p {
     font-size: 16px;
-    height: 40px;
-    line-height: 40px;
+    height: 36px;
+    line-height: 36px;
     text-align: center;
   }
 }
