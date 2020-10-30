@@ -17,10 +17,7 @@
 
     <p @click="fk">去付款</p>
 
-
     <p>page2：{{list[1]}}</p>
-
-
 
     <button @click="handleReload" style="margin-top:50px;">点击刷新</button>
 
