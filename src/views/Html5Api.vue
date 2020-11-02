@@ -41,9 +41,21 @@
       <input class="error" type="checkbox" name="c2" />
       <input class="error" type="checkbox" name="c2" checked />
     </div>
+    <h3>web Workers</h3>
+    <div style="margin-top: 10px; display: flex">
+      <input
+      ref='input'
+        type="number"
+        placeholder="请输入"
+        style="height: 35px; line-height: 35px"
+      />
+      <button @click="sends">发送</button>
+      <button @click="stops">停止</button>
+    </div>
   </div>
 </template>
 <script>
+import Worker from '../my.worker'
 export default {
   data() {
     return {
@@ -54,6 +66,14 @@ export default {
     };
   },
   mounted() {
+     //子线程向主线程传递消息
+    this.worker = new Worker();
+
+    //监听子线程的message事件
+    this.worker.addEventListener("message", function (e) {
+      console.log('数据：',e.data);
+    });
+
     window.addEventListener("online", (e) => {
       console.log(e);
       this.getLine();
@@ -76,6 +96,17 @@ export default {
     }
   },
   methods: {
+    // web workers
+    sends() {
+      let num = this.$refs.input.value;
+      //向子线程发送message事件
+      this.worker.postMessage(num);
+    },
+    stops(){
+      //停止webworker
+      this.worker.terminate(); 
+    },
+
     // 网络改变监听
     updateConnectionStatus(e) {
       this.connection = navigator.connection || initConnection;
