@@ -44,7 +44,7 @@
     <h3>web Workers</h3>
     <div style="margin-top: 10px; display: flex">
       <input
-      ref='input'
+        ref="input"
         type="number"
         placeholder="请输入"
         style="height: 35px; line-height: 35px"
@@ -55,7 +55,10 @@
   </div>
 </template>
 <script>
-import Worker from '../my.worker'
+import Worker from "../my.worker";
+
+var worker = null;
+
 export default {
   data() {
     return {
@@ -65,15 +68,17 @@ export default {
       src: "",
     };
   },
-  mounted() {
-     //子线程向主线程传递消息
-    this.worker = new Worker();
+  created() {
+    //子线程向主线程传递消息
+    worker = new Worker();
 
     //监听子线程的message事件
-    this.worker.addEventListener("message", function (e) {
-      console.log('数据：',e.data);
+    worker.addEventListener("message", function (e) {
+      console.log("数据：", e.data);
     });
-
+    
+  },
+  mounted() {
     window.addEventListener("online", (e) => {
       console.log(e);
       this.getLine();
@@ -96,15 +101,18 @@ export default {
     }
   },
   methods: {
+    sendWorkers(params){
+      console.log(params)
+    },
     // web workers
     sends() {
       let num = this.$refs.input.value;
       //向子线程发送message事件
-      this.worker.postMessage(num);
+      worker.postMessage(num);
     },
-    stops(){
+    stops() {
       //停止webworker
-      this.worker.terminate(); 
+      worker.terminate();
     },
 
     // 网络改变监听

@@ -33,11 +33,17 @@
     <ul style="margin-top: 10px">
       <li v-for="item of categroyList" :key="item.id">{{ item.name }}</li>
     </ul>
+
+    <button @click="repeatAjax">点击重复发送请求</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
+let CancelToken = axios.CancelToken;
+let source;
+
 export default {
   data() {
     return {
@@ -59,9 +65,42 @@ export default {
   created() {
     // this.getCitylist();
     // this.getCategroyList()
-    this.getCcountryAreaCodeList();
+    this.getCountryAreaCodeList();
+    // this.repeatAjax()
   },
   methods: {
+    /*************** 重复发送ajax请求 ****************/
+    repeatAjax() {
+      let _that = this
+      // 取消上一次请求
+      this.cancelRequest();
+
+      axios
+        .get("http://rap2api.taobao.org/app/mock/233782/api/roomList", {
+          params: {
+            a: 1,
+            b: 2,
+          },
+          cancelToken: new axios.CancelToken(function executor(c) {
+            source = c;
+            console.log(_that)
+          }),
+        })
+        .then((res) => {
+          console.log("列表", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    cancelRequest() {
+      if (typeof source === "function") {
+        //这样就可以成功取消上一次请求
+        source("终止重复的请求");
+      }
+    },
+    /*************** 重复发送ajax请求 ****************/
+
     // 左滑、右滑切换路由实现
     touchstart(e) {
       console.log("开始", e.touches[0].clientX);
@@ -113,7 +152,7 @@ export default {
     },
 
     // 前端分页相关
-    getCcountryAreaCodeList() {
+    getCountryAreaCodeList() {
       axios
         .post("/getCountryCode")
         .then((res) => {

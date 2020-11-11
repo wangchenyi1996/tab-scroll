@@ -20,9 +20,9 @@ module.exports = {
     },
 
     devServer: {
-        port: 8080, // 端口号
+        port: 8888, // 端口号
         // host: "localhost",
-        // https: false, // https:{type:Boolean}
+        // https: false,
         open: true, //配置自动启动浏览器
         proxy: {
             "/api": {
