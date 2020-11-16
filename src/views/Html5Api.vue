@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div id="video-container">
+
+    <button @click="stop">停止</button>
+  </div>
+  <!-- <div>
     <h3><center>Html5 Api介绍使用</center></h3>
     <div class="notices">
       <button @click="joinFriend">有人想加你为好友</button>
@@ -52,12 +56,17 @@
       <button @click="sends">发送</button>
       <button @click="stops">停止</button>
     </div>
-  </div>
+    <h3>加密和解密使用</h3>
+    <img src="@/assets/imgs/ctypto.png" />
+  </div> -->
 </template>
 <script>
-import Worker from "../my.worker";
+import EZUIKit from 'ezuikit-js';
+// 导入 crypto-js 包
+import cryptoJS from "crypto-js/crypto-js";
 
-var worker = null;
+import Worker from "../my.worker";
+let worker = null;
 
 export default {
   data() {
@@ -76,16 +85,24 @@ export default {
     worker.addEventListener("message", function (e) {
       console.log("数据：", e.data);
     });
-    
+
   },
   mounted() {
+    this.player = new EZUIKit.EZUIKitPlayer({
+      id: 'video-container', // 视频容器ID
+      accessToken: 'at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz',
+      url: 'ezopen://open.ys7.com/203751922/1.live',
+      width: 300,
+      height: 400
+    })
+
     window.addEventListener("online", (e) => {
-      console.log(e);
+      // console.log(e);
       this.getLine();
     });
 
     window.addEventListener("offline", (e) => {
-      console.log(e);
+      // console.log(e);
       this.getLine();
     });
 
@@ -101,8 +118,11 @@ export default {
     }
   },
   methods: {
-    sendWorkers(params){
-      console.log(params)
+    stop(){
+      this.player.stop()
+    },
+    sendWorkers(params) {
+      console.log(params);
     },
     // web workers
     sends() {
