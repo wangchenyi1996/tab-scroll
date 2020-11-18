@@ -1,10 +1,12 @@
 <template>
   <div class="water-ful">
     <p>瀑布流示例</p>
+    <h3>v-lazy 背景图片</h3>
+    <div v-lazy:background-image="bgurl" style="width:100%;height:200px"></div>
     <ul>
-      <li class="item" v-for="(img,index) in list" :key="index">
-        <img :src="img" />
-        <p>第{{index+1}}张</p>
+      <li class="item" v-for="(img, index) in list" :key="index">
+        <img v-lazy="img" />
+        <p>第{{ index + 1 }}张</p>
       </li>
     </ul>
   </div>
@@ -12,15 +14,15 @@
 
 <script>
 import imglist from "@/assets/imglist";
+import axios from "axios";
 export default {
   data() {
     return {
       list: imglist,
+      bgurl: 'https://c-ssl.duitang.com/uploads/item/201902/15/20190215233958_jsnbd.thumb.400_0.jpg'
     };
-  },
-  mounted() {
-    console.log(this.list);
-  },
+  }
+ 
 };
 </script>
 

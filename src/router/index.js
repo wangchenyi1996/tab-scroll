@@ -35,6 +35,15 @@ const routes = [
         }
     },
     {
+        path: '/login',
+        name: 'login',
+        component: () =>
+            import( /* webpackChunkName: "login" */ '../views/Login.vue'),
+        meta: {
+            showTabbar: false // true :缓存  false :不缓存
+        }
+    },
+    {
         path: '/about',
         name: 'about',
         component: () =>

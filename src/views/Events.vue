@@ -109,10 +109,11 @@ p {
   position: relative;
   input[type='file']{
     color: #fff;
+    height: 38px;
   }
   span{
     display: inline-block;
-    width: 80px;
+    width: 100%;
     height: 40px;
     line-height: 40px;
     background-color: skyblue;

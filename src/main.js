@@ -42,6 +42,14 @@ import io from '@/assets/socket/socket.io.js'
 // Vue.prototype.socket = io('http://localhost:9527')
 // Vue.prototype.socket = io('http://192.168.1.156:9527')
 
+// 图片懒加载
+import VueLazyload from 'vue-lazyload' 
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: require('./assets/imgs/error.png'),
+  loading: require('./assets/imgs/loading.png'),
+  attempt: 2
+})
 
 new Vue({
     router,

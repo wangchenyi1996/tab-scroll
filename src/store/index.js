@@ -7,21 +7,25 @@ import createPersistedState from 'vuex-persistedstate'
 
 export default new Vuex.Store({
   state: {
-    token:'15785625225573450056'
+    token: '',
+    refresh_token: ''
   },
-  getters:{
-    getToken(state,getters){
+  getters: {
+    getToken(state, getters) {
       // console.log('state:',state)
       // console.table('getters:',getters['user/getTestData'])
       return state.token
     }
   },
-  mutations:{
-    updateToken(state,token){
-      state.token=token
+  mutations: {
+    updateToken(state, token) {
+      state.token = token
+    },
+    setRefreshToken(state, reToken) {
+      state.refresh_token = reToken
     }
   },
-  modules:{
+  modules: {
     user
   },
   plugins: [
@@ -31,9 +35,10 @@ export default new Vuex.Store({
         // console.log('所有state:', val)
         return {
           token: val.token,
+          refresh_token: val.refresh_token,
           user: {
-            count:val.user.count,
-            userinfo:val.user.userinfo
+            count: val.user.count,
+            userinfo: val.user.userinfo
           }
         }
       }
