@@ -37,9 +37,7 @@ VueAMap.initAMapApiLoader({
 })
 
 // socket
-import io from '@/assets/socket/socket.io.js'
-
-// Vue.prototype.socket = io('http://localhost:9527')
+// import io from '@/assets/socket/socket.io.js'
 // Vue.prototype.socket = io('http://192.168.1.156:9527')
 
 // 图片懒加载
@@ -50,6 +48,13 @@ Vue.use(VueLazyload, {
   loading: require('./assets/imgs/loading.png'),
   attempt: 2
 })
+
+// 滑动验证
+import SlideVerify from "vue-monoplasty-slide-verify";
+Vue.use(SlideVerify)
+
+// 进度条
+import "nprogress/nprogress.css";
 
 new Vue({
     router,

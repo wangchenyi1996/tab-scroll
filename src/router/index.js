@@ -6,6 +6,12 @@ import store from '../store'
 
 // Vue.use(VueRouter)
 
+//引入nprogress
+import NProgress from 'nprogress'
+// 简单配置
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
+
 // 命名视图 
 /*
   <div class="container">
@@ -368,6 +374,13 @@ const routes = [
         component: () =>
             import('../views/TurnBook.vue')
     },
+    // 图片验证码
+    {
+        path: '/verification',
+        name: 'Verification',
+        component: () =>
+            import('../views/Verification.vue')
+    },
 ]
 
 const router = new VueRouter({
@@ -410,6 +423,9 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+    // 开启进度条
+     NProgress.start()
+
     // to: Route: 即将要进入的目标 路由对象
     // from: Route: 当前导航正要离开的路由
     // next: Function: 一定要调用该方法来 resolve 这个钩子。
@@ -421,6 +437,11 @@ router.beforeEach((to, from, next) => {
         store.commit('user/addHistory', to.path)
     }
     next()
+})
+
+router.afterEach((to, from) => {
+    // 关闭进度条
+    NProgress.done()
 })
 
 export default router
