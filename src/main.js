@@ -56,6 +56,11 @@ Vue.use(SlideVerify)
 // 进度条
 import "nprogress/nprogress.css";
 
+// 引入滑动组件  只是测试使用
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper.scss'
+Vue.use(VueAwesomeSwiper)
+
 new Vue({
     router,
     store,

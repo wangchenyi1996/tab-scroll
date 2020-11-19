@@ -20,7 +20,7 @@ module.exports = {
     },
 
     devServer: {
-        port: 9876, // 端口号
+        port: 8765, // 端口号
         // host: "localhost",
         // https: false,
         open: true, //配置自动启动浏览器

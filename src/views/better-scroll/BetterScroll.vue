@@ -1,51 +1,86 @@
 <template>
   <div class="my-scrolls">
     <h3 style="text-align: center">better-scroll 使用</h3>
-    <div ref="wrapper" class="wrapper-container">
+    <Bscroll
+      ref="scroll"
+      :top="30"
+      :datas="listArr"
+      @scroll="contentScroll"
+      @pullingUp="loadMore"
+      :pull-up-load="true"
+      :probe-type="3"
+    >
       <div class="content">
         <!-- 轮播图 -->
         <div class="imgs u-f">
-          <img
-            v-for="item in bannerList"
-            :key="item.id"
-            v-lazy="item.url"
-            alt="banner"
-            @load="scrollRefresh"
-          />
+          <swiper :options="swiperOption" ref="mySwiper">
+            <swiper-slide v-for="item in bannerList" :key="item.id">
+              <img v-lazy="item.url" alt="banner" @load="scrollRefresh" />
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
         </div>
         <!-- 列表 -->
         <ul class="m-lists">
-          <li class="m-item u-f" v-for="(item, index) in listArr" :key="index">
+          <li
+            class="m-item u-f"
+            v-for="(item, index) in listArr"
+            :key="index"
+            @click="handleDetail(item)"
+          >
             <img v-lazy="item.firstImg" class="img" @load="scrollRefresh" />
             <p>{{ index + 1 }}--{{ item.describtion }}</p>
           </li>
         </ul>
       </div>
-    </div>
+    </Bscroll>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import BScroll from "better-scroll";
+import Bscroll from "./Bscroll.vue";
 
 export default {
   data() {
     return {
       bannerList: [],
       listArr: [],
-      scroll: null,
-      top: 30,
+
+      swiperOption: {
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          stopOnLastSlide: true,
+          disableOnInteraction: true,
+        },
+        // 显示分页
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true, //允许分页点击跳转
+           type: 'progressbar'
+        },
+        // 设置点击箭头
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      },
     };
   },
+  components: {
+    Bscroll,
+  },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper;
+    },
+  },
   mounted() {
-    this.$nextTick(() => {
-      this._initScroll();
-      if (this.scroll) {
-        this.getList();
-        this.getBannerList();
-      }
-    });
+    this.getBannerList();
+    this.getList();
   },
   methods: {
     // 获取轮播图
@@ -74,21 +109,19 @@ export default {
           console.log(err);
         });
     },
-    scrollRefresh() {
-      this.scroll && this.scroll.refresh();
+    // 下拉加载
+    loadMore() {
+      console.log("下拉加载");
     },
-    _initScroll() {
-      // 1.初始化BScroll对象
-      if (!this.$refs.wrapper) return;
-
-      this.$refs.wrapper.style.top = this.top + "px";
-
-      this.scroll = new BScroll(this.$refs.wrapper, {
-        probeType: 3,
-        click: true,
-        mouseWheel: true,
-        scrollX: true,
-      });
+    contentScroll(position) {
+      // console.log(position);
+    },
+    // 刷新
+    scrollRefresh() {
+      this.$refs.scroll.refresh();
+    },
+    handleDetail(item) {
+      console.log(item);
     },
   },
 };
@@ -98,14 +131,6 @@ export default {
 ul,
 li {
   list-style: none;
-}
-.wrapper-container {
-  position: absolute;
-  top: 0px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
 }
 .my-scrolls {
   width: 100%;
@@ -130,5 +155,17 @@ li {
       }
     }
   }
+}
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: pink;
+}
+.swiper-container .swiper-slide {
+  width: 100%;
+  height: 180px;
+  font-size: 16px;
+  text-align: center;
 }
 </style>
