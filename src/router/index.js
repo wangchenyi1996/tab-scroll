@@ -381,6 +381,13 @@ const routes = [
         component: () =>
             import('../views/Verification.vue')
     },
+    // better-scroll使用
+    {
+        path: '/bscroll',
+        name: 'Bscroll',
+        component: () =>
+            import('../views/better-scroll/BetterScroll.vue')
+    },
 ]
 
 const router = new VueRouter({

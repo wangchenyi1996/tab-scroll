@@ -18,6 +18,7 @@
       <li @click="$router.push('/waterful')">瀑布流示例</li>
       <li @click="$router.push('/book')">实现小说左右滑动翻页功能</li>
       <li @click="$router.push('/verification')">实现图片验证码功能</li>
+      <li @click="$router.push('/bscroll')">better-scroll</li>
       <li @click="txtDirective" v-test="{a:1,b:2}">{{txt}}</li>
       <li @click="naviHtml">打开新窗口，跳转到html5 API页面</li>
     </ul>
