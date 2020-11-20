@@ -5,10 +5,12 @@
       ref="scroll"
       :top="30"
       :datas="listArr"
+      :pull_down_refresh="true"
+      :probe-type="3"
+      :pull-up-load="true"
       @scroll="contentScroll"
       @pullingUp="loadMore"
-      :pull-up-load="true"
-      :probe-type="3"
+      @pullingDown="pullDown"
     >
       <div class="content">
         <!-- 轮播图 -->
@@ -46,6 +48,7 @@ import Bscroll from "./Bscroll.vue";
 export default {
   data() {
     return {
+      allList: [],
       bannerList: [],
       listArr: [],
 
@@ -60,7 +63,7 @@ export default {
         pagination: {
           el: ".swiper-pagination",
           clickable: true, //允许分页点击跳转
-           type: 'progressbar'
+          type: "progressbar",
         },
         // 设置点击箭头
         navigation: {
@@ -102,6 +105,7 @@ export default {
           "http://rap2api.taobao.org/app/mock/234046/api/home_select_recormend_goods"
         )
         .then((res) => {
+          this.allList = res.data.data.selectList;
           this.listArr = res.data.data.selectList.slice(0, 15);
           // console.log("列表", this.listArr);
         })
@@ -111,7 +115,37 @@ export default {
     },
     // 下拉加载
     loadMore() {
-      console.log("下拉加载");
+      let temp = {
+        describtion:
+          "纪梵希高定香榭天鹅绒唇膏306#(小羊皮口红 法式红 雾面哑光 持久锁色）",
+        firstImg:
+          "https://img12.360buyimg.com/da/s513x513_jfs/t17803/140/312601975/303824/9f668081/5a6a95c0N65c45d06.png",
+        imgArr: [],
+        intro: [],
+        price: 327.75,
+      };
+      setTimeout(() => {
+        this.listArr.push(temp, ...this.allList.slice(15, 17));
+        this.$refs.scroll.finishPullUp();
+        this.scrollRefresh();
+      }, 1000);
+    },
+    //模拟下拉刷新
+    pullDown() {
+      let temp = {
+        describtion:
+          "纪梵希高定香榭天鹅绒唇膏306#(小羊皮口红 法式红 雾面哑光 持久锁色）",
+        firstImg:
+          "https://img12.360buyimg.com/da/s513x513_jfs/t17803/140/312601975/303824/9f668081/5a6a95c0N65c45d06.png",
+        imgArr: [],
+        intro: [],
+        price: 327.75,
+      };
+      setTimeout(() => {
+        this.listArr.unshift(...this.allList.slice(18, 20));
+        this.$refs.scroll.finishPullDown();
+        this.scrollRefresh();
+      }, 1000);
     },
     contentScroll(position) {
       // console.log(position);

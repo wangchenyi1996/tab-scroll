@@ -24,6 +24,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    pullDownRefresh: {
+      tyle: Boolean,
+      default: true,
+    },
+    refreshDelay: {
+      type: Number,
+      default: 20,
+    },
   },
   data() {
     return {
@@ -50,34 +58,55 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: true,
-        pullUpLoad: this.pullUpLoad,
         mouseWheel: true,
         disableMouse: false, //启用鼠标拖动
         disableTouch: false, //启用手指触摸
         startX: 0,
-        scrollX:true,
+        scrollX: true,
+        pullUpLoad: this.pullUpLoad, //监听下拉加载
+        pullDownRefresh: this.pullDownRefresh, //下拉刷新
       });
 
-      // 2.将监听事件回调
-      this.scroll.on("scroll", (pos) => {
-        this.$emit("scroll", pos);
-      });
-      // 3.监听上拉到底部
-      this.scroll.on("pullingUp", () => {
-        // console.log("上拉加载");
-        this.$emit("pullingUp");
-      });
+      // 监听滚动位置
+      if (this.probeType === 2 || this.probeType === 3) {
+        this.scroll.on("scroll", (position) => {
+          this.$emit("scroll", position);
+        });
+      }
+
+      // 监听是否滚动到底部--上拉加载
+      if (this.pullUpLoad) {
+        this.scroll.on("pullingUp", () => {
+          this.$emit("pullingUp");
+        });
+      }
+
+      // 下拉刷新
+      if (this.pullDownRefresh) {
+        this.scroll.on("pullingDown", () => {
+          this.$emit("pullingDown");
+        });
+      }
+
+    },
+    scrollTo(x, y, time = 300) {
+      this.scroll && this.scroll.scrollTo(x, y, time);
+    },
+    //完成上拉加载
+    finishPullUp() {
+      this.scroll && this.scroll.finishPullUp();
+    },
+    //完成下拉刷新
+    finishPullDown() {
+      this.scroll && this.scroll.finishPullDown();
     },
     refresh() {
       this.scroll && this.scroll.refresh();
     },
-    finishPullUp() {
-      this.scroll && this.scroll.finishPullUp && this.scroll.finishPullUp();
-    },
-    scrollTo(x, y, time) {
-      this.scroll && this.scroll.scrollTo && this.scroll.scrollTo(x, y, time);
-    },
-  },
+    getScrollY() {
+      return this.scroll.y;
+    }
+  }
 };
 </script>
 
