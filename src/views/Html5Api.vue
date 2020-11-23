@@ -1,8 +1,7 @@
 <template>
-  <div id="video-container">
-
+  <!-- <div id="video-container">
     <button @click="stop">停止</button>
-  </div>
+  </div> -->
   <!-- <div>
     <h3><center>Html5 Api介绍使用</center></h3>
     <div class="notices">
@@ -59,9 +58,16 @@
     <h3>加密和解密使用</h3>
     <img src="@/assets/imgs/ctypto.png" />
   </div> -->
+  <div>
+    <h2>computed 使用</h2>
+    <h3>1--循环</h3>
+    <p v-for="(item, index) in a1" :key="item" @click="handle1(index)">{{ item }}</p>
+    <h3>2--循环</h3>
+    <p v-for="(item) in getFilterlist" :key="item" @click="handle2(item)">{{ item }}</p>
+  </div>
 </template>
 <script>
-import EZUIKit from 'ezuikit-js';
+import EZUIKit from "ezuikit-js";
 // 导入 crypto-js 包
 import cryptoJS from "crypto-js/crypto-js";
 
@@ -75,7 +81,16 @@ export default {
       online: null,
       connection: null,
       src: "",
+      allArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      a1: [1, 5, 9],
     };
+  },
+  computed: {
+    getFilterlist() {
+      return this.allArr.filter((item) => {
+        return this.a1.includes(item) === false;
+      });
+    },
   },
   created() {
     //子线程向主线程传递消息
@@ -85,16 +100,16 @@ export default {
     worker.addEventListener("message", function (e) {
       console.log("数据：", e.data);
     });
-
   },
   mounted() {
     this.player = new EZUIKit.EZUIKitPlayer({
-      id: 'video-container', // 视频容器ID
-      accessToken: 'at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz',
-      url: 'ezopen://open.ys7.com/203751922/1.live',
+      id: "video-container", // 视频容器ID
+      accessToken:
+        "at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz",
+      url: "ezopen://open.ys7.com/203751922/1.live",
       width: 300,
-      height: 400
-    })
+      height: 400,
+    });
 
     window.addEventListener("online", (e) => {
       // console.log(e);
@@ -118,8 +133,8 @@ export default {
     }
   },
   methods: {
-    stop(){
-      this.player.stop()
+    stop() {
+      this.player.stop();
     },
     sendWorkers(params) {
       console.log(params);
@@ -235,6 +250,17 @@ export default {
         URL.revokeObjectURL(this.src); //释放createObjectURL创建得对象
       };
     },
+
+    // computed 相关
+    // 删除
+    handle1(index){
+      console.log(index)
+      this.a1.splice(index,1)
+    },
+    // 添加
+    handle2(item){
+      this.a1.push(item)
+    }
   },
 };
 </script>

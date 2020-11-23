@@ -87,7 +87,6 @@ export default {
           this.$emit("pullingDown");
         });
       }
-
     },
     scrollTo(x, y, time = 300) {
       this.scroll && this.scroll.scrollTo(x, y, time);
@@ -105,8 +104,8 @@ export default {
     },
     getScrollY() {
       return this.scroll.y;
-    }
-  }
+    },
+  },
 };
 </script>
 
