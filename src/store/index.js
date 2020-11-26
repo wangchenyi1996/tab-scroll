@@ -5,10 +5,16 @@ import user from './user'
 import createPersistedState from 'vuex-persistedstate'
 // console.log('tag', user)
 
+//使用scss的变量
+import variables from '@/styles/variables.scss'
+
 export default new Vuex.Store({
   state: {
     token: '',
-    refresh_token: ''
+    refresh_token: '',
+    // 换肤功能测试
+    textcolor: variables.menuText,
+    bgcolor:variables.menuBg
   },
   getters: {
     getToken(state, getters) {
@@ -23,6 +29,10 @@ export default new Vuex.Store({
     },
     setRefreshToken(state, reToken) {
       state.refresh_token = reToken
+    },
+    // 换颜色
+    CHANGE_COLOR(state, color){
+      state.bgcolor = color
     }
   },
   modules: {

@@ -388,6 +388,13 @@ const routes = [
         component: () =>
             import('../views/better-scroll/BetterScroll.vue')
     },
+    // scss 换肤功能
+    {
+        path: '/vars',
+        name: 'Variables',
+        component: () =>
+            import('../views/CssVariables.vue')
+    },
 ]
 
 const router = new VueRouter({

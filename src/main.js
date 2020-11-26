@@ -13,6 +13,8 @@ import './mockServer/mock'
 // import './common/reset.scss'
 import './common/style.scss'
 
+import './styles/index.scss'
+
 // 引入 v-charts图标插件
 import VCharts from 'v-charts'
 Vue.use(VCharts)
