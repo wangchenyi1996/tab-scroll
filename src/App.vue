@@ -92,17 +92,17 @@ export default {
     // 下面2种方法可以判断是pc端还是手机端
     // 这种方式可以根据设备进入不同页面
     if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
-      console.log("mobile");
+      // console.log("mobile");
       // window.location.href = "iPhone.html";
     } else {
-      console.log("PC");
+      // console.log("PC");
       // window.location.href = "pc.html";
     }
     
     if(this.IsPC()){
-      console.log("PC");
+      // console.log("PC");
     }else{
-      console.log("mobile");
+      // console.log("mobile");
     }
   },
 
@@ -148,7 +148,7 @@ export default {
   width: 100%;
   background-color: #fff;
   min-height: 100%;
-  // padding-bottom: 70px;
+  padding-bottom: 70px;
 }
 * {
   margin: 0;

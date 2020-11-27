@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
-import router from './router'
 import store from './store'
+import router from './router'
+
+// 路由验证
+import './permission'
 
 Vue.config.productionTip = false
 

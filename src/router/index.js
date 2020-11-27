@@ -1,16 +1,7 @@
 // import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// 引入 store
-import store from '../store'
-
 // Vue.use(VueRouter)
-
-//引入nprogress
-import NProgress from 'nprogress'
-// 简单配置
-NProgress.inc(0.2)
-NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 
 // 命名视图 
 /*
@@ -26,7 +17,7 @@ const Foo = { template: '<div>header</div>' }
 const Bar = { template: '<div>left</div>' }
 const Baz = { template: '<div>mian</div>' }
 
-const routes = [
+export const constantRoutes = [
     {
         path: '/',
         redirect: '/home'
@@ -395,12 +386,34 @@ const routes = [
         component: () =>
             import('../views/CssVariables.vue')
     },
+    // 404 页面找不到
+    {
+        path: '*',
+        name: 'notfound',
+        component: () =>
+            import('../views/Notfound.vue')
+    },
+]
+
+export const asyncRoute = [
+    {
+        path: '/add1',
+        name: 'add1',
+        component: () =>
+            import('@/views/addRoutes/add1.vue')
+    },
+    {
+        path: '/add2',
+        name: 'add2',
+        component: () =>
+            import('@/views/addRoutes/add2.vue')
+    }
 ]
 
 const router = new VueRouter({
     mode: 'hash',
     base: process.env.BASE_URL,
-    routes,
+    routes: constantRoutes,
     scrollBehavior(to, from, savedPosition) {
         // console.log(savedPosition)
         // if (savedPosition) {
@@ -433,29 +446,6 @@ const router = new VueRouter({
             return position
         }
     }
-})
-
-
-router.beforeEach((to, from, next) => {
-    // 开启进度条
-     NProgress.start()
-
-    // to: Route: 即将要进入的目标 路由对象
-    // from: Route: 当前导航正要离开的路由
-    // next: Function: 一定要调用该方法来 resolve 这个钩子。
-    // to.path 可以表示历史记录
-    // this.$store.commit("user/addCount", 10);
-    let historyList = store.state.user.historyList
-    console.log(historyList)
-    if (!historyList.includes(to.path)) {
-        store.commit('user/addHistory', to.path)
-    }
-    next()
-})
-
-router.afterEach((to, from) => {
-    // 关闭进度条
-    NProgress.done()
 })
 
 export default router

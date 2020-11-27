@@ -23,8 +23,6 @@
     <br />
     <p>{{users}}</p>
     <button @click="handleReload" style="margin-top:50px;">点击刷新</button>
-
-
   </div>
 </template>
 
@@ -32,7 +30,7 @@
 import { mapState,mapGetters,mapActions } from "vuex";
 
 export default {
-  name: "about",
+  name: "aboutPage",
    //字符串数组方式
   // inject:["reload",'userInfo'],  
 

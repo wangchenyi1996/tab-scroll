@@ -92,7 +92,8 @@ export default {
       // });
 
       // 生成下载png图片
-      domtoimage.toBlob(node).then(function (blob) {
+      // height width设置 可能导致截图不完全，不建议设置
+      domtoimage.toBlob(node, { quality: 0.5, height: 400, width:200, bgcolor: '#fff' }).then(function (blob) {
         // window.saveAs(blob, "my-node.png");
         saveAs(blob, "my-node.png");
       });
@@ -102,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#screenshot{
+#screenshot {
   background-color: #fff;
   width: 100%;
   height: 100%;
