@@ -1,4 +1,4 @@
-import router, { constantRoutes } from './router/index.js'
+import router,{constantRoutes} from './router'
 import store from './store'
 
 import NProgress from 'nprogress'
@@ -26,17 +26,24 @@ router.beforeEach(async (to, from, next) => {
         if (to.path === '/login') {
             next({ path: '/' })
             NProgress.done()
-        } else {
-            // try {
-            //     let roles = "admin";
-            //     let accessRoutes = await store.dispatch("generateRoutes", roles)
-            //     router.addRoutes(accessRoutes)
-            //     router.replace(to.path)
-            // } catch (error) {
-            //     next(`/login?redirect=${to.path}`)
-            //     NProgress.done()
-            // }
-            next()
+        }else{
+            const hasRoles = store.state.roles
+            if (hasRoles) {
+              next()
+            } else {
+                console.log(store.state)
+                store.commit('SET_RULES', 'admin')
+                try {
+                    let accessRoutes = await store.dispatch("generateRoutes",hasRoles)
+                    router.addRoutes(accessRoutes)
+                    next({ ...to, replace: true })
+                } catch (error) {
+                    next(`/login?redirect=${to.path}`)
+                    NProgress.done()
+                }finally{
+                    NProgress.done()
+                }
+            }
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {

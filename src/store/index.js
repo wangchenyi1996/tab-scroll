@@ -17,7 +17,9 @@ export default new Vuex.Store({
     textcolor: variables.menuText,
     bgcolor:variables.menuBg,
     // 路由
-    routes: []
+    routes: [],
+    addRoutes: [],
+    roles: ''
   },
   getters: {
     getToken(state, getters) {
@@ -37,18 +39,22 @@ export default new Vuex.Store({
     CHANGE_COLOR(state, color){
       state.bgcolor = color
     },
-    // 添加路由
-    SET_ROUTES: (state, routes) => {
+    // 添加路由--模拟使用
+    SET_ROUTES(state, routes){
+      state.addRoutes = routes
       state.routes = constantRoutes.concat(routes)
+    },
+    SET_RULES(state, roles){
+      state.roles = roles
     }
   },
   actions:{
-    generateRoutes({ commit }) {
+    generateRoutes({ commit },roles) {
       return new Promise(resolve => {
         commit('SET_ROUTES', asyncRoute)
         resolve(asyncRoute)
       })
-    }
+    },
   },
   modules: {
     user

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
+
 import store from './store'
 import router from './router'
 
@@ -46,12 +47,12 @@ VueAMap.initAMapApiLoader({
 // Vue.prototype.socket = io('http://192.168.1.156:9527')
 
 // 图片懒加载
-import VueLazyload from 'vue-lazyload' 
+import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: require('./assets/imgs/error.png'),
-  loading: require('./assets/imgs/loading.png'),
-  attempt: 2
+    preLoad: 1.3,
+    error: require('./assets/imgs/error.png'),
+    loading: require('./assets/imgs/loading.png'),
+    attempt: 2
 })
 
 // 滑动验证
@@ -66,8 +67,16 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper.scss'
 Vue.use(VueAwesomeSwiper)
 
+// new Vue({
+//     router,
+//     store,
+//     render: h => h(App)
+// }).$mount('#app')
+
+
 new Vue({
+    el: '#app',
     router,
     store,
     render: h => h(App)
-}).$mount('#app')
+})

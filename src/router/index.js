@@ -1,7 +1,12 @@
-// import Vue from 'vue'
-import VueRouter from 'vue-router'
+// // import Vue from 'vue'
+// import VueRouter from 'vue-router'
 
-// Vue.use(VueRouter)
+// // Vue.use(VueRouter)
+
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
 
 // 命名视图 
 /*
@@ -410,7 +415,7 @@ export const asyncRoute = [
     }
 ]
 
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
     mode: 'hash',
     base: process.env.BASE_URL,
     routes: constantRoutes,
@@ -447,5 +452,13 @@ const router = new VueRouter({
         }
     }
 })
+
+const router = createRouter()
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
 
 export default router
