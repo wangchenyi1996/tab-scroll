@@ -10,7 +10,7 @@
   <div style="width:100%">
     <input v-focus type="text" placeholder="请输入内容" style="width:100%;background:#ffffff;height:40px;"/>
     <ul class="my-ul">
-      <li @click="$router.push('/pic1')">点击去图表页面</li>
+      <li @click="$router.push('/pic1')">图表页面 - 一键截图功能</li>
       <li @click="$router.push('/mock')">点击去mockjs页面</li>
       <li @click="$router.push('/vlist')">点击去虚拟列表页面，模拟几万条数据</li>
       <li @click="$router.push('/list')">模仿 商品列表的倒计时功能</li>
