@@ -1,0 +1,79 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: 王强
+ * @Date: 2020-06-19 10:51:40
+ * @LastEditors: 王强
+ * @LastEditTime: 2020-07-17 14:22:13
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 300px;
+      height: 300px;
+    }
+    /* 使用另一种方式来解决图片自适应的问题－－图片自适应问题，图片宽度设置100%，
+    页面加载时会存在高度塌陷的问题，可以使用padding－top来设置百分比值来实现自适应 
+    padding-top = (图片的高度/图片的宽度)*100； */
+    .imgs {
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      overflow: hidden;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    
+    .box2 {
+      width: 0px;
+      height: 0px;
+      border-width: 20px;
+      border-style: solid;
+      /* border-color: #CCC #00F #933 #0C9; */
+      border-color: transparent red transparent transparent;
+    }
+    .demo {
+      width: 200px;
+      height: 60px;
+      position: relative;
+      border: 1px solid skyblue;
+      margin: 100px;
+      border-radius: 8px;
+    }
+    
+    .demo:after,.demo:before {
+      width: 0px;
+      height: 0px;
+      border-width: 12px;
+      border-style: solid;
+      border-color: transparent #fff transparent transparent;
+      position: absolute;
+      content: ' ';
+      left: -24px;
+      top: 12px;
+    }
+    
+    .demo:before {
+      left: -25px;
+      border-color: transparent skyblue transparent transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="imgs" style="background-image: url(./src/assets/imgs/images/n.png)"></div>
+  </div>
+  <div class="demo">
+    <!-- <p class="box2"></p> -->
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>简单的纯CSS动画加载-jq22.com</title>
+<script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<style>
+.load {
+	border:5px dotted #fff;
+	border-radius:50%;
+	border-top:5px dotted rgb(163,247,142);
+	border-left:5px dotted rgb(177,255,158);
+	width:40px;
+	height:40px;
+	position:absolute;
+	left:50%;
+	top:100px;
+	margin-left:-20px;
+	display:block;
+	animation:l 1s ease-out 0s infinite;
+}
+@keyframes l {
+	0% {
+	transform:rotate(0deg);
+}
+100% {
+	transform:rotate(360deg);
+}
+}</style>
+</head>
+<body>
+<div class="load"></div>
+
+<script>
+
+</script>
+
+</body>
+</html>

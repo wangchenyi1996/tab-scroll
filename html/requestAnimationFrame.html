@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background: red;
+      margin-bottom: 50px;
+      position: absolute;
+      top: 100px;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="box"></div>
+
+  <button class="start" onclick="animloop()">开始动画</button>
+  <button class="stop" onclick="stops()">停止动画</button>
+
+
+  <script>
+    var e = document.getElementById("box");
+
+    var start = document.querySelector('.start')
+    var stop = document.querySelector('.stop')
+
+    var flag = true;
+    var left = 0;
+    var rafId = null;
+
+    //当前执行时间
+    var nowTime = 0;
+    //记录每次动画执行结束的时间
+    var lastTime = Date.now();
+    //我们自己定义的动画时间差值
+    var diffTime = 50;
+
+    function render() {
+      if (flag == true) {
+        if (left >= 200) {
+          flag = false
+        }
+        e.style.left = ` ${left++}px`
+      } else {
+        if (left <= 0) {
+          flag = true
+        }
+        e.style.left = ` ${left--}px`
+      }
+    }
+
+    //requestAnimationFrame效果
+    function animloop() {
+      //记录当前时间
+      nowTime = Date.now()
+      // 当前时间-上次执行时间如果大于diffTime，那么执行动画，并更新上次执行时间
+      if (nowTime - lastTime > diffTime) {
+        lastTime = nowTime
+        render();
+      }
+
+      rafId = window.requestAnimationFrame(animloop);
+      //如果left等于200 停止动画
+      // if (left == 200) {
+      //   cancelAnimationFrame(rafId)
+      // }
+    }
+
+    function stops() {
+      cancelAnimationFrame(rafId)
+    }
+  </script>
+</body>
+
+</html>

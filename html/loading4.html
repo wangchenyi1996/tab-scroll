@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>简约css加载动画-jq22.com</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<style>
+div {
+	width:100%;
+	text-align:center;
+	padding-top:30px;
+	box-sizing:border-box;
+}
+.box {
+	width:30px;
+	height:30px;
+	display:inline-block;
+	border:3px solid rgba(0,0,0,0.2);
+	border-left-color:#333;
+	border-radius:50%;
+	animation:rota 1s linear infinite;
+}
+@-webkit-keyframes rota {
+	0% {
+	transform:rotate(0deg);
+}
+100% {
+	transform:rotate(360deg);
+}
+}@-webkit-keyframes rota2 {
+	0% {
+	transform:rotate3d(0,0,1,0deg);
+}
+100% {
+	transform:rotate3d(0,0,1,360deg);
+}
+}.box2 {
+	display:inline-block;
+	width:36px;
+	height:36px;
+}
+.box2 svg {
+	width:100%;
+	height:100%;
+	animation:rota2 1s steps(12,end) infinite;
+}
+</style>
+</head>
+<body>
+<div>
+    <i class="box"></i>
+</div>
+<div>
+    <i class="box2">
+			<!--<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 100 100"><path fill="none" d="M0 0h100v100H0z"></path><rect width="7" height="20" x="46.5" y="40" fill="#E9E9E9" rx="5" ry="5" transform="translate(0 -30)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#989697" rx="5" ry="5" transform="rotate(30 105.98 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#9B999A" rx="5" ry="5" transform="rotate(60 75.98 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#A3A1A2" rx="5" ry="5" transform="rotate(90 65 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#ABA9AA" rx="5" ry="5" transform="rotate(120 58.66 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#B2B2B2" rx="5" ry="5" transform="rotate(150 54.02 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#BAB8B9" rx="5" ry="5" transform="rotate(180 50 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#C2C0C1" rx="5" ry="5" transform="rotate(-150 45.98 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#CBCBCB" rx="5" ry="5" transform="rotate(-120 41.34 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#D2D2D2" rx="5" ry="5" transform="rotate(-90 35 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#DADADA" rx="5" ry="5" transform="rotate(-60 24.02 65)"></rect><rect width="7" height="20" x="46.5" y="40" fill="#E2E2E2" rx="5" ry="5" transform="rotate(-30 -5.98 65)"></rect></svg>-->
+		</i>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

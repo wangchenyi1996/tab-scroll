@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="cool.css">
+  <style>
+    body {
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 20px;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>聊天气泡效果</h3>
+  <div class="chat-box">大家好，我是 vortesnail，如果大家喜欢我的文章，对大家有所帮助，麻烦给个小小的赞支持一下，谢谢😊</div>
+
+  <h3>利用 grid 实现完美的水平铺满、间隔一致的自适应布局</h3>
+  <div class="father">
+    <div class="child">Child1</div>
+    <div class="child">Child2</div>
+    <div class="child">Child3</div>
+    <div class="child">Child4</div>
+    <div class="child">Child5</div>
+    <div class="child">Child6</div>
+    <div class="child">Child7</div>
+    <div class="child">Child8</div>
+    <div class="child">Child9</div>
+    <div class="child">Child10</div>
+    <div class="child">Child10</div>
+    <div class="child">Child10</div>
+    <div class="child">Child10</div>
+    <div class="child">Child10</div>
+  </div>
+
+  <h3>交互式图片对比效果</h3>
+  <div class="image-slider">
+    <div class="before-container">
+      <img src="https://img3.doubanio.com/view/photo/l/public/p2622600072.webp" alt="before">
+    </div>
+    <img src="https://img9.doubanio.com/view/photo/l/public/p2380745925.webp" alt="after">
+    <span class="handler"></span>
+  </div>
+
+  <h3>透明度渐变层代替滚动条提示</h3>
+  <div class="content-wrapper">
+    <header>目录</header>
+    <div class="list-wrapper">
+      <ul>
+        <li>如何长高</li>
+        <li>如何变得富有</li>
+        <li>如何变得好看</li>
+        <li>如何不被生活压垮</li>
+        <li>如何获得点赞</li>
+        <li>如何写好文章</li>
+        <li>如何变强</li>
+        <li>如何平衡生活</li>
+        <li>如何不加班</li>
+        <li>如何对别人心怀善意</li>
+        <li>如何长高</li>
+        <li>如何变得富有</li>
+        <li>如何变得好看</li>
+        <li>如何不被生活压垮</li>
+        <li>如何获得点赞</li>
+        <li>如何写好文章</li>
+        <li>如何变强</li>
+        <li>如何平衡生活</li>
+        <li>如何不加班</li>
+        <li>如何对别人心怀善意</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const imageSlider = document.querySelector(".image-slider");
+    const beforeContainer = document.querySelector(".before-container");
+    const handler = document.querySelector(".handler");
+
+    let marginX;
+
+    handler.onmousedown = (e) => {
+      marginX = e.pageX - handler.offsetLeft;
+      window.addEventListener('mousemove', moveHandler)
+    };
+
+    window.onmouseup = (e) => {
+      window.removeEventListener('mousemove', moveHandler)
+    };
+
+
+    const moveHandler = e => {
+      const beforeWidth = e.pageX - marginX;
+      const imageSliderWidth = imageSlider.offsetWidth;
+      console.log(beforeWidth, imageSliderWidth)
+
+      if (beforeWidth >= 0 && beforeWidth <= imageSliderWidth) {
+        handler.style.left = beforeWidth + 'px';
+        beforeContainer.style.width = beforeWidth + 'px';
+      }
+    }
+  </script>
+  <script>
+    const listWrapper = document.querySelector(".list-wrapper");
+    const ul = document.querySelector("ul");
+
+    const onScroll = (e) => {
+      if (e.target.scrollTop > 0) {
+        listWrapper.classList.add("top-gradient");
+      } else {
+        listWrapper.classList.remove("top-gradient");
+      }
+
+      if (e.target.scrollHeight - e.target.scrollTop !== ul.offsetHeight) {
+        listWrapper.classList.add("bottom-gradient");
+      } else {
+        listWrapper.classList.remove("bottom-gradient");
+      }
+    };
+
+    ul.addEventListener("scroll", onScroll);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+//这里定义变量
+$menuText:#ffffff;
+$menuBg:#FEC171;
+$test-color: red;
+
+
+//这里将变量导出
+:export {
+  menuText: $menuText;
+  menuBg: $menuBg;
+  test: $test-color;  //如果将此变量导出 在 <style>里面使用会报错
+}

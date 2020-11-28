@@ -1,0 +1,22 @@
+{
+    "name": "Vue-PWA webapp",
+    "short_name": "Vue-PWA",
+    "icons": [
+        {
+            "src": "./img/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./img/icons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#41B883",
+    "gcm_sender_id": "my_gcm_sender_id",
+    "gcm_user_visible_only": true
+}

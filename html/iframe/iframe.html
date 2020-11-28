@@ -1,0 +1,26 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-10-13 11:31:55
+ * @LastEditTime: 2020-10-13 13:21:19
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \reactc:\Users\wq\Desktop\vue\tab-scroll\html\iframe\iframe.html
+-->
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <h2>Receiving iframe.</h2>
+  <script>
+    window.addEventListener('message', function(event) {
+      console.log(event)
+      alert(`Received ${event.data} from ${event.origin}`);
+    });
+  </script>
+
+</body>
+</html>

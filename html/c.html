@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>js</title>
+  <style>
+    .base-coupons {
+    width: 600px;
+    height: 300px;
+    margin: 250px auto;
+    position: relative;
+    background: radial-gradient(circle at right top, transparent 10px,  red 0) top left / 30% 51% no-repeat,
+      radial-gradient(circle at right bottom, transparent 10px,  red 0) bottom left /30% 51% no-repeat,
+      radial-gradient(circle at left top, transparent 10px, blue 0) top right /70% 51% no-repeat,
+      radial-gradient(circle at left bottom, transparent 10px, blue 0) bottom right /70% 51% no-repeat;
+    filter: drop-shadow(3px 3px 3px rgba(0,0,0,.3));
+  }
+
+  .base-coupons::before {
+    content: '';
+    height: 270px;
+    border: 2px dashed white;
+    position: absolute;
+    left: 30%;
+    top: 0;
+    bottom: 0;
+    margin: auto -2px;
+    }
+
+  .base-coupons::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width:5px;
+    top: 0;
+    right: -5px;
+    background-image: linear-gradient(to bottom, blue 5px, transparent 5px, transparent),
+    radial-gradient(10px circle at 5px 10px, transparent 5px, blue 5px);
+    background-size: 5px 15px;
+  }
+  .disabled {
+    pointer-events: none;
+    cursor: default;
+    /* opacity: 0.6; */
+    -webkit-font-smoothing: antialiased;
+}
+
+  </style>
+</head>
+<body>
+  <div class="base-coupons disabled">示例</div>
+</body>
+</html>
