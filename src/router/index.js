@@ -393,11 +393,11 @@ export const constantRoutes = [
     },
     // 404 页面找不到
     {
-        path: '*',
+        path: '/404',
         name: 'notfound',
         component: () =>
             import('../views/Notfound.vue')
-    },
+    }
 ]
 
 export const asyncRoute = [
@@ -412,7 +412,8 @@ export const asyncRoute = [
         name: 'add2',
         component: () =>
             import('@/views/addRoutes/add2.vue')
-    }
+    },
+    { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new VueRouter({
