@@ -49,8 +49,6 @@
     <!-- 拨号 -->
 
     <TabBar v-if="$route.meta && $route.meta.showTabbar" />
-    <!-- 回到底部动画 -->
-    <scroll-top :scrollDom="'.home'"></scroll-top>
   </div>
 </template>
 <script>

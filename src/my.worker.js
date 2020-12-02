@@ -9,13 +9,20 @@ function getData(data) {
     });
 }
 
-self.onmessage = function (e) {
-  const result = e.data;
+// self.onmessage = event => {
+//   const result = event.data;
+//   if (result) {
+//     self.postMessage('hello world');
+//   } else {
+//     self.postMessage('没有传数据');
+//   }
+// }
+
+self.addEventListener('message', event => {
+  const result = event.data;
   if (result) {
-    console.log(123)
-    // getData(result)
-    self.postMessage(result);
+    self.postMessage('hello world');
   } else {
     self.postMessage('没有传数据');
   }
-}
+})

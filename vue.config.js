@@ -20,7 +20,7 @@ module.exports = {
     },
 
     devServer: {
-        port: 4321, // 端口号
+        port: 1234, // 端口号
         // host: "localhost",
         // https: false,
         open: true, //配置自动启动浏览器
@@ -58,7 +58,7 @@ module.exports = {
                     name: '张三', age: 18
                 });
             });
-        },
+        }
     },
     // 解决打包的时报错: (由于一些原因我的项目最后没有使用 worker, 也就没有研究打包遇到的问题...)
     parallel: false,
@@ -101,7 +101,7 @@ module.exports = {
     },
     configureWebpack: {
         externals: {
-            'vue': 'Vue',
+            'vue': 'Vue',         // 加上它 vue-devtools 调试工具无法显示
             'vuex': 'Vuex',
             'vue-router': 'VueRouter',
             'axios': 'axios'

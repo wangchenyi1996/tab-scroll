@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "better-scroll": "^2.0.5",
     "core-js": "^3.4.4",
+    "cropperjs": "^1.5.9",
     "crypto-js": "^4.0.0",
     "dom-to-image": "^2.6.0",
     "echarts": "^4.7.0",

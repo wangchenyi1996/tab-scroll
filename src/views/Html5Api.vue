@@ -2,7 +2,7 @@
   <!-- <div id="video-container">
     <button @click="stop">停止</button>
   </div> -->
-  <!-- <div>
+  <div>
     <h3><center>Html5 Api介绍使用</center></h3>
     <div class="notices">
       <button @click="joinFriend">有人想加你为好友</button>
@@ -47,27 +47,29 @@
     <h3>web Workers</h3>
     <div style="margin-top: 10px; display: flex">
       <input
-        ref="input"
         type="number"
         placeholder="请输入"
         style="height: 35px; line-height: 35px"
+        v-model="num"
       />
       <button @click="sends">发送</button>
       <button @click="stops">停止</button>
     </div>
     <h3>加密和解密使用</h3>
     <img src="@/assets/imgs/ctypto.png" />
-  </div> -->
-  <div>
     <h2>computed 使用</h2>
     <h3>1--循环</h3>
-    <p v-for="(item, index) in a1" :key="item" @click="handle1(index)">{{ item }}</p>
+    <p v-for="(item, index) in a1" :key="item" @click="handle1(index)">
+      {{ item }}
+    </p>
     <h3>2--循环</h3>
-    <p v-for="(item) in getFilterlist" :key="item" @click="handle2(item)">{{ item }}</p>
+    <p v-for="item in getFilterlist" :key="item" @click="handle2(item)">
+      {{ item }}
+    </p>
   </div>
 </template>
 <script>
-import EZUIKit from "ezuikit-js";
+// import EZUIKit from "ezuikit-js";
 // 导入 crypto-js 包
 import cryptoJS from "crypto-js/crypto-js";
 
@@ -83,6 +85,7 @@ export default {
       src: "",
       allArr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       a1: [1, 5, 9],
+      num: null
     };
   },
   computed: {
@@ -92,23 +95,21 @@ export default {
       });
     },
   },
-  created() {
-    //子线程向主线程传递消息
-    worker = new Worker();
+  mounted() {
+    // this.player = new EZUIKit.EZUIKitPlayer({
+    //   id: "video-container", // 视频容器ID
+    //   accessToken:
+    //     "at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz",
+    //   url: "ezopen://open.ys7.com/203751922/1.live",
+    //   width: 300,
+    //   height: 400,
+    // });
 
+     //子线程向主线程传递消息
+    worker = new Worker();
     //监听子线程的message事件
     worker.addEventListener("message", function (e) {
       console.log("数据：", e.data);
-    });
-  },
-  mounted() {
-    this.player = new EZUIKit.EZUIKitPlayer({
-      id: "video-container", // 视频容器ID
-      accessToken:
-        "at.3bvmj4ycamlgdwgw1ig1jruma0wpohl6-48zifyb39c-13t5am6-yukyi86mz",
-      url: "ezopen://open.ys7.com/203751922/1.live",
-      width: 300,
-      height: 400,
     });
 
     window.addEventListener("online", (e) => {
@@ -141,9 +142,8 @@ export default {
     },
     // web workers
     sends() {
-      let num = this.$refs.input.value;
       //向子线程发送message事件
-      worker.postMessage(num);
+      worker.postMessage(this.num);
     },
     stops() {
       //停止webworker
@@ -253,14 +253,14 @@ export default {
 
     // computed 相关
     // 删除
-    handle1(index){
-      console.log(index)
-      this.a1.splice(index,1)
+    handle1(index) {
+      console.log(index);
+      this.a1.splice(index, 1);
     },
     // 添加
-    handle2(item){
-      this.a1.push(item)
-    }
+    handle2(item) {
+      this.a1.push(item);
+    },
   },
 };
 </script>

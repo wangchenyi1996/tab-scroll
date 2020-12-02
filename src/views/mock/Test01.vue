@@ -18,9 +18,11 @@
       <center>mock使用--实现纯前端分页效果</center>
     </h3>
 
-    <div v-for="(item, index) in currentPageData" :key="index">
-      <p>国家：{{ item.cn }}---区号：{{ item.code }}</p>
-    </div>
+    <ul ref="delegate">
+      <li v-for="(item, index) in currentPageData" :key="index" :data-key="index">
+        国家：{{ item.cn }}---区号：{{ item.code }}
+      </li>
+    </ul>
     <center style="font-weight: bolder">
       <a @click="prevPage()">上一页</a>
       <span>第{{ currentPage }}页/共{{ totalPage }}页</span>
@@ -68,10 +70,23 @@ export default {
     this.getCountryAreaCodeList();
     // this.repeatAjax()
   },
+  mounted() {
+    // 事件委托
+    this.$refs.delegate.addEventListener("click", function (e) {
+      // 兼容性处理
+      let event = e || window.event;
+      let target = event.target || event.srcElement;
+      // 判断是否匹配目标元素
+      if (target.nodeName.toLocaleLowerCase() === "li") {
+        let id = target.getAttribute('data-key')  //给元素设置一个属性
+        console.log(id) // 获取到属性，可以进行其他操作
+      }
+    });
+  },
   methods: {
     /*************** 重复发送ajax请求 ****************/
     repeatAjax() {
-      let _that = this
+      let _that = this;
       // 取消上一次请求
       this.cancelRequest();
 
@@ -83,7 +98,6 @@ export default {
           },
           cancelToken: new axios.CancelToken(function executor(c) {
             source = c;
-            console.log(_that)
           }),
         })
         .then((res) => {
@@ -103,14 +117,14 @@ export default {
 
     // 左滑、右滑切换路由实现
     touchstart(e) {
-      console.log("开始", e.touches[0].clientX);
+      // console.log("开始", e.touches[0].clientX);
       this.startX = e.touches[0].clientX;
     },
     touchmove(e) {
       // console.log("滑动", e.touches[0].clientX);
     },
     touchend(e) {
-      console.log("结束", e.changedTouches[0].clientX);
+      // console.log("结束", e.changedTouches[0].clientX);
       this.endX = e.changedTouches[0].clientX;
       let X = this.endX - this.startX;
       if (X < -50) {
@@ -199,9 +213,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul,li{
+  list-style-type: none;
+}
 .mock {
   transition: all 0.8s;
-  p {
+  li,p {
     font-size: 16px;
     height: 36px;
     line-height: 36px;
