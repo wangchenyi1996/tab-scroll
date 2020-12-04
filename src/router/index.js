@@ -404,7 +404,21 @@ export const constantRoutes = [
         name: 'face',
         component: () =>
             import('../views/FaceImg.vue')
-    }
+    },
+    // vue实现单选多选反选全选全不选
+    {
+        path: '/select',
+        name: 'select',
+        component: () =>
+            import('../views/single-multi-select.vue')
+    },
+    // vue控制多行文字展开收起的实现示例
+    {
+        path: '/mutiTxt',
+        name: 'mutiTxt',
+        component: () =>
+            import('../views/MutiTxt.vue')
+    },
 ]
 
 export const asyncRoute = [

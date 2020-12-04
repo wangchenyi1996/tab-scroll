@@ -23,6 +23,7 @@
       <li @click="$router.push('/bscroll')">better-scroll</li>
       <li @click="txtDirective" v-test="{a:1,b:2}">{{txt}}</li>
       <li @click="naviHtml">打开新窗口，跳转到html5 API页面</li>
+      <li @click="$router.push('/mutiTxt')">vue控制多行文字展开收起的实现示例</li>
     </ul>
     <div class="bruce flex-ct-x">
       <div class="scroll-indicator">

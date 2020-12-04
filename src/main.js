@@ -7,6 +7,7 @@ import router from './router'
 
 // 路由验证
 import './permission'
+import './directive/permission'
 
 Vue.config.productionTip = false
 
