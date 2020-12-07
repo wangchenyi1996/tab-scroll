@@ -105,6 +105,9 @@ export default {
     getScrollY() {
       return this.scroll.y;
     },
+    scrollToElement() {
+      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
+    }
   },
 };
 </script>

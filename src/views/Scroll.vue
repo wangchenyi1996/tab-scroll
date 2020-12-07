@@ -1,53 +1,79 @@
 <template>
-  <div class="scroll-box" :style="{height:heights+'px'}">
-    <!-- 26 个字母 -->
-    <div class="index">
-      <p class="index-item" @click="scrollTo('#')">#</p>
-      <div
-        class="index-item"
-        v-for="item in citys"
-        :key="item.letter"
-        @click="scrollTo(item.letter)"
-      >{{ item.letter }}</div>
-    </div>
-
-    <div class="content">
-      <div class="section" id="current" v-if="current">
-        <div class="city-title">当前城市</div>
-        <div class="city-list">
-          <div class="city-item">{{ current }}</div>
+  <div class="scroll-box" :style="{ height: heights + 'px' }">
+    <Bscroll
+      ref="scroll"
+      :top="0"
+      :datas="citys"
+      :pull_down_refresh="true"
+      :probe-type="3"
+      :pull-up-load="true"
+      @scroll="contentScroll"
+    >
+      <div class="content">
+        <!-- 城市 -->
+        <div class="section" ref="current#" v-if="current">
+          <div class="city-title">当前城市</div>
+          <div class="city-list">
+            <div class="city-item">{{ current }}</div>
+          </div>
+        </div>
+        <div class="section" id="hot" v-if="hotCitys.length">
+          <div class="city-title">热门城市</div>
+          <div class="city-list">
+            <div
+              class="city-item"
+              :class="{ active: current === city }"
+              v-for="(city, i) in hotCitys"
+              :key="i"
+              @click="onSelect(city)"
+            >
+              {{ city }}
+            </div>
+          </div>
+        </div>
+        <div
+          ref="listGroup"
+          class="section"
+          :id="item.letter"
+          v-for="item in citys"
+          :key="item.letter"
+        >
+          <div class="letter">{{ item.letter }}</div>
+          <div class="city-list">
+            <div
+              class="city-item"
+              :class="{ active: current === city }"
+              v-for="(city, itemIndex) in item.list"
+              :key="itemIndex"
+              @click="onSelect(city)"
+            >
+              {{ city }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="section" id="hot" v-if="hotCitys.length">
-        <div class="city-title">热门城市</div>
-        <div class="city-list">
-          <div
-            class="city-item"
-            :class="{ active: current === city }"
-            v-for="(city, i) in hotCitys"
-            :key="i"
-            @click="onSelect(city)"
-          >{{ city }}</div>
+      <!-- 26 个字母 -->
+      <div class="index">
+        <p class="index-item" @click="gotoTop()"  :class="{ active: currentIndex === -1 }">#</p>
+        <div
+          class="index-item"
+          :class="{ active: currentIndex === index }"
+          :data-index="index"
+          v-for="(item, index) in citys"
+          :key="item.letter"
+          @click="scrollTo(index)"
+        >
+          {{ item.letter }}
         </div>
       </div>
-      <div class="section" :id="item.letter" v-for="item in citys" :key="item.letter">
-        <div class="letter">{{ item.letter }}</div>
-        <div class="city-list">
-          <div
-            class="city-item"
-            :class="{ active: current === city }"
-            v-for="(city, itemIndex) in item.list"
-            :key="itemIndex"
-            @click="onSelect(city)"
-          >{{ city }}</div>
-        </div>
-      </div>
-    </div>
+    </Bscroll>
   </div>
 </template>
 
 <script>
+import Bscroll from "./better-scroll/Bscroll.vue";
 import cityList from "@/assets/data/cityList";
+
 export default {
   data() {
     return {
@@ -66,38 +92,108 @@ export default {
         "重庆",
         "厦门",
       ],
+      listHeight: [],
+      scrollY: -1,
+      currentIndex: -1, // 如果是0 ，A就选中了
     };
   },
-  methods: {
-    scrollTo(letter) {
-      if (letter === "#") {
-        document.querySelector("#A").scrollIntoView({ behavior: "smooth" });
-      } else {
-        document
-          .querySelector(`#${letter}`)
-          .scrollIntoView({ behavior: "smooth" });
-      }
+  components: {
+    Bscroll,
+  },
+  mounted() {
+    this._calculateHeight();
+  },
+  watch: {
+    data() {
+      setTimeout(() => {
+        this._calculateHeight();
+      }, 20);
     },
+    scrollY(newY) {
+      const listHeight = this.listHeight;
+      if (newY > 0) {
+        this.currentIndex = 0;
+        return;
+      }
+      for (let i = 0; i < listHeight.length - 1; i++) {
+        let height1 = listHeight[i];
+        let height2 = listHeight[i + 1];
+        if (-newY >= height1 && -newY < height2) {
+          this.currentIndex = i;
+          return;
+        }
+      }
+      this.currentIndex = listHeight.length - 2;
+    },
+  },
+
+  methods: {
+    // 点击字母
+    scrollTo(index) {
+      this.currentIndex = index
+      this._scrollTo(index);
+    },
+    // 选择哪个城市
     onSelect(city) {
       this.current = city;
     },
+    // 滚动监听
+    contentScroll(position) {
+      this.scrollY =position.y
+    },
+    _calculateHeight() {
+      this.listHeight = [];
+      const list = this.$refs.listGroup;
+      let height = 0;
+      this.listHeight.push(height);
+      for (let i = 0; i < list.length; i++) {
+        let item = list[i];
+        height += item.clientHeight;
+        this.listHeight.push(height);
+      }
+      console.log(this.listHeight);
+    },
+    _scrollTo(index) {
+      if (!index && index !== 0) {
+        return;
+      }
+      if (index < 0) {
+        index = 0;
+      } else if (index > this.listHeight.length - 2) {
+        index = this.listHeight.length - 2;
+      }
+      this.scrollY = -this.listHeight[index];
+      this.$refs.scroll.scrollToElement(this.$refs.listGroup[index], 0);
+    },
+    gotoTop(){
+      this.currentIndex = -1
+      this.$refs.scroll.scrollToElement(this.$refs['current#'], 0);
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.active {
+  color: red;
+  font-weight: bold;
+}
+.content {
+}
 .scroll-box {
+  position: relative;
+  width: 100%;
   .index {
+    width: 20px;
     position: fixed;
     right: 0;
-    top: 50px;
+    top: 30px;
     z-index: 999;
     color: #2f9bfe;
-    font-size: 16px;
+    font-size: 13px;
     .index-item {
       width: 20px;
-      height: 21px;
-      line-height: 21px;
+      height: 26px;
       text-align: center;
     }
   }
