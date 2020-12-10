@@ -6,6 +6,8 @@ import Vuex from 'vuex'
 // import Vuex from 'vuex'
 // Vue.use(Vuex)
 
+import createLogger from 'vuex/dist/logger' // 输出日志信息
+
 import user from './user'
 import createPersistedState from 'vuex-persistedstate'
 
@@ -92,6 +94,7 @@ export default new Vuex.Store({
           }
         }
       }
-    })
+    }),
+    process.env.NODE_ENV !== 'production' && createLogger()
   ]
 })
