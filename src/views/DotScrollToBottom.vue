@@ -12,6 +12,7 @@
     <ul class="my-ul">
       <li @click="$router.push('/add1')">add1</li>
       <li @click="$router.push('/add2')">add2</li>
+      <li @click="$router.push('/animation')">实现加入购物车动画效果</li>
       <li @click="$router.push('/pic1')">图表页面 - 一键截图功能</li>
       <li @click="$router.push('/mock')">点击去mockjs页面</li>
       <li @click="$router.push('/vlist')">点击去虚拟列表页面，模拟几万条数据</li>
@@ -21,6 +22,7 @@
       <li @click="$router.push('/book')">实现小说左右滑动翻页功能</li>
       <li @click="$router.push('/verification')">实现图片验证码功能</li>
       <li @click="$router.push('/bscroll')">better-scroll</li>
+      <li @click="$router.push('/scroll')">better-scroll城市选择案列</li>
       <li @click="txtDirective" v-test="{a:1,b:2}">{{txt}}</li>
       <li @click="naviHtml">打开新窗口，跳转到html5 API页面</li>
       <li @click="$router.push('/mutiTxt')">vue控制多行文字展开收起的实现示例</li>

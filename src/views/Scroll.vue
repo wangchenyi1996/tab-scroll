@@ -92,9 +92,9 @@ export default {
         "重庆",
         "厦门",
       ],
-      listHeight: [],
-      scrollY: -1,
-      currentIndex: -1, // 如果是0 ，A就选中了
+      listHeight: [], // 左侧列表元素高度集合
+      scrollY: -1, // 列表的y轴位置属性
+      currentIndex: -1, // 如果是0 ，A就选中了 ,右侧列表点击的index高亮
     };
   },
   components: {
@@ -111,10 +111,12 @@ export default {
     },
     scrollY(newY) {
       const listHeight = this.listHeight;
+       // 当newY大于0,滚动到顶部
       if (newY > 0) {
         this.currentIndex = 0;
         return;
       }
+      // 在中间部分滚动
       for (let i = 0; i < listHeight.length - 1; i++) {
         let height1 = listHeight[i];
         let height2 = listHeight[i + 1];
@@ -123,6 +125,7 @@ export default {
           return;
         }
       }
+      // 滚动到底部,则-newY要大于最后一个元素的上限
       this.currentIndex = listHeight.length - 2;
     },
   },
