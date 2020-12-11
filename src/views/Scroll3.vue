@@ -72,6 +72,7 @@
           :data-index="index"
           v-for="(item, index) in citys"
           :key="item.letter"
+          @click.stop="scrollTo(index)"
         >
           {{ item.letter }}
         </div>
@@ -84,7 +85,7 @@
 import Bscroll from "./better-scroll/Bscroll.vue";
 import cityList from "@/assets/data/cityList";
 import { getData } from "@/common/dom";
-const ANCHOR_HEIGHT = 26  // 做个需要看26个字母中的每个字母设置的高度
+
 export default {
   data() {
     return {
@@ -106,10 +107,6 @@ export default {
       listHeight: [], // 左侧列表元素高度集合
       scrollY: -1, // 列表的y轴位置属性
       currentIndex: -1, // 如果是0 ，A就选中了 ,右侧列表点击的index高亮
-      touch: {
-        y1: 0,
-        anchorIndex: 0,
-      },
     };
   },
   components: {
@@ -148,19 +145,10 @@ export default {
 
   methods: {
     touchstart(e) {
-      let anchorIndex = getData(e.target, "index");
-      let firstTouch = e.touches[0];
-      this.touch.y1 = firstTouch.pageY;
-      this.touch.anchorIndex = anchorIndex;
-      this._scrollTo(anchorIndex);
+      console.log(e.target);
     },
     touchmove(e) {
-      let firshTouch = e.touches[0]
-      this.touch.y2 = firshTouch.pageY
-      // let delta = (this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT | 0  // 相当于下面的-向下取整
-      let delta = Math.floor((this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT)
-      let anchorIndex = parseInt(this.touch.anchorIndex) + delta
-      this._scrollTo(anchorIndex)
+      console.log(e.target);
     },
 
     // 点击字母
