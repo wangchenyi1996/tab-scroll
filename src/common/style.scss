@@ -71,6 +71,13 @@ $borderColor-m:#cfcfcf;
 }
 //使用方式---->@extend %ellipsis;	//继承
 
+// 水平垂直居中
+.all-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 
 /* flex布局 */
 .u-f,

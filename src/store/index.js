@@ -29,7 +29,10 @@ export default new Vuex.Store({
     // 路由
     routes: [],
     addRoutes: [],
-    roles: ''
+    roles: '',
+    // 测试app.vue 隐藏弹框组件的
+    popupShow: false
+
   },
   getters: {
     getToken(state, getters) {
@@ -57,6 +60,14 @@ export default new Vuex.Store({
     },
     SET_RULES(state, roles) {
       state.roles = roles
+    },
+    // 关闭弹框
+    closePopup(state){
+      state.popupShow = false
+    },
+    // 打开弹框
+    openPopup(state){
+      state.popupShow = true
     }
   },
   actions: {

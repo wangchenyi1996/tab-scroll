@@ -131,7 +131,6 @@ ul,li{
   list-style-type: none;
 }
 .shop {
-  width: 100%;
   >li{
     width: 50%;
     margin: 10px 0;

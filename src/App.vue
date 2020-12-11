@@ -9,14 +9,21 @@
     </div>-->
 
     <keep-alive>
-      <router-view v-if="$route.meta.keepAlive && isShow" />
       <!-- 这里是会被缓存的视图组件，比如 page1,page2 -->
+      <router-view v-if="$route.meta.keepAlive && isShow" />
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive">
-      <!-- 这里是不被缓存的视图组件，比如 page3 -->
-    </router-view>
+    <!-- 这里是不被缓存的视图组件，比如 page3 -->
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
 
     <!-- 底部tabbar -->
+    <TabBar v-if="$route.meta && $route.meta.showTabbar" />
+
+    <!-- 返回顶部 -->
+    <back-top></back-top>
+
+    <!-- 这是一个新增的测试组件，默认是隐藏的，在其他的页面中操作，使该组件显示 -->
+    <test-com></test-com>
+
     <!-- <div>
       <a href="weixin://">打开微信</a>
     </div>
@@ -46,13 +53,12 @@
 
     <!-- 多选 -->
     <!-- <input type="file" multiple /> -->
-    <!-- 拨号 -->
-
-    <TabBar v-if="$route.meta && $route.meta.showTabbar" />
   </div>
 </template>
 <script>
 import TabBar from "@/components/TabBar.vue";
+import BackTop from '@/components/back-top/BackTop.vue';
+import TestCom from '@/components/test/TestCom.vue';
 export default {
   data() {
     return {
@@ -61,6 +67,8 @@ export default {
   },
   components: {
     TabBar,
+    BackTop,
+    TestCom
   },
   /*
     provide：是一个对象，或者是一个返回对象的函数。里面呢就包含要给子孙后代的东西，也就是属性和属性值。
@@ -96,10 +104,10 @@ export default {
       // console.log("PC");
       // window.location.href = "pc.html";
     }
-    
-    if(this.IsPC()){
+
+    if (this.IsPC()) {
       // console.log("PC");
-    }else{
+    } else {
       // console.log("mobile");
     }
   },
@@ -132,8 +140,8 @@ export default {
       this.$nextTick(() => {
         this.isShow = true;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

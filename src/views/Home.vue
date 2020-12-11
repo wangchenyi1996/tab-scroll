@@ -1,10 +1,10 @@
 <template>
-  <div class="home">
-    <div style="display:flex;flex-direction:column;">
-      <p>模拟吸顶效果</p>
-      <hr />
+  <div class="home" :class="{ 'fixed-class': popupShow }">
+    <div class="u-f-c">
+      <h3 style="text-align: center;">模拟吸顶效果</h3>
       <button @click="toast">成功taost弹出框</button>
       <button @click="toast2">失败taost弹出框</button>
+      <button @click="handleopenPopup">打开 App.vue 隐藏的弹框</button>
       <p @click="downs">去下载图片</p>
     </div>
     <Tab :tabList="tabList" @Tabchang="tabchange" :current="current" />
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 import Tab from "@/components/tab.vue";
 import datas from "@/assets/data.js";
 
@@ -56,6 +57,9 @@ export default {
   name: "home",
   components: {
     Tab
+  },
+  computed:{
+    ...mapState(['popupShow'])
   },
   data() {
     return {
@@ -107,6 +111,11 @@ export default {
     // })
   },
   methods: {
+     ...mapMutations(['openPopup']),
+    //  打开弹框
+    handleopenPopup(){
+      this.openPopup()
+    },
     listLoad() {
       this.domH.push(0);
       this.domH.push(document.getElementsByClassName("yule")[0].offsetTop - 50);
@@ -174,6 +183,10 @@ export default {
 </script>
 
 <style lang="scss">
+.fixed-class{
+  position: fixed;
+  width: 100%;
+}
 .home {
   width: 98%;
   img {
