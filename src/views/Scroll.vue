@@ -131,8 +131,8 @@ export default {
         this.currentIndex = 0;
         return;
       }
-      // 在中间部分滚动
-      for (let i = 0; i < listHeight.length - 1; i++) {
+      // 在中间部分滚动 
+      for (let i = 0; i < listHeight.length - 1; i++) {   //listHeight.length - 1，是因为我们一开始在这个数组添加了一个元素
         let height1 = listHeight[i];
         let height2 = listHeight[i + 1];
         if (-newY >= height1 && -newY < height2) {
@@ -141,7 +141,7 @@ export default {
           return;
         }
       }
-      // 滚动到底部,则-newY要大于最后一个元素的上限
+      // 滚动到底部,则-newY要大于最后一个元素的上限， -2 表示是最后一个元素
       this.currentIndex = listHeight.length - 2;
     },
   },

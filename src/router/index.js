@@ -419,6 +419,13 @@ export const constantRoutes = [
         component: () =>
             import('../views/MutiTxt.vue')
     },
+    // 进度条
+    {
+        path: '/progress',
+        name: 'progress',
+        component: () =>
+            import('../views/progress-bar.vue')
+    },
 ]
 
 export const asyncRoute = [
