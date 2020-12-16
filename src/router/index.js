@@ -419,12 +419,19 @@ export const constantRoutes = [
         component: () =>
             import('../views/MutiTxt.vue')
     },
+    // 音乐列表播放
+    {
+        path: '/music',
+        name: 'music',
+        component: () =>
+            import('../views/music/SongList.vue')
+    },
     // 进度条
     {
         path: '/progress',
         name: 'progress',
         component: () =>
-            import('../views/progress-bar.vue')
+            import('../views/music/Progress.vue')
     },
 ]
 

@@ -24,6 +24,9 @@
     <!-- 这是一个新增的测试组件，默认是隐藏的，在其他的页面中操作，使该组件显示 -->
     <test-com></test-com>
 
+    <!-- 音乐播放器 -->
+    <miniPlayer />
+
     <!-- <div>
       <a href="weixin://">打开微信</a>
     </div>
@@ -59,6 +62,7 @@
 import TabBar from "@/components/TabBar.vue";
 import BackTop from '@/components/back-top/BackTop.vue';
 import TestCom from '@/components/test/TestCom.vue';
+import miniPlayer from '@/views/music/Progress.vue'
 export default {
   data() {
     return {
@@ -68,7 +72,8 @@ export default {
   components: {
     TabBar,
     BackTop,
-    TestCom
+    TestCom,
+    miniPlayer
   },
   /*
     provide：是一个对象，或者是一个返回对象的函数。里面呢就包含要给子孙后代的东西，也就是属性和属性值。
@@ -154,7 +159,7 @@ export default {
   width: 100%;
   background-color: #fff;
   min-height: 100%;
-  padding-bottom: 70px;
+  // padding-bottom: 70px;
 }
 * {
   margin: 0;

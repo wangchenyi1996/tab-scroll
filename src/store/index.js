@@ -9,6 +9,7 @@ import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger' // 输出日志信息
 
 import user from './user'
+import music from './music'
 import createPersistedState from 'vuex-persistedstate'
 
 //使用scss的变量
@@ -88,7 +89,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    user
+    user,
+    music
   },
   plugins: [
     createPersistedState({

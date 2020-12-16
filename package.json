@@ -17,6 +17,7 @@
     "echarts": "^4.7.0",
     "ezuikit-js": "^0.1.7",
     "file-saver": "^2.0.5",
+    "lyric-parser": "^1.0.1",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "register-service-worker": "^1.7.1",
