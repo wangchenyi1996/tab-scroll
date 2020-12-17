@@ -9,6 +9,7 @@
             src="./icons/select.png"
             style="margin-right:auto"
             @click="back"
+            width="32"
           />
           <p>{{ currentSong.name }}</p>
           <p>{{ currentSong.singer }}</p>
@@ -69,10 +70,7 @@
 
     <!-- 底部播放器 -->
     <transition name="mini">
-      <ul
-        class="btm-play u-f u-f-sbc"
-        v-show="!fullScreen"
-      >
+      <ul class="btm-play u-f u-f-sbc" v-show="!fullScreen">
         <li class="u-f u-f-ajc" @click.stop="openFull">
           <img src="./icons/full.png" alt="" class="icon" />
         </li>
@@ -189,6 +187,7 @@ export default {
     back() {
       this.setFullScreen(false);
     },
+    // 获取歌曲歌词
     _getLyric(index) {
       if (this.currentLyric) {
         this.currentLyric.stop();
@@ -214,6 +213,7 @@ export default {
           this.currentLineNum = 0;
         });
     },
+    // 处理歌词
     handleLyric({ lineNum, txt }) {
       this.currentLineNum = lineNum;
       if (lineNum > 5) {
@@ -290,7 +290,7 @@ export default {
     },
     // 音频
     end(e) {
-      console.log(e, "结束了");
+      console.log('播放结束：',e);
       this.loop();
     },
     // 循环播放
@@ -298,6 +298,10 @@ export default {
       this.$refs.myVideo.currentTime = 0;
       this.$refs.myVideo.play();
       if (this.currentLyric) {
+        console.log('循环播放-loop')
+        // 歌词重载以后 高亮行设置为 0
+        this.currentLineNum = 0;
+        this.$refs.lyricList.scrollTo(0, 0, 1000);
         this.currentLyric.seek();
       }
     },

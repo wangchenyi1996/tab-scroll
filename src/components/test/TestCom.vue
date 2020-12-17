@@ -14,7 +14,7 @@ import { mapMutations, mapState } from 'vuex'
       ...mapState(['popupShow'])
     },
     created() {
-      console.log(this.popupShow)
+      // console.log(this.popupShow)
       
     },
     methods: {

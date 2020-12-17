@@ -57,11 +57,13 @@ $borderColor-m:#cfcfcf;
 }
 
 // 显示省略号 -->只显示一行文字
-%ellipsis {
+%ellipsis {     // 前面加上 % 如果不使用，不会编译css
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+//使用方式---->@extend %ellipsis;	//继承
+
 //显示省略号 -->显示多行文字
 @mixin twoEllipsis($row) {
     display: -webkit-box;
@@ -69,7 +71,6 @@ $borderColor-m:#cfcfcf;
     -webkit-line-clamp: $row; //需要控制的文本行数
     overflow: hidden;
 }
-//使用方式---->@extend %ellipsis;	//继承
 
 // 水平垂直居中
 .all-center {

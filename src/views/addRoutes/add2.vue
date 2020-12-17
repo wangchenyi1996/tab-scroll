@@ -2,6 +2,7 @@
   <div style="height: 100vh; width: 100%">
     <h1>歌词上下渐变效果</h1>
     <button @click="$router.back()">返回</button>
+    <button @click="$router.push('/music')">模仿网易云音乐播放器</button>
     <ul ref="lyricUL" class="ul-sings lyric-wrap">
       <li
         v-for="(item, i) in lyricsObjArr"

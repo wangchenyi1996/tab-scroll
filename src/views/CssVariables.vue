@@ -1,8 +1,12 @@
 <template>
   <div class="variables">
     <h3>操作 Scss变量 实现 页面换肤功能</h3>
-    <div class="box" :style="{ 'background-color':  bgcolor}">
-      <span :style="{ color:  textcolor}"> 点击按钮实现换肤功能 </span>
+    <div class="box u-f" :style="{ 'background-color':  bgcolor}">
+      <!-- <span :style="{ color:  textcolor}" class="u-font-14 u-flex-1"> 点击按钮实现换肤功能 </span>
+      <span :style="{ color:  textcolor}" class="u-font-12 u-flex-1"> 点击按钮实现换肤功能 </span> -->
+      <span style="background-color: red;" class="u-margin-10 u-padding-20">css 变量的使用</span>
+      <span style="background-color: green;" class="u-m-r-10">scss语法</span>
+      <span style="background-color: orange;" class="u-m-t-20 u-p-l-20">scss语法</span>
     </div>
     <p style="text-align: center">选择颜色</p>
     <input type="color" @change="change" v-model="color" />
@@ -68,6 +72,10 @@ export default {
     display: block;
     margin: 10px auto;
     color: $test-color;
+  }
+  span{
+    height: 30px;
+    line-height: 30px;
   }
 }
 </style>
