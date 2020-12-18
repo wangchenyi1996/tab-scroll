@@ -14,32 +14,64 @@
           <p>{{ currentSong.name }}</p>
           <p>{{ currentSong.singer }}</p>
         </div>
-        <!-- 中间歌词 -->
-        <div class="middle-r">
-          <Bscroll
-            style="bottom:100px;"
-            ref="lyricList"
-            :top="30"
-            :datas="currentLyric && currentLyric.lines"
-            :probe-type="3"
-          >
-            <div class="content">
-              <div v-if="currentLyric">
-                <p
-                  ref="lyricLine"
-                  class="pitem"
-                  v-for="(item, index) in currentLyric.lines"
-                  :key="index"
-                  :class="{ current: currentLineNum === index }"
-                >
-                  {{ item.txt }}
-                </p>
-              </div>
+        <!-- 封面背景 -->
+        <!-- <div class="background">
+          <img width="100%" height="100%" :src="currentSong.pic" />
+        </div> -->
+
+        <!-- 中间部分 -->
+        <div
+          class="middles"
+          @touchstart.prevent="middleTouchStart"
+          @touchmove.prevent="middleTouchMove"
+          @touchend="middleTouchEnd"
+        >
+          <!-- CD 图片 -->
+          <div class="cd-bg" ref="middleL">
+            <div class="cd-wrapper">
+              <!-- <img
+                src="http://p1.music.126.net/QHw-RuMwfQkmgtiyRpGs0Q==/102254581395219.jpg"
+              /> -->
+              <img :src="currentSong.pic" />
+              <div class="cd-title">{{  currentLyric && currentLyric.lines[currentLineNum].txt }}</div>
             </div>
-          </Bscroll>
+          </div>
+
+          <!-- 歌词部分 -->
+          <div class="middle-r" ref="list">
+            <Bscroll
+              ref="lyricList"
+              :top="30"
+              :datas="currentLyric && currentLyric.lines"
+              :probe-type="3"
+            >
+              <div class="content">
+                <div v-if="currentLyric">
+                  <p
+                    ref="lyricLine"
+                    class="pitem"
+                    v-for="(item, index) in currentLyric.lines"
+                    :key="index"
+                    :class="{ current: currentLineNum === index }"
+                  >
+                    {{ item.txt }}
+                  </p>
+                </div>
+              </div>
+            </Bscroll>
+          </div>
         </div>
+
         <!-- 底部 -->
         <div class="bottom">
+          <!-- 小点 -->
+          <div class="dot-wrapper">
+            <span class="dot" :class="{ active: currentShow === 'cd' }"></span>
+            <span
+              class="dot"
+              :class="{ active: currentShow === 'lyric' }"
+            ></span>
+          </div>
           <!-- 进度条 -->
           <div class="progress-wrapper">
             <span class="time time-l">{{ format(currentTime) }}</span>
@@ -111,6 +143,9 @@ import { mapGetters, mapMutations } from "vuex";
 import { getSongAndLyricList } from "@/assets/song/songList";
 import Lyric from "lyric-parser";
 import Bscroll from "@/views/better-scroll/Bscroll.vue";
+import { prefixStyle } from "@/common/dom";
+const transform = prefixStyle("transform");
+const transitionDuration = prefixStyle("transitionDuration");
 
 export default {
   data() {
@@ -123,7 +158,8 @@ export default {
       currentLyric: null,
       noLyric: false,
       currentLineNum: 0,
-      songReady: false
+      songReady: false,
+      currentShow: "cd"
     };
   },
   components: {
@@ -179,10 +215,81 @@ export default {
         : require("./icons/pause.png");
     }
   },
+  created() {
+    this.touch = {};
+  },
   mounted() {
     console.log(this.currentSong);
   },
   methods: {
+    /** 滑动滑块相关  **/
+    middleTouchStart(e) {
+      this.touch.initiated = true;
+      // 用来判断是否是一次移动
+      this.touch.moved = false;
+      const touch = e.touches[0];
+      this.touch.startX = touch.pageX;
+      this.touch.startY = touch.pageY;
+    },
+    middleTouchMove(e) {
+      if (!this.touch.initiated) {
+        return;
+      }
+      const touch = e.touches[0];
+      const deltaX = touch.pageX - this.touch.startX;
+      const deltaY = touch.pageY - this.touch.startY;
+      // 防止在scroll 滑动
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        return;
+      }
+      if (!this.touch.moved) {
+        this.touch.moved = true;
+      }
+      const left = this.currentShow === "cd" ? 0 : -window.innerWidth;
+      const offsetWidth = Math.min(
+        0,
+        Math.max(-window.innerWidth, left + deltaX)
+      );
+      this.touch.percent = Math.abs(offsetWidth / window.innerWidth);
+      this.$refs.list.style[transform] = `translate3d(${offsetWidth}px,0,0)`;
+      this.$refs.list.style[transitionDuration] = 0;
+      this.$refs.middleL.style.opacity = 1 - this.touch.percent;
+      this.$refs.middleL.style[transitionDuration] = 0;
+    },
+    middleTouchEnd() {
+      if (!this.touch.moved) {
+        return;
+      }
+      let offsetWidth;
+      let opacity;
+      if (this.currentShow === "cd") {
+        if (this.touch.percent > 0.1) {
+          offsetWidth = -window.innerWidth;
+          opacity = 0.1;
+          this.currentShow = "lyric";
+        } else {
+          offsetWidth = 0;
+          opacity = 1;
+        }
+      } else {
+        if (this.touch.percent < 0.9) {
+          offsetWidth = 0;
+          this.currentShow = "cd";
+          opacity = 1;
+        } else {
+          offsetWidth = -window.innerWidth;
+          opacity = 0.1;
+        }
+      }
+      const time = 300;
+      this.$refs.list.style[transform] = `translate3d(${offsetWidth}px,0,0)`;
+      this.$refs.list.style[transitionDuration] = `${time}ms`;
+      this.$refs.middleL.style.opacity = opacity;
+      this.$refs.middleL.style[transitionDuration] = `${time}ms`;
+      this.touch.initiated = false;
+    },
+    /** 滑动滑块相关  **/
+
     // 关闭全屏
     back() {
       this.setFullScreen(false);
@@ -290,7 +397,7 @@ export default {
     },
     // 音频
     end(e) {
-      console.log('播放结束：',e);
+      console.log("播放结束：", e);
       this.loop();
     },
     // 循环播放
@@ -298,7 +405,7 @@ export default {
       this.$refs.myVideo.currentTime = 0;
       this.$refs.myVideo.play();
       if (this.currentLyric) {
-        console.log('循环播放-loop')
+        console.log("循环播放-loop");
         // 歌词重载以后 高亮行设置为 0
         this.currentLineNum = 0;
         this.$refs.lyricList.scrollTo(0, 0, 1000);
@@ -381,18 +488,12 @@ export default {
 
 <style scoped lang="scss">
 .my-progress {
-  // position: fixed;
-  // z-index: 100;
-  // top: 0;
-  // left: 0;
-  // bottom: 0;
-  // right: 0;
-  // background: #fefefe;
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   .normal-player {
     position: fixed;
-    z-index: 100;
+    z-index: 150;
     top: 0;
     left: 0;
     bottom: 0;
@@ -412,7 +513,7 @@ export default {
     }
     .btm-play2 {
       width: 100%;
-      padding: 0 2.5rem 1rem;
+      padding: 0 2.5rem 10px;
       box-sizing: border-box;
 
       .icon {
@@ -438,7 +539,7 @@ export default {
         align-items: center;
         width: 94%;
         margin: 0px auto;
-        padding: 10px 0;
+        padding: 2px 0;
         .time {
           color: rgb(173, 172, 172);
           font-size: 11px;
@@ -457,28 +558,111 @@ export default {
           flex: 1;
         }
       }
-    }
-  }
-  .middle-r {
-    // padding-bottom: 100px;
-    height: calc(100vh - 100px);
-    .pitem {
-      font-size: 16px;
-      color: #c7c7c7;
-      line-height: 40px;
-      text-align: center;
-      &.current {
-        color: #333;
-        font-weight: bold;
+      .dot-wrapper {
+        text-align: center;
+        font-size: 0;
+        margin-top: 10px;
+        .dot {
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0 4px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgb(80, 72, 72);
+          &.active {
+            width: 20px;
+            border-radius: 5px;
+            background: rgba(219, 44, 38, 0.8);
+          }
+        }
       }
     }
   }
+
   .header {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    top: 0;
     height: 30px;
     line-height: 30px;
     background-color: rgb(149, 212, 236);
     p {
       margin: 0 10px;
+    }
+  }
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(10px);
+  }
+
+  .middles {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    bottom: 100px;
+    // bottom: 150px;
+    white-space: nowrap;
+    font-size: 0;
+    .cd-bg {
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 100%;
+      .cd-wrapper {
+        position: absolute;
+        left: 10%;
+        top: 10%;
+        width: 80%;
+        height: 100%;
+        box-sizing: border-box;
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+        }
+        .cd-title{
+          text-align: center;
+           position: absolute;
+          left: 0;
+          bottom: -100px;
+          color: #b98383;
+          height: 30px;
+          width: 100%;
+          font-size: 16px;
+        }
+      }
+    }
+    .middle-r {
+      transform: translate3d(0, 0, 0);
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      // height: calc(100vh - 100px);
+      .pitem {
+        font-size: 16px;
+        color: #c7c7c7;
+        line-height: 40px;
+        text-align: center;
+        &.current {
+          color: #333;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

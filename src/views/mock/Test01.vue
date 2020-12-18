@@ -19,7 +19,11 @@
     </h3>
 
     <ul ref="delegate">
-      <li v-for="(item, index) in currentPageData" :key="index" :data-key="index">
+      <li
+        v-for="(item, index) in currentPageData"
+        :key="index"
+        :data-key="index"
+      >
         国家：{{ item.cn }}---区号：{{ item.code }}
       </li>
     </ul>
@@ -37,11 +41,13 @@
     </ul>
 
     <button @click="repeatAjax">点击重复发送请求</button>
+    <button @click="repeatAjax2">点击重复发送请求（封装）</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { getMenu, login } from "@/api/test";
 
 let CancelToken = axios.CancelToken;
 let source;
@@ -61,25 +67,24 @@ export default {
       startX: 0,
       startY: 0,
       endX: 0,
-      endY: 0,
+      endY: 0
     };
   },
   created() {
     // this.getCitylist();
     // this.getCategroyList()
     this.getCountryAreaCodeList();
-    // this.repeatAjax()
   },
   mounted() {
     // 事件委托
-    this.$refs.delegate.addEventListener("click", function (e) {
+    this.$refs.delegate.addEventListener("click", function(e) {
       // 兼容性处理
       let event = e || window.event;
       let target = event.target || event.srcElement;
       // 判断是否匹配目标元素
       if (target.nodeName.toLocaleLowerCase() === "li") {
-        let id = target.getAttribute('data-key')  //给元素设置一个属性
-        console.log(id) // 获取到属性，可以进行其他操作
+        let id = target.getAttribute("data-key"); //给元素设置一个属性
+        console.log(id); // 获取到属性，可以进行其他操作
       }
     });
   },
@@ -94,16 +99,16 @@ export default {
         .get("http://rap2api.taobao.org/app/mock/233782/api/roomList", {
           params: {
             a: 1,
-            b: 2,
+            b: 2
           },
           cancelToken: new axios.CancelToken(function executor(c) {
             source = c;
-          }),
+          })
         })
-        .then((res) => {
+        .then(res => {
           console.log("列表", res);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -113,6 +118,26 @@ export default {
         source("终止重复的请求");
       }
     },
+
+    // 测试 get请求
+    async repeatAjax2() {
+      try {
+        const result = await getMenu({ a: 1, b: 2 });
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // 测试 post请求
+    // async repeatAjax2() {
+    //   try {
+    //     const result = await login({ name: "张三", age: 18 });
+    //     console.log(result);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+
     /*************** 重复发送ajax请求 ****************/
 
     // 左滑、右滑切换路由实现
@@ -145,22 +170,22 @@ export default {
           //   b:2
           // }
         })
-        .then((res) => {
+        .then(res => {
           console.log("城市列表", res);
           this.list = res.data.data;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
     getCategroyList() {
       axios
         .post("/categroy")
-        .then((res) => {
+        .then(res => {
           console.log("商品分类列表", res.data.data.data.cate);
           this.categroyList = res.data.data.data.cate;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -169,7 +194,7 @@ export default {
     getCountryAreaCodeList() {
       axios
         .post("/getCountryCode")
-        .then((res) => {
+        .then(res => {
           // console.log("国家区号列表", res.data.data);
           this.productList = res.data.data;
           //获取数据完成后进行页数计算
@@ -179,7 +204,7 @@ export default {
           this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
           this.getCurrentPageData();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -207,18 +232,20 @@ export default {
         this.currentPage++;
         this.getCurrentPageData();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-ul,li{
+ul,
+li {
   list-style-type: none;
 }
 .mock {
   transition: all 0.8s;
-  li,p {
+  li,
+  p {
     font-size: 16px;
     height: 36px;
     line-height: 36px;
