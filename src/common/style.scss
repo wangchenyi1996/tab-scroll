@@ -2,7 +2,6 @@
 $bgcolor:#f9f9f9; //页面及Tab的背景颜色
 $tabH:50px; //Tab的高度
 $tabColor:#cfcfcf; //Tab文字颜色
-
 // 辅助色
 $text-color:#515151;
 $color-info: #999;
@@ -13,7 +12,6 @@ $color2: #7183AB;
 $bg-color2:#F6F7F9;
 $color3: #F37662;
 $bg-color3: #FFF1EE;
-
 // 文字、背景
 $base-fz:12px;
 $base-fz-s:14px;
@@ -24,63 +22,71 @@ $littlesc:#969a9d;
 // 大的标题
 $big-color:#000000;
 $big-fz:20px;
-
 // 边框
 $borderColor-s:#eeeeee;
 $borderColor-l:#efefef;
 $borderColor-m:#cfcfcf;
-
 // 边框(四边)
 @mixin borderAll($w:1px, $r:#eee) {
-    border: $w solid $r;
+  border: $w solid $r;
 }
 
 @mixin borderTop($w:1px, $r:#eee) {
-    border-top: $w solid $r;
+  border-top: $w solid $r;
 }
 
 @mixin borderBottom($w:1px, $r:#eee) {
-    border-bottom: $w solid $r;
+  border-bottom: $w solid $r;
+}
+
+@mixin lg-text($c1: #f70909, $c2: #ebb00f) {
+  background-image: -webkit-linear-gradient(left, $c1, $c2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 // 使用方式--->@include borderAll($r:red);	//mixin混入
 
 /*  清除浮动  */
+
 %clearFix {
-    *zoom: 1;
-    &:after {
-        content: " ";
-        display: block;
-        clear: both;
-        visibility: hidden;
-    }
+  *zoom: 1;
+  &:after {
+    content: " ";
+    display: block;
+    clear: both;
+    visibility: hidden;
+  }
 }
 
 // 显示省略号 -->只显示一行文字
-%ellipsis {     // 前面加上 % 如果不使用，不会编译css
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+%ellipsis {
+  // 前面加上 % 如果不使用，不会编译css
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-//使用方式---->@extend %ellipsis;	//继承
 
+//使用方式---->@extend %ellipsis;	//继承
 //显示省略号 -->显示多行文字
 @mixin twoEllipsis($row) {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: $row; //需要控制的文本行数
-    overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $row; //需要控制的文本行数
+  overflow: hidden;
 }
 
 // 水平垂直居中
 .all-center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+
 /* flex布局 */
+
 .u-f,
 .u-f-r2,
 .u-f-r,
@@ -89,68 +95,68 @@ $borderColor-m:#cfcfcf;
 .u-f-jc,
 .u-f-ajc,
 .u-f-sbc {
-    display: flex;
+  display: flex;
 }
 
 .u-f-ajc {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .u-f-sbc {
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .u-f-asc {
-    justify-content: space-around;
-    align-items: center;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .u-f-item {
-    flex: 1;
+  flex: 1;
 }
 
 .u-f-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .u-f-r {
-    flex-direction: row;
+  flex-direction: row;
 }
-.u-f-r2{
-    flex-direction: row-reverse;
+
+.u-f-r2 {
+  flex-direction: row-reverse;
 }
 
 .u-f-c {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .u-f-start {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .u-f-end {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .u-f-jc {
-    justify-content: center;
+  justify-content: center;
 }
 
 .u-f-jsb {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .u-f-ac {
-    align-items: center;
+  align-items: center;
 }
 
 .u-f-as {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .u-f-ae {
-    align-items: flex-end;
+  align-items: flex-end;
 }
-

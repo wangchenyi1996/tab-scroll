@@ -14,10 +14,10 @@ export default {
       msg: "",
       tims: null,
        timeArr:[
-        {title:'商品1',id:1,creatime:'2020/06/09 11:37:00',daoTim: 7 * 60 * 1000},
-        {title:'商品2',id:2,creatime:'2020/06/09 11:37:00',daoTim: 10 * 60 * 1000},
-        {title:'商品3',id:3,creatime:'2020/06/09 11:37:00',daoTim: 12 * 60 * 1000},
-        {title:'商品4',id:4,creatime:'2020/06/09 11:37:00',daoTim: 15 * 60 * 1000},
+        {title:'商品1',id:1,creatime:'2021/01/09 15:01:00',daoTim: 8 * 60 * 1000},
+        {title:'商品2',id:2,creatime:'2021/01/10 15:01:00',daoTim: 10 * 60 * 1000},
+        {title:'商品3',id:3,creatime:'2021/01/12 15:01:00',daoTim: 12 * 60 * 1000},
+        {title:'商品4',id:4,creatime:'2021/01/13 15:01:00',daoTim: 30 * 60 * 1000},
       ],
     };
   },

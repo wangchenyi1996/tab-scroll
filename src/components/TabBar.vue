@@ -27,6 +27,7 @@
 </script>
 
 <style scoped lang="scss">
+@import '../common/style.scss';
 .tabbar {
   position: fixed;
   z-index: 100;
@@ -52,8 +53,13 @@
   }
 }
 .active {
-  color: red !important;
+  // color: red !important;
   animation: jump 1s;
+  //字体渐变色
+  @include lg-text(); 
+  // background-image: -webkit-linear-gradient(left, red, yellow);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
 }
 
 </style>

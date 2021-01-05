@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <meta name=keywords content=首页>
+    <meta name=description content=首页>
+    <meta name=author content="">
+    <meta name=viewport content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="format-detection" content="telphone=no" />
+    <script type="text/javascript">
+        var deviveWidth = document.documentElement.clientWidth;
+        document.documentElement.style.fontSize = deviveWidth / 7.5 + 'px';
+    </script>
+ 
+    <style>
+        .slider{
+          overflow: hidden;
+        }
+        .slider-list{
+          transition:all .6s;
+        }
+        .item{
+          height: 218px;
+          text-align: center;
+          flex:none;
+          width: 100vw;
+        } 
+        .item1{
+          background-color: red;
+        }
+        .item2{
+          background-color: yellow;
+        }
+        .item3{
+          background-color: green;
+        }
+        .item4{
+          background-color: blue;
+        }
+        .flex{
+        	display: flex;
+        	flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+<div class="slider" id="slider">
+  <div class="slider-list flex" id="slider-list">
+    <div class="item item1">滑块1</div>
+    <div class="item item2">滑块2</div>
+    <div class="item item3">滑块3</div>
+    <div class="item item4">滑块4</div>
+  </div>
+</div>
+ 
+<script type="text/javascript">
+document.getElementById('slider').addEventListener('touchstart',touchstart, false);
+document.getElementById('slider').addEventListener('touchmove',touchmove, false);
+document.getElementById('slider').addEventListener('touchend',touchend, false);
+ 
+var width = document.documentElement.clientWidth;
+var startX =0;
+var index = 0;
+var translateX = 0;
+var startTime;
+var startTranslate;
+var isSlide = false;
+var sliderNumber = 4;//滑块是数量，控制溢出不能滑动
+var distance;
+ 
+function touchstart(e){
+  startX = e.touches[0].clientX;
+  startTime = new Date().getTime();
+  startTranslate = translateX;
+  isSlide = true;
+}
+ 
+function touchmove(e){
+  if (!isSlide) return
+  var currentX = e.touches[0].clientX
+  //2端溢出不能滑动
+  if (startTranslate == 0 && currentX > startX) return;
+  if (Math.abs(startTranslate) == width * (sliderNumber - 1) && currentX < startX) return;
+ 
+  // 向右滑动时， 没数据无法滑动
+  if (currentX < startX) {
+
+  }
+ 
+  distance = currentX - startX;
+  translateX = currentX - startX + startTranslate;
+ 
+  document.getElementById("slider-list").style.transform = "translateX("+translateX+"px)"
+}
+function touchend(){
+   if (!isSlide) return
+ 
+  var duration = +new Date() - startTime
+  var newTranslateX
+  if (translateX > startTranslate) {
+    // 向左划
+    if (distance > width / 3 || (distance > 40 && duration < 600)) {
+      newTranslateX = startTranslate + width;
+    } else {
+      newTranslateX = startTranslate
+    }
+  } else {
+    // 向右划
+    if (Math.abs(distance) > width / 3 || (Math.abs(distance) > 40 && duration < 600)) {
+      newTranslateX = startTranslate - width;
+    } else {
+      newTranslateX = startTranslate
+    }
+  }
+ 
+  translateX = newTranslateX;
+  isSlide = false;
+  distance = 0;
+  index = Math.abs(newTranslateX / width)
+ 
+  document.getElementById("slider-list").style.transform = "translateX("+translateX+"px)"
+}
+</script>
+</body>
+</html>
+ 

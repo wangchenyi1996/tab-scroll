@@ -12,7 +12,7 @@
     <ul class="my-ul">
       <li @click="$router.push('/add1')">add1</li>
       <li @click="$router.push('/add2')">add2--歌词上下渐变</li>
-      <li @click="$router.push('/animation')">实现加入购物车动画效果</li>
+      <li @click="$router.push('/animation')">实现加入购物车动画效果-直播点赞动画</li>
       <li @click="$router.push('/pic1')">图表页面 - 一键截图功能</li>
       <li @click="$router.push('/mock')">点击去mockjs页面</li>
       <li @click="$router.push('/vlist')">点击去虚拟列表页面，模拟几万条数据</li>

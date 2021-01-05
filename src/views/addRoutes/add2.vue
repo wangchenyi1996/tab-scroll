@@ -64,7 +64,7 @@ export default {
   mounted() {
     this.handleOnline();
     window.addEventListener("online", this.handleOnline);
-    this.$once("hook:beforeDestroy", function () {
+    this.$once("hook:beforeDestroy", () => {
       window.removeEventListener("online", this.handleOnline);
     });
   },

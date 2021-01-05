@@ -71,6 +71,16 @@ export default {
     };
   },
   created() {
+    // vue.config.js devserver before
+    axios
+      .get("/test", {})
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     // this.getCitylist();
     // this.getCategroyList()
     this.getCountryAreaCodeList();

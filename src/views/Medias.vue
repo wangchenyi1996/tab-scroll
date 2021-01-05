@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <div class="box">
-      <!-- pc端： 
+  <div style="width:100vw;">
+    <!-- pc端： 
       1:打开二维码登录网页index.html 
       2:index.html调用GetQrCodeServlet
       3:GetQrCodeServlet干2件事
@@ -26,6 +25,9 @@
       pc端：
       　　1:继续轮询检测uuid中是否为null
       　　2:登录后的uuid中就不为null了，此时LongConnectionCheckServlet停止循环，返回登录状态。 -->
+    <h2>移动端 1px 边框处理</h2>
+    <div class="input u-f-c">
+      <input type="text" placeholder="请输入内容" />
     </div>
   </div>
 </template>
@@ -35,11 +37,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.box {
-  width: 100px;
-  height: 100px;
-  position: relative;
-}
 /*当屏幕小于400px屏幕样式*/
 // @media screen and (max-width:400px){
 // 	.box{
@@ -52,33 +49,35 @@ export default {};
 // 		background-color: red;
 // 	};
 // }
-
-.box::after {
-  content: "";
-  position: absolute;
-  border: 1px solid orangered;
-  top: 0;
-  left: 0;
-  border-radius: 4px;
-  -webkit-transform: scale(0.5, 0.5);
-  transform: scale(0.5, 0.5);
+.input {
+  width: 90%;
+  margin: 0 auto;
+  input {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    outline: none;
+  }
+  &::after {
+    display: block;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: orangered;
+    transform: scaleY(0.5);
+  }
 }
 
 // 根据设备 像素比来表示 1px border
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
-  .box::after {
-     width: 200%;
-    height: 200%;
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
+  .input::after {
+    transform: scaleY(0.5);
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 3) {
-  .box::after {
-    width: 300%;
-    height: 300%;
-    -webkit-transform: scale(0.333333);
-    transform: scale(0.333333);
+  .input::after {
+    transform: scaleY(0.333333);
   }
 }
 </style>
