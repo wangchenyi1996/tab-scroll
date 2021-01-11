@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style>
+			ul li {
+				list-style-type: none;
+				width: 120px;
+				height: 40px;
+				line-height: 40px;
+				text-align: justify;
+				/* 加下面这个，就不要伪类 */
+				text-align-last: justify
+			}
+			/* 用户选中文字时，可以设置样式 */
+			::selection {
+				color: red;
+			}
+
+			/* ul li:after{
+			    content: '';
+			    display: inline-block;
+			    width: 100%;
+			} */
+			/* p{
+				 display: inline-block;
+				    width: 100%;
+			} */
+			.box {
+				display: inline-block;
+				font-size: 20px;
+				margin: 10px;
+				background: linear-gradient(to right, #f71605, #e0f513);
+				background: -webkit-linear-gradient(left, #f71605, #e0f513);
+				background: -o-linear-gradient(right, #f71605, #e0f513);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				animation: scratchy 0.253s linear forwards infinite;
+			}
+			@keyframes scratchy {
+				0% {
+					background-position: 0 0;
+				}
+
+				25% {
+					background-position: 0 0;
+				}
+				26% {
+					background-position: 20px -20px;
+				}
+				50% {
+					background-position: 20px -20px;
+				}
+				51% {
+					background-position: 40px -40px;
+				}
+				75% {
+					background-position: 40px -40px;
+				}
+				76% {
+					background-position: 60px -60px;
+				}
+				99% {
+					background-position: 60px -60px;
+				}
+				100% {
+					background-position: 0 0;
+				}
+			}
+
+			.box1 {
+				font-size: 20px;
+				color: #4cc134;
+				margin: 10px;
+				animation: changeshadow 1s ease-in infinite;
+			}
+			@keyframes changeshadow {
+				0% {
+					text-shadow: 0 0 4px #4cc134
+				}
+				50% {
+					text-shadow: 0 0 40px #4cc134
+				}
+				100% {
+					text-shadow: 0 0 4px #4cc134
+				}
+			}
+			
+			.main{
+			  color: #666;margin-top: 50px;
+			}
+			/* 定义blink类*/
+			.blink{
+			    color: #dd4814;
+			    animation: blink 1s linear infinite;  
+			}
+			/* 定义keyframe动画，命名为blink */
+			@keyframes blink{
+			  0%{opacity: 1;}
+			  100%{opacity: 0;} 
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+		    <li>密码<p></p></li>
+		    <li>用户名<p></p></li>
+		    <li>身份证号<p></p></li>
+			<br />
+			<br />
+			<li>密码</li>
+			<li>用户名</li>
+			<li>身份证号</li>
+		</ul>
+		<p class="box">闪烁效果</p>
+		<p class="box1">闪烁效果</p>
+		<div class="main">
+			<span class="blink">闪烁效果</span>
+		</div>
+	</body>
+</html>

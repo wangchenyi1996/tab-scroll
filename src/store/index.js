@@ -1,10 +1,6 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
-// Vue.use(Vuex)
-
-// import Vue from 'vue'
-// import Vuex from 'vuex'
-// Vue.use(Vuex)
+Vue.use(Vuex)
 
 import createLogger from 'vuex/dist/logger' // 输出日志信息
 

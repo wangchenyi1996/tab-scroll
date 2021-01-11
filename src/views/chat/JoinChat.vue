@@ -37,6 +37,10 @@
 </template>
 
 <script>
+// 表情包
+import emojiJson from '@/assets/emoji';
+console.log(emojiJson.data.split(','))
+
 export default {
   data() {
     return {

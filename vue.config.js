@@ -1,6 +1,10 @@
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 let publicPath = process.env.NODE_ENV === 'production' ? '/test' : './'
+// 代码压缩
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
     publicPath: './',
     outputDir: 'dist',
@@ -85,6 +89,17 @@ module.exports = {
         //     .plugin('webpack-bundle-analyzer')
         //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 
+        if (isProd) {
+            config.plugin('compression-webpack-plugin')
+            .use(new CompressionWebpackPlugin({
+                filename: '[path].gz[query]',
+                algorithm: 'gzip',
+                test: /\.js$|\.html$|\.css$/,
+                // 超过4kb压缩
+                threshold: 4096
+            })).end()
+        }
+
         // ============压缩图片 start============
         // config.module
         //     .rule("images")
@@ -99,12 +114,33 @@ module.exports = {
         //     });
         // ============压缩图片 end============
     },
-    configureWebpack: {
-        externals: {
-            'vue': 'Vue',         // 加上它 vue-devtools 调试工具无法显示
-            'vuex': 'Vuex',
-            'vue-router': 'VueRouter',
-            'axios': 'axios'
-        }
-    }
+    // configureWebpack: {
+    //     externals: {
+    //         'vue': 'Vue',         // 加上它 vue-devtools 调试工具无法显示
+    //         'vuex': 'Vuex',
+    //         'vue-router': 'VueRouter',
+    //         'axios': 'axios'
+    //     }
+    // }
+    // configureWebpack: config => {
+    //     // CDN 第三方插件
+    //     config['externals'] = {
+    //         'vue': 'Vue',         // 加上它 vue-devtools 调试工具无法显示
+    //         'vuex': 'Vuex',
+    //         'vue-router': 'VueRouter',
+    //         'axios': 'axios'
+    //     }
+
+    //     if (isProd) {
+    //         // 配置webpack 压缩
+    //         config.plugins.push(
+    //           new CompressionWebpackPlugin({
+    //             algorithm: 'gzip',
+    //             test: /\.js$|\.html$|\.css$/,
+    //             // 超过4kb压缩
+    //             threshold: 4096
+    //           })
+    //         )
+    //     }
+    // }
 }

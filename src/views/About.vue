@@ -61,9 +61,9 @@ export default {
       from:'userInfo1',
       defalut:() => {}
     },
-    foo:{
-      from:'foo'
-    }
+    // foo:{
+    //   from:'foo'
+    // }
   },
 
   computed: {

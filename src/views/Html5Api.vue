@@ -247,7 +247,7 @@ export default {
       let img = document.getElementById("img");
       img.src = blob;
       img.onload = function (e) {
-        URL.revokeObjectURL(this.src); //释放createObjectURL创建得对象
+        URL.revokeObjectURL(blob); //释放createObjectURL创建得对象
       };
     },
 

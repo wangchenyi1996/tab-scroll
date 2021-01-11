@@ -14,7 +14,7 @@ export default {
     },
     datas: {
       type: Array,
-      required: true,
+      defalut: () => []
     },
     probeType: {
       type: Number,
