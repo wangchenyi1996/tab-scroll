@@ -245,10 +245,26 @@ export default {
 
       let blob = URL.createObjectURL(file);
       let img = document.getElementById("img");
+      let img2 = new Image();
       img.src = blob;
       img.onload = function (e) {
+        console.log('高：',e.target.height)
+        console.log('宽：',e.target.width)
         URL.revokeObjectURL(blob); //释放createObjectURL创建得对象
       };
+
+      // const reader = new FileReader()
+      // reader.onload = function (event) {
+      //   let base64 = event.target.result
+      //   let img = document.createElement('img')
+      //   img.src = base64
+      //   img.onload = function () {
+      //     console.log('宽度', img.width)
+      //     console.log('高度', img.height)
+      //   }
+      // }
+      // reader.readAsDataURL(file)
+
     },
 
     // computed 相关
