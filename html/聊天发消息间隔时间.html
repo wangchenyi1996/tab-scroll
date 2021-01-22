@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>聊天发消息间隔时间</title>
+	</head>
+	<body>
+		<h1>聊天发消息间隔时间</h1>
+		<script>
+			// 时间处理函数
+			var timeObj = {
+				// 获取聊天时间（相差300s内的信息不会显示时间）
+				getChatTime(v1,v2){
+					v1=v1.toString().length<13 ? v1*1000 : v1;
+					v2=v2.toString().length<13 ? v2*1000 : v2;
+					if(((parseInt(v1)-parseInt(v2))/1000) > 300){
+						return this.gettime(v1);
+					}
+				},
+				
+				// 人性化时间格式
+				gettime(shorttime){
+					shorttime=shorttime.toString().length<13 ? shorttime*1000 : shorttime;
+					shorttime = Number(shorttime)
+					let now = (new Date()).getTime();
+					let cha = (now-parseInt(shorttime))/1000;
+					if (cha < 43200) {
+						// 当天
+						return this.dateFormat(new Date(shorttime),"{A} {t}:{ii}");
+					} else if(cha < 518400){
+						// 隔天 显示日期+时间
+						return this.dateFormat(new Date(shorttime),"{Mon}月{DD}日 {A} {t}:{ii}");
+					} else {
+						// 隔年 显示完整日期+时间
+						return this.dateFormat(new Date(shorttime),"{Y}-{MM}-{DD} {A} {t}:{ii}");
+					}
+				},
+				
+				parseNumber(num) {
+					return num < 10 ? "0" + num : num;
+				},
+			 
+				dateFormat(date, formatStr) {
+					let dateObj = {},
+						rStr = /\{([^}]+)\}/,
+						mons = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
+					 
+					dateObj["Y"] = date.getFullYear();
+					dateObj["M"] = date.getMonth() + 1;
+					dateObj["MM"] = this.parseNumber(dateObj["M"]);
+					dateObj["Mon"] = mons[dateObj['M'] - 1];
+					dateObj["D"] = date.getDate();
+					dateObj["DD"] = this.parseNumber(dateObj["D"]);
+					dateObj["h"] = date.getHours();
+					dateObj["hh"] = this.parseNumber(dateObj["h"]);
+					dateObj["t"] = dateObj["h"] > 12 ? dateObj["h"] - 12 : dateObj["h"];
+					dateObj["tt"] = this.parseNumber(dateObj["t"]);
+					dateObj["A"] = dateObj["h"] > 12 ? '下午' : '上午';
+					dateObj["i"] = date.getMinutes();
+					dateObj["ii"] = this.parseNumber(dateObj["i"]);
+					dateObj["s"] = date.getSeconds();
+					dateObj["ss"] = this.parseNumber(dateObj["s"]);
+				 
+					while(rStr.test(formatStr)) {
+						formatStr = formatStr.replace(rStr, dateObj[RegExp.$1]);
+					}
+					return formatStr;
+				}
+				
+			}
+			// 模拟发消息的时间
+			let arr = [
+				{
+					data: "昨天",
+					time: "1611125227000",
+				},
+				{
+					data: "14:45",
+					time: "1611297907000",
+				},
+				{
+					data: "14:47",
+					time: "1611298027000",
+				},
+				{
+					data: "14:49",
+					time: "1611298147000",
+				},
+				{
+					data: "16:23",
+					time: "1611303787000"
+				}
+			];
+			// 处理间隔时间
+			function getdata() {
+				for (let i = 0; i < arr.length; i++) {
+					arr[i].gstime = timeObj.getChatTime(arr[i].time, i > 0 ? arr[i - 1].time : 0);
+				}
+				console.table('时间：', arr);
+			}
+			getdata()
+		</script>
+	</body>
+</html>
