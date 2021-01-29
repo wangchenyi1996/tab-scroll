@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>CSS3逼真水波浪动画特效</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.aaa{
+				position: relative;
+				height: 150px;
+				width: 100%;
+				background-color: red;
+			}
+			.comiis_svg_box {
+				color: #333333;
+				font-weight: 300;
+				position: absolute;
+				left: 0;
+				bottom: -10px;
+				height: 26px;
+				width: 100%;
+				z-index: 1;
+			}
+			.comiis_svg_a{
+				color: #333333;
+				font-weight: 300;
+				position: absolute;
+				width: 100%;
+				height: 26px;
+				background: url(./img/comiis_a.svg) repeat-x;
+				background-size: 450px;
+				animation: comiis_bgdwtop 3.5s infinite linear;
+			}
+			.comiis_svg_b{
+				color: #333333;
+				font-weight: 300;
+				position: absolute;
+				width: 100%;
+				height: 26px;
+				background: url(./img/comiis_b.svg) repeat-x;
+				top: 5px;
+				background-size: 450px;
+				animation: comiis_bgdwbm 6s infinite linear;
+			}
+			@keyframes comiis_bgdwtop{
+				from{
+					background-position: 0 top;
+				}
+				to{
+					background-position: 450px top;
+				}
+			}
+			@keyframes comiis_bgdwbm{
+				from{
+					background-position: 0 top;
+				}
+				to{
+					background-position: 450px top;
+				}
+			}
+			.abs{
+				height: 400px;
+				background-color: #01E9D3;
+				padding-top: 40px;
+			}
+		</style>
+		<script src="times.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="aaa">
+			<div class="comiis_svg_box">
+				<div class="comiis_svg_a"></div>
+				<div class="comiis_svg_b"></div>
+			</div>
+		</div>
+		<div class="abs">
+			我是下面内容
+		</div>
+		<script>
+			let arr = [
+				{
+					data: "昨天",
+					time: "1611125227000",
+				},
+				{
+					data: "14:45",
+					time: "1611297907000",
+				},
+				{
+					data: "14:47",
+					time: "1611298027000",
+				},
+				{
+					data: "14:49",
+					time: "1611298147000",
+				},
+				{
+					data: "16:23",
+					time: "1611303787000"
+				}
+			];
+			// let arr = [
+			// 	{
+			// 		isme: false,
+			// 		type: "text",
+			// 		data: "哈1",
+			// 		time: "1555146412"
+			// 	},
+			// 	{
+			// 		isme: true,
+			// 		type: "img",
+			// 		data: "哈3",
+			// 		time: "1555146414",
+			// 	},
+			// 	{
+			// 		isme: false,
+			// 		type: "text",
+			// 		data: "哈2",
+			// 		time: "1555146412"
+			// 	},
+			// 	{
+			// 		isme: true,
+			// 		type: "img",
+			// 		data: "哈4",
+			// 		time: "1555146414",
+			// 	},
+			// 	{
+			// 		isme: false,
+			// 		type: "text",
+			// 		data: "哈5",
+			// 		time: "1555146412"
+			// 	},
+			// 	{
+			// 		isme: true,
+			// 		type: "img",
+			// 		data: "哈6",
+			// 		time: "1555146414",
+			// 	},
+			// 	{
+			// 		isme: false,
+			// 		type: "text",
+			// 		data: "哈7",
+			// 		time: "1555146412"
+			// 	},
+			// 	{
+			// 		isme: true,
+			// 		type: "img",
+			// 		data: "哈8",
+			// 		time: "1555146414",
+			// 	}
+			// ];
+
+			function getdata() {
+				for (let i = 0; i < arr.length; i++) {
+					arr[i].gstime = timeObj.getChatTime(arr[i].time, i > 0 ? arr[i - 1].time : 0);
+				}
+				console.table('时间：', arr);
+			}
+			getdata()
+		</script>
+	</body>
+</html>
