@@ -99,21 +99,29 @@ export default {
     };
   },
 
-  mounted() {
+  // mounted() {
     // 下面2种方法可以判断是pc端还是手机端
     // 这种方式可以根据设备进入不同页面
-    if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
-      // console.log("mobile");
-      // window.location.href = "iPhone.html";
-    } else {
-      // console.log("PC");
-      // window.location.href = "pc.html";
-    }
+    // if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+    //   console.log("mobile");
+    //   // window.location.href = "iPhone.html";
+    // } else {
+    //   console.log("PC");
+    //   // window.location.href = "pc.html";
+    // }
 
-    if (this.IsPC()) {
-      // console.log("PC");
-    } else {
-      // console.log("mobile");
+    // if (this.IsPC()) {
+    //   console.log("PC");
+    // } else {
+    //   console.log("mobile");
+    // }
+  // },
+  mounted() {
+    //这个用来判断当前浏览器是否微信内置浏览器，是微信返回true，不是微信返回false
+    const WxObj = window.navigator.userAgent.toLowerCase();
+    if(WxObj.match(/microMessenger/i)=='micromessenger'){
+      // 是微信就跳转跳转微信遮罩页面
+      window.location.href = "/weixin.html";
     }
   },
 

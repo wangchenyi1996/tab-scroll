@@ -427,6 +427,13 @@ export const constantRoutes = [
         component: () =>
             import('../views/music/Progress.vue')
     },
+    // 跳转微信页面
+    {
+        path: '/weixin',
+        name: 'Weixin',
+        component: () =>
+            import('../views/WeiXin.vue')
+    },
 ]
 
 export const asyncRoute = [
