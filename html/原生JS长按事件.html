@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			#btn{
+				width: 200px;
+				height: 40px;
+				line-height: 40px;
+				font-size: 18px;
+				border: none;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button" id="btn">原生JS长按事件</button>
+		<script>
+			let btn = document.getElementById('btn')
+			let longClick =0;
+			let minilongClick =0;
+			// 长按事件
+			btn.addEventListener('touchstart', function(e){
+				longClick=0;//设置初始为0
+				timeOutEvent = setTimeout(function(){
+					//此处为长按事件-----在此显示遮罩层及删除按钮
+					longClick = 1;//假如长按，则设置为1
+					console.log(longClick);
+				},500);
+			})
+			btn.addEventListener('touchmove', function(e){
+				timeOutEvent = 0;
+				clearTimeout(timeOutEvent);
+				e.preventDefault();
+			})
+			btn.addEventListener('touchend', function(e){
+				clearTimeout(timeOutEvent);
+				return false;
+			})
+		</script>
+	</body>
+</html>

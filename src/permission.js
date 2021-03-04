@@ -8,13 +8,13 @@ NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 // import { getToken } from '@/utils/auth.js'
 
 // 每次页面刷新都会执行该钩子函数
-router.onReady(async () => {
-    console.log('onReady')
-    //   const roles = await store.dispatch('setRoles')
-    //   let accessRoutes = await store.dispatch("generateRoutes", roles)
-    //   router.addRoutes(accessRoutes)
-    //   router.options.routes = [...constantRoutes, ...accessRoutes]
-})
+// router.onReady(async () => {
+//     console.log('onReady')
+//     //   const roles = await store.dispatch('setRoles')
+//     //   let accessRoutes = await store.dispatch("generateRoutes", roles)
+//     //   router.addRoutes(accessRoutes)
+//     //   router.options.routes = [...constantRoutes, ...accessRoutes]
+// })
 
 // 白名单
 const whiteList = ['/login']
